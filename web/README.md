@@ -10,7 +10,7 @@ A professional web-based map application for Ruhve village on Saaremaa, Estonia.
 - **Road Network**: Shows roads with names (toggleable)
 - **Village Boundary**: Prominent red dashed border around the village
 - **Sea Highlighting**: Subtle blue water background for coastal context
-- **Tamkivi Family Plots**: Special highlighting for specific family properties (7.06% of village lands)
+- **T. Family Plots**: Special highlighting for specific family properties (7.06% of village lands)
 - **High-Resolution Export**: Generate printable maps at 300 DPI for professional use
 
 ## Controls
@@ -21,7 +21,7 @@ A professional web-based map application for Ruhve village on Saaremaa, Estonia.
 - **🏷️ Näita tee nimesid**: Show/hide road names
 - **🏠 Näita hooneid**: Show/hide building footprints
 - **🏘️ Näita küla piiri**: Show/hide village boundary
-- **🏘️ Tamkivide maad (7.06%)**: Highlight Tamkivi family properties with detailed info
+- **🏘️ T. maad (7.06%)**: Highlight T. family properties with detailed info
 - **🖨️ Ekspordi kaart**: Export high-resolution map for printing
 
 ## Data Sources

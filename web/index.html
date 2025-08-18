@@ -179,7 +179,7 @@
                 </div>
                 <div class="control-group">
                     <input type="checkbox" id="toggleTamkivi" unchecked>
-                    <label for="toggleTamkivi">🏘️ Tamkivide maad (7.06%)</label>
+                    <label for="toggleTamkivi">🏘️ T. maad (7.06%)</label>
                 </div>
         </div>
     </div>
@@ -192,7 +192,7 @@
     </div>
     
     <div class="info" id="tamkivi-info" style="display: none;">
-        <h3>🏘️ Tamkivide maad</h3>
+        <h3>🏘️ T. maad</h3>
         <p><strong>Kogupindala:</strong> 67.34 ha</p>
         <p><strong>Protsent külast:</strong> 7.06%</p>
         <p><strong>Krundid:</strong></p>
@@ -343,7 +343,7 @@
                         }
                     });
                     
-                    // Add Tamkivi plots highlight layer
+                    // Add T. plots highlight layer
                     map.addLayer({
                         id: 'tamkivi-highlight',
                         type: 'fill',
@@ -364,7 +364,7 @@
                         }
                     });
                     
-                    // Add Tamkivi plots outline
+                    // Add T. plots outline
                     map.addLayer({
                         id: 'tamkivi-outline',
                         type: 'line',
@@ -488,7 +488,7 @@
                             '38601:004:0606'
                         ].includes(f.properties.tunnus));
                         
-                        // Calculate Tamkivi area and percentage
+                        // Calculate T. area and percentage
                         const tamkiviArea = tamkiviPlots.reduce((sum, f) => sum + (f.properties.area_ha || 0), 0);
                         const totalArea = data.features.reduce((sum, f) => sum + (f.properties.area_ha || 0), 0);
                         const tamkiviPercentage = totalArea > 0 ? (tamkiviArea / totalArea * 100) : 0;
@@ -501,7 +501,7 @@
                             <p>🛣️ Teed: ${roadsData.features.length}</p>
                             <p>🏷️ Nimetatud teed: ${namedRoads}</p>
                             <p>🏠 Hooneid: ${buildingsData.features.length}</p>
-                            <p>🏘️ Tamkivide maad: ${tamkiviPlots.length} (${tamkiviArea.toFixed(2)} ha, ${tamkiviPercentage.toFixed(2)}%)</p>
+                            <p>🏘️ T. maad: ${tamkiviPlots.length} (${tamkiviArea.toFixed(2)} ha, ${tamkiviPercentage.toFixed(2)}%)</p>
                             <p>📍 Asukoht: Ruhve, Saaremaa</p>
                         `;
                     })
@@ -600,23 +600,23 @@
             }
         });
         
-        // Toggle Tamkivi plots
+        // Toggle T. plots
         document.getElementById('toggleTamkivi').addEventListener('change', (e) => {
-            console.log('🏘️ Toggle Tamkivi plots:', e.target.checked);
+            console.log('🏘️ Toggle T. plots:', e.target.checked);
             if (map.getLayer('tamkivi-highlight')) {
                 map.setLayoutProperty('tamkivi-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ Tamkivi highlight visibility set to:', e.target.checked ? 'visible' : 'none');
+                console.log('✅ T. highlight visibility set to:', e.target.checked ? 'visible' : 'none');
             } else {
-                console.log('⚠️ Tamkivi highlight layer not found');
+                console.log('⚠️ T. highlight layer not found');
             }
             if (map.getLayer('tamkivi-outline')) {
                 map.setLayoutProperty('tamkivi-outline', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ Tamkivi outline visibility set to:', e.target.checked ? 'visible' : 'none');
+                console.log('✅ T. outline visibility set to:', e.target.checked ? 'visible' : 'none');
             } else {
-                console.log('⚠️ Tamkivi outline layer not found');
+                console.log('⚠️ T. outline layer not found');
             }
             
-            // Show/hide Tamkivi info box
+            // Show/hide T. info box
             const tamkiviInfo = document.getElementById('tamkivi-info');
             if (tamkiviInfo) {
                 tamkiviInfo.style.display = e.target.checked ? 'block' : 'none';
@@ -708,7 +708,7 @@
                     }
                 });
                 
-                // Add Tamkivi plots highlight for export
+                // Add T. plots highlight for export
                 tempMap.addLayer({
                     id: 'tamkivi-highlight-export',
                     type: 'fill',

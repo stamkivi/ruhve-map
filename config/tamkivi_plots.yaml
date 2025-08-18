@@ -1,5 +1,5 @@
-# Tamkivi family plot codes in Ruhve village
-# These plots will be highlighted when "Tamkivide maad" toggle is enabled
+# T. family plot codes in Ruhve village
+# These plots will be highlighted when "T. maad" toggle is enabled
 
 tamkivi_plots:
   - "38601:004:0294"
@@ -13,7 +13,7 @@ tamkivi_plots:
 
 # Plot information (optional metadata)
 plot_info:
-  family_name: "Tamkivi"
+  family_name: "T."
   village: "Ruhve"
   municipality: "Saaremaa"
-  description: "Tamkivi family properties in Ruhve village"
+  description: "T. family properties in Ruhve village"
