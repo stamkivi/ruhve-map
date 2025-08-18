@@ -1,0 +1,42 @@
+
+# Fill these with Maa- ja Ruumiamet endpoints before running ETL.
+# Example keys included; you must paste the correct WFS URLs from MaRu/X-GIS.
+crs_epsg: 3301
+village_name: "Ruhve"
+admin_layer_name: "asustusyksuste_piirid" # settlement/village boundary layer name (adjust)
+
+services:
+  parcels_wfs_url: "https://gsavalik.envir.ee/geoserver/ows"   # Main WFS endpoint URL
+  parcels_layer: "maaamet:ky_kehtiv"     # layer name for cadastral parcels
+
+  buildings_wfs_url: "https://gsavalik.envir.ee/geoserver/etak/wfs" # ETAK WFS endpoint URL for buildings
+  buildings_layer: "etak:e_401_hoone_ka"
+
+  roads_wfs_url: "https://gsavalik.envir.ee/geoserver/etak/wfs"     # ETAK WFS endpoint URL for roads
+  roads_layer: "etak:e_501_tee_j"
+
+  admin_wfs_url: "https://gsavalik.envir.ee/geoserver/ows"           # Main WFS endpoint URL
+  admin_layer: "ehak:asustusyksuste_piirid"                          # settlement boundaries layer
+
+ads:
+  enabled: true
+  base_url: ""          # In-ADS/ADS API endpoint (if available)
+  timeout_sec: 10
+  rate_limit_per_sec: 5
+
+output:
+  geojson_dir: "output"
+  geojson_filename: "ruhve_map_data.geojson"
+  csv_dir: "outputs/csv"
+  tiles_dir: "outputs/tiles"
+  debug_csv: "outputs/csv/ruhve_parcels_debug.csv"
+
+labels:
+  dual_names: true      # cadastral + ADS
+  leader_lines: true
+
+highlight:
+  by_building_intersection: true
+
+overrides:
+  path: "overrides/overrides.geojson"

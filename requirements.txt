@@ -1,0 +1,12 @@
+
+geopandas==0.14.4
+shapely==2.0.4
+pyproj==3.6.1
+requests==2.32.3
+pandas==2.2.2
+fiona==1.9.6
+pyyaml==6.0.2
+tqdm==4.66.4
+# optional for future exports:
+# mapnik==4.0.0
+# qgis not pip-installable; use qgis_process on system

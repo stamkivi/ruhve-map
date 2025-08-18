@@ -1,0 +1,16 @@
+{
+  "name": "ruhve-map",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "serve": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "maplibre-gl": "^4.5.0"
+  }
+}

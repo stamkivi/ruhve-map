@@ -1,0 +1,6079 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.3970",
+        "fid": 3970,
+        "etak_id": 163704,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106008955",
+        "ads_oid": "EE00803680",
+        "ads_lahiaadress": "Kadariku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-03T08:30:44Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.01800815245986,
+              58.37990131178522
+            ],
+            [
+              23.017925494488463,
+              58.37980511755026
+            ],
+            [
+              23.017833856865455,
+              58.37982684324
+            ],
+            [
+              23.017916514637626,
+              58.37992303753411
+            ],
+            [
+              23.01800815245986,
+              58.37990131178522
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.22929",
+        "fid": 22929,
+        "etak_id": 5591547,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120292913",
+        "ads_oid": "EE01007858",
+        "ads_lahiaadress": "Sireli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-07T17:40:03Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.992265898796084,
+              58.367308398763846
+            ],
+            [
+              22.992216388272393,
+              58.36721766576097
+            ],
+            [
+              22.9920594655942,
+              58.36724130878377
+            ],
+            [
+              22.99210897574713,
+              58.36733204184736
+            ],
+            [
+              22.992265898796084,
+              58.367308398763846
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.91344",
+        "fid": 91344,
+        "etak_id": 164681,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106009176",
+        "ads_oid": "EE00803861",
+        "ads_lahiaadress": "Vahuri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-06-13T17:55:26Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.037050230444567,
+              58.37586364185185
+            ],
+            [
+              23.0370317066383,
+              58.375800907133126
+            ],
+            [
+              23.036759883270786,
+              58.37582306505979
+            ],
+            [
+              23.03677842369446,
+              58.37588579994675
+            ],
+            [
+              23.037050230444567,
+              58.37586364185185
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.100451",
+        "fid": 100451,
+        "etak_id": 5591520,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120306360",
+        "ads_oid": "ME01038293",
+        "ads_lahiaadress": "Mäimäe",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-01-10T18:30:04Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03630843587124,
+              58.37259260677236
+            ],
+            [
+              23.036214772281035,
+              58.37253829301916
+            ],
+            [
+              23.036094331651913,
+              58.372595632775734
+            ],
+            [
+              23.036188012542574,
+              58.37264993776856
+            ],
+            [
+              23.03630843587124,
+              58.37259260677236
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.100452",
+        "fid": 100452,
+        "etak_id": 5591521,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 40,
+        "tyyp_tekst": "Vare",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-01T16:50:10Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036882911953967,
+              58.374854098124615
+            ],
+            [
+              23.036804865312316,
+              58.37484664016442
+            ],
+            [
+              23.03678517578151,
+              58.374903492513035
+            ],
+            [
+              23.036863239634144,
+              58.37491095061414
+            ],
+            [
+              23.036882911953967,
+              58.374854098124615
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.100453",
+        "fid": 100453,
+        "etak_id": 5591568,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": null,
+        "ads_oid": "EE02736624",
+        "ads_lahiaadress": "Kadastiku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T14:27:39Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.99491790494309,
+              58.364545485764616
+            ],
+            [
+              22.99489518375275,
+              58.36447757497208
+            ],
+            [
+              22.994795589649524,
+              58.36448677579815
+            ],
+            [
+              22.99481832748194,
+              58.36455469572033
+            ],
+            [
+              22.99491790494309,
+              58.364545485764616
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.101635",
+        "fid": 101635,
+        "etak_id": 168929,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02520500",
+        "ads_lahiaadress": "Sadama",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 135,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-02-28T16:52:39Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.039236084596936,
+              58.37750509974268
+            ],
+            [
+              23.03915275109399,
+              58.37744618778659
+            ],
+            [
+              23.03902684675879,
+              58.377495336024914
+            ],
+            [
+              23.03911018016747,
+              58.377554248062964
+            ],
+            [
+              23.039236084596936,
+              58.37750509974268
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.111012",
+        "fid": 111012,
+        "etak_id": 162924,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02606873",
+        "ads_lahiaadress": "Endrikuelu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T17:24:39Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022942682265793,
+              58.37577358859148
+            ],
+            [
+              23.022919673605827,
+              58.37567500757724
+            ],
+            [
+              23.02275415533964,
+              58.3756856654323
+            ],
+            [
+              23.022777163543495,
+              58.375784246476286
+            ],
+            [
+              23.022942682265793,
+              58.37577358859148
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.113792",
+        "fid": 113792,
+        "etak_id": 166043,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02591857",
+        "ads_lahiaadress": "Voo",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-01T16:50:10Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.037392685274018,
+              58.37578446721274
+            ],
+            [
+              23.037330302626913,
+              58.375694104665506
+            ],
+            [
+              23.037233032142368,
+              58.375712631931215
+            ],
+            [
+              23.037295397483163,
+              58.37580299439702
+            ],
+            [
+              23.037392685274018,
+              58.37578446721274
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.116355",
+        "fid": 116355,
+        "etak_id": 171869,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02507963",
+        "ads_lahiaadress": "Laasu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-01T16:50:10Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036564464016585,
+              58.37494762190574
+            ],
+            [
+              23.03666569889018,
+              58.37494595236801
+            ],
+            [
+              23.03665583929388,
+              58.37480642872968
+            ],
+            [
+              23.03655459254703,
+              58.374808547134336
+            ],
+            [
+              23.036564464016585,
+              58.37494762190574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.117396",
+        "fid": 117396,
+        "etak_id": 5591584,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03631632824163,
+              58.37552196291718
+            ],
+            [
+              23.03627709566268,
+              58.375507111275056
+            ],
+            [
+              23.036189037906297,
+              58.37557126848841
+            ],
+            [
+              23.036228270274005,
+              58.375586129135044
+            ],
+            [
+              23.03631632824163,
+              58.37552196291718
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.122415",
+        "fid": 122415,
+        "etak_id": 163618,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02512219",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:28:48Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02303522414213,
+              58.37696648789974
+            ],
+            [
+              23.023176199492546,
+              58.37700646511728
+            ],
+            [
+              23.02318823083551,
+              58.37699484806032
+            ],
+            [
+              23.023228452507688,
+              58.37695600570088
+            ],
+            [
+              23.023087857763798,
+              58.376915869823144
+            ],
+            [
+              23.02303522414213,
+              58.37696648789974
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.126289",
+        "fid": 126289,
+        "etak_id": 5591515,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120302127",
+        "ads_oid": "EE01030664",
+        "ads_lahiaadress": "Sarapiku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-06-13T17:44:53Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025551600228166,
+              58.372666712889284
+            ],
+            [
+              23.02551019324314,
+              58.3725985038283
+            ],
+            [
+              23.025322339435338,
+              58.37262998817575
+            ],
+            [
+              23.025363746342062,
+              58.372698188320044
+            ],
+            [
+              23.025551600228166,
+              58.372666712889284
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.143729",
+        "fid": 143729,
+        "etak_id": 545028,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02505267",
+        "ads_lahiaadress": "Peetri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-03T08:43:12Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02334122287654,
+              58.3773123436558
+            ],
+            [
+              23.02329567528401,
+              58.377352142022715
+            ],
+            [
+              23.023525841662174,
+              58.3774232231606
+            ],
+            [
+              23.023570712935257,
+              58.37738315016007
+            ],
+            [
+              23.02334122287654,
+              58.3773123436558
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.146791",
+        "fid": 146791,
+        "etak_id": 172051,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106008814",
+        "ads_oid": "EE01887107",
+        "ads_lahiaadress": "Aida",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-05-16T11:02:57Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025852345716995,
+              58.380106150074056
+            ],
+            [
+              23.025590287575973,
+              58.38010567714396
+            ],
+            [
+              23.025589795284684,
+              58.3801667420443
+            ],
+            [
+              23.025852030010284,
+              58.38016702775242
+            ],
+            [
+              23.025852345716995,
+              58.380106150074056
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.157830",
+        "fid": 157830,
+        "etak_id": 163204,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02604032",
+        "ads_lahiaadress": "Põlde",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-06T14:43:06Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.024253457032028,
+              58.37983509446499
+            ],
+            [
+              23.024184291072427,
+              58.379798019907454
+            ],
+            [
+              23.024100214911535,
+              58.37984129547321
+            ],
+            [
+              23.024169380867622,
+              58.37987837007617
+            ],
+            [
+              23.024253457032028,
+              58.37983509446499
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.158280",
+        "fid": 158280,
+        "etak_id": 538835,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120255248",
+        "ads_oid": "EE01798110",
+        "ads_lahiaadress": "Tõnujaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-06-13T17:51:00Z",
+        "geom_muutmisaeg": "2018-06-13T17:51:20Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.027637230737408,
+              58.36860484206891
+            ],
+            [
+              23.02764015736959,
+              58.36872980327915
+            ],
+            [
+              23.02779891543484,
+              58.36872878557732
+            ],
+            [
+              23.02779600532599,
+              58.368603824500816
+            ],
+            [
+              23.027637230737408,
+              58.36860484206891
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.161421",
+        "fid": 161421,
+        "etak_id": 169405,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106020599",
+        "ads_oid": "EE00812607",
+        "ads_lahiaadress": "Voo",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-02-28T14:42:36Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.037820033932405,
+              58.37575121427262
+            ],
+            [
+              23.03742522241861,
+              58.375918666368364
+            ],
+            [
+              23.037527164147082,
+              58.37598508284114
+            ],
+            [
+              23.037921812377768,
+              58.37581735981835
+            ],
+            [
+              23.037820033932405,
+              58.37575121427262
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.167862",
+        "fid": 167862,
+        "etak_id": 5591501,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.023779012908772,
+              58.38016458483224
+            ],
+            [
+              23.02373020633442,
+              58.38012076054053
+            ],
+            [
+              23.02367708327556,
+              58.38013708295153
+            ],
+            [
+              23.023725872714706,
+              58.38018090713279
+            ],
+            [
+              23.023779012908772,
+              58.38016458483224
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.202847",
+        "fid": 202847,
+        "etak_id": 164463,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120541596",
+        "ads_oid": "EE01089968",
+        "ads_lahiaadress": "Peeteli/1",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T14:27:44Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03051939109203,
+              58.38114203101334
+            ],
+            [
+              23.030502219659944,
+              58.38107147557364
+            ],
+            [
+              23.030343054468553,
+              58.38108216473148
+            ],
+            [
+              23.030360225834198,
+              58.38115271121502
+            ],
+            [
+              23.03051939109203,
+              58.38114203101334
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.207881",
+        "fid": 207881,
+        "etak_id": 5591507,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2022-05-10T12:07:17Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03944887630575,
+              58.37750176205762
+            ],
+            [
+              23.039475301451755,
+              58.37751939872075
+            ],
+            [
+              23.03955543563767,
+              58.37748625715043
+            ],
+            [
+              23.039529010476414,
+              58.37746862050385
+            ],
+            [
+              23.03944887630575,
+              58.37750176205762
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.211297",
+        "fid": 211297,
+        "etak_id": 164392,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106009108",
+        "ads_oid": "EE00803803",
+        "ads_lahiaadress": "Uus-Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T17:24:40Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.024354542613125,
+              58.38024245257346
+            ],
+            [
+              23.024341811937575,
+              58.38015275020523
+            ],
+            [
+              23.024243749274213,
+              58.38015658937797
+            ],
+            [
+              23.024256479701474,
+              58.380246291755945
+            ],
+            [
+              23.024354542613125,
+              58.38024245257346
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.220355",
+        "fid": 220355,
+        "etak_id": 544823,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106019430",
+        "ads_oid": "EE00811744",
+        "ads_lahiaadress": "Peetri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 23,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-01T16:50:02Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022973180708988,
+              58.37760916960727
+            ],
+            [
+              23.023002159497082,
+              58.37768545559376
+            ],
+            [
+              23.0232879995906,
+              58.37765369138343
+            ],
+            [
+              23.023257628165965,
+              58.37757767317364
+            ],
+            [
+              23.022973180708988,
+              58.37760916960727
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.221585",
+        "fid": 221585,
+        "etak_id": 5591518,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120307025",
+        "ads_oid": "EE01801467",
+        "ads_lahiaadress": "Meremaa",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-06T14:06:02Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03723962151012,
+              58.36978259556081
+            ],
+            [
+              23.037395639628507,
+              58.36973125189984
+            ],
+            [
+              23.0373445318002,
+              58.36968837623738
+            ],
+            [
+              23.03738105715005,
+              58.36967635893836
+            ],
+            [
+              23.037292190431906,
+              58.369601824680764
+            ],
+            [
+              23.037252336745233,
+              58.36961493927157
+            ],
+            [
+              23.037199725554654,
+              58.369570804080965
+            ],
+            [
+              23.037043225018806,
+              58.36962230548912
+            ],
+            [
+              23.03709687240702,
+              58.369667292619596
+            ],
+            [
+              23.0370649168917,
+              58.369677808840095
+            ],
+            [
+              23.03715126037571,
+              58.369750232038335
+            ],
+            [
+              23.037187010085187,
+              58.36973846036546
+            ],
+            [
+              23.03723962151012,
+              58.36978259556081
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.222903",
+        "fid": 222903,
+        "etak_id": 166042,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "106008956",
+        "ads_oid": "ME00803681",
+        "ads_lahiaadress": "Kadariku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-07T17:40:06Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.01851513418739,
+              58.37978576585067
+            ],
+            [
+              23.01851063472655,
+              58.37975398018485
+            ],
+            [
+              23.018337887858465,
+              58.37976073373474
+            ],
+            [
+              23.018342387164324,
+              58.3797925194066
+            ],
+            [
+              23.01851513418739,
+              58.37978576585067
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.223437",
+        "fid": 223437,
+        "etak_id": 539297,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120647550",
+        "ads_oid": "EE02332105",
+        "ads_lahiaadress": "Punni",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-01T16:49:57Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.018872318672237,
+              58.37934940120861
+            ],
+            [
+              23.01859196615392,
+              58.37933571729107
+            ],
+            [
+              23.018575410755314,
+              58.37942926292676
+            ],
+            [
+              23.01885576401155,
+              58.37944294688056
+            ],
+            [
+              23.018872318672237,
+              58.37934940120861
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.228384",
+        "fid": 228384,
+        "etak_id": 163517,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498939",
+        "ads_lahiaadress": "Sadama",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 135,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-03T10:58:01Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.039024664410647,
+              58.37774644480116
+            ],
+            [
+              23.03889061391322,
+              58.377648629600436
+            ],
+            [
+              23.038826689190433,
+              58.37767280568704
+            ],
+            [
+              23.03896072275663,
+              58.377770611848604
+            ],
+            [
+              23.039024664410647,
+              58.37774644480116
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.230993",
+        "fid": 230993,
+        "etak_id": 5591502,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120302122",
+        "ads_oid": "EE01030657",
+        "ads_lahiaadress": "Põlde",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T14:42:34Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.0239639379872,
+              58.379966342192404
+            ],
+            [
+              23.023942235117765,
+              58.37993519748661
+            ],
+            [
+              23.023914031315684,
+              58.379940629925535
+            ],
+            [
+              23.023879832378704,
+              58.379891574623734
+            ],
+            [
+              23.023768255527116,
+              58.37991303539345
+            ],
+            [
+              23.023824174432416,
+              58.379993226607716
+            ],
+            [
+              23.0239639379872,
+              58.379966342192404
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.232521",
+        "fid": 232521,
+        "etak_id": 172052,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106019986",
+        "ads_oid": "EE00812180",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:27:48Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022859773119265,
+              58.37678651869049
+            ],
+            [
+              23.022956976285023,
+              58.37683861555796
+            ],
+            [
+              23.02299136411947,
+              58.37682091096848
+            ],
+            [
+              23.023022810573707,
+              58.37683777240258
+            ],
+            [
+              23.023083626535424,
+              58.37680645972859
+            ],
+            [
+              23.023054352341628,
+              58.376790782248364
+            ],
+            [
+              23.02310722594082,
+              58.37676355726372
+            ],
+            [
+              23.023007816075708,
+              58.3767102852866
+            ],
+            [
+              23.022960630423974,
+              58.37673458158274
+            ],
+            [
+              23.022859773119265,
+              58.37678651869049
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.250869",
+        "fid": 250869,
+        "etak_id": 164461,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02443081",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-01T14:44:25Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.023878527598505,
+              58.3766451097645
+            ],
+            [
+              23.02381771930868,
+              58.376572531557926
+            ],
+            [
+              23.023707562993092,
+              58.3765980078591
+            ],
+            [
+              23.023768371099983,
+              58.376670586117996
+            ],
+            [
+              23.023878527598505,
+              58.3766451097645
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.251148",
+        "fid": 251148,
+        "etak_id": 169783,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "106009110",
+        "ads_oid": "ME00803805",
+        "ads_lahiaadress": "Uus-Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-07T18:54:03Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.024438952924964,
+              58.37992105248745
+            ],
+            [
+              23.024430754174052,
+              58.37985597923532
+            ],
+            [
+              23.024306694736023,
+              58.379860284309146
+            ],
+            [
+              23.024314876167185,
+              58.37992535743862
+            ],
+            [
+              23.024438952924964,
+              58.37992105248745
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.252933",
+        "fid": 252933,
+        "etak_id": 163207,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106024355",
+        "ads_oid": "EE01887171",
+        "ads_lahiaadress": "Endrikuelu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-01T14:44:24Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022979960501885,
+              58.37593332056389
+            ],
+            [
+              23.022942682265793,
+              58.37577358859148
+            ],
+            [
+              23.022777163543495,
+              58.375784246476286
+            ],
+            [
+              23.022814441040552,
+              58.37594397849692
+            ],
+            [
+              23.022979960501885,
+              58.37593332056389
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.268403",
+        "fid": 268403,
+        "etak_id": 166424,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106008639",
+        "ads_oid": "EE00803444",
+        "ads_lahiaadress": "Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-02T14:27:43Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02551725799283,
+              58.38055184323206
+            ],
+            [
+              23.02585570347743,
+              58.380541145046486
+            ],
+            [
+              23.02584641691785,
+              58.38045657839163
+            ],
+            [
+              23.02550728831903,
+              58.38046728031283
+            ],
+            [
+              23.02551725799283,
+              58.38055184323206
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.286367",
+        "fid": 286367,
+        "etak_id": 167928,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120834200",
+        "ads_oid": "ME03639074",
+        "ads_lahiaadress": "Pärdi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-11-29T16:21:11Z",
+        "geom_muutmisaeg": "2022-11-29T16:30:30Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.029322507099902,
+              58.368205012320395
+            ],
+            [
+              23.028994447676798,
+              58.36818672261305
+            ],
+            [
+              23.0289813647462,
+              58.36825157084269
+            ],
+            [
+              23.02930940768015,
+              58.368269860453644
+            ],
+            [
+              23.029322507099902,
+              58.368205012320395
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.302998",
+        "fid": 302998,
+        "etak_id": 166426,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106008957",
+        "ads_oid": "EE00803682",
+        "ads_lahiaadress": "Jaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T16:52:32Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.003493937258856,
+              58.38298495544004
+            ],
+            [
+              23.003410983583485,
+              58.38291062310678
+            ],
+            [
+              23.003115163048967,
+              58.38300168210961
+            ],
+            [
+              23.003198116314586,
+              58.383076014634554
+            ],
+            [
+              23.003493937258856,
+              58.38298495544004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.307209",
+        "fid": 307209,
+        "etak_id": 542851,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02449379",
+        "ads_lahiaadress": "Peetri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-02-28T18:32:46Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022973180708988,
+              58.37760916960727
+            ],
+            [
+              23.0227898659501,
+              58.377629416060174
+            ],
+            [
+              23.022820744146397,
+              58.37770561785405
+            ],
+            [
+              23.023002159497082,
+              58.37768545559376
+            ],
+            [
+              23.022973180708988,
+              58.37760916960727
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.313112",
+        "fid": 313112,
+        "etak_id": 5591503,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120778511",
+        "ads_oid": "ME03505493",
+        "ads_lahiaadress": "Uus-Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T18:32:48Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025140245111125,
+              58.38018258058546
+            ],
+            [
+              23.025045173658228,
+              58.38013022340242
+            ],
+            [
+              23.024983978978568,
+              58.38016086966915
+            ],
+            [
+              23.02507905017479,
+              58.38021323587511
+            ],
+            [
+              23.025140245111125,
+              58.38018258058546
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.332847",
+        "fid": 332847,
+        "etak_id": 5591506,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02632546",
+        "ads_lahiaadress": "Peeteli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 135,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-02T17:24:42Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03109526168379,
+              58.38087355503412
+            ],
+            [
+              23.031064436561536,
+              58.38080213283402
+            ],
+            [
+              23.030941852581794,
+              58.38081672794822
+            ],
+            [
+              23.030972694560425,
+              58.38088815030753
+            ],
+            [
+              23.03109526168379,
+              58.38087355503412
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.332872",
+        "fid": 332872,
+        "etak_id": 5591511,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022674725923437,
+              58.3759431605525
+            ],
+            [
+              23.022584167993685,
+              58.37593567894278
+            ],
+            [
+              23.022570001607875,
+              58.375982981584436
+            ],
+            [
+              23.022660542566488,
+              58.37599046307334
+            ],
+            [
+              23.022674725923437,
+              58.3759431605525
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.335474",
+        "fid": 335474,
+        "etak_id": 162917,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02643109",
+        "ads_lahiaadress": "Endrikuelu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:29:41Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02279155170929,
+              58.37549103641321
+            ],
+            [
+              23.022855987218836,
+              58.37554608823064
+            ],
+            [
+              23.02296364561522,
+              58.37551135379384
+            ],
+            [
+              23.022899402964015,
+              58.37545612391988
+            ],
+            [
+              23.02279155170929,
+              58.37549103641321
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.337902",
+        "fid": 337902,
+        "etak_id": 169967,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106020090",
+        "ads_oid": "ME01684852",
+        "ads_lahiaadress": "Sadama",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2019-02-05T18:30:08Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03911018016747,
+              58.377554248062964
+            ],
+            [
+              23.03902684675879,
+              58.377495336024914
+            ],
+            [
+              23.038797014755207,
+              58.377585051697196
+            ],
+            [
+              23.03888034823669,
+              58.37764395490736
+            ],
+            [
+              23.03911018016747,
+              58.377554248062964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.349205",
+        "fid": 349205,
+        "etak_id": 164926,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02494044",
+        "ads_lahiaadress": "Pärdi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-06T14:06:02Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02886187679656,
+              58.36805179587185
+            ],
+            [
+              23.02878111450263,
+              58.36804798477692
+            ],
+            [
+              23.028770197153207,
+              58.36811175398193
+            ],
+            [
+              23.028850959592084,
+              58.368115565083755
+            ],
+            [
+              23.02886187679656,
+              58.36805179587185
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.352848",
+        "fid": 352848,
+        "etak_id": 5591516,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02632352",
+        "ads_lahiaadress": "Meremaa",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-06T14:06:02Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.035991312167198,
+              58.36937907139228
+            ],
+            [
+              23.03578612790545,
+              58.369234812937506
+            ],
+            [
+              23.035672765138848,
+              58.36927932929927
+            ],
+            [
+              23.03587794944136,
+              58.36942357895829
+            ],
+            [
+              23.035991312167198,
+              58.36937907139228
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.353270",
+        "fid": 353270,
+        "etak_id": 159673,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120167028",
+        "ads_oid": "EE01045594",
+        "ads_lahiaadress": "Uue-Rauna",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T17:24:38Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02097097334282,
+              58.37817723245814
+            ],
+            [
+              23.020855743525747,
+              58.378044244340266
+            ],
+            [
+              23.020698283949578,
+              58.378081890560644
+            ],
+            [
+              23.020813513295455,
+              58.378214878820266
+            ],
+            [
+              23.02097097334282,
+              58.37817723245814
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.355524",
+        "fid": 355524,
+        "etak_id": 168743,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 30,
+        "tyyp_tekst": "Vundament",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-02T14:27:41Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.012561371986763,
+              58.386133306243835
+            ],
+            [
+              23.012509985987325,
+              58.38618534856098
+            ],
+            [
+              23.012867711334128,
+              58.38628194850674
+            ],
+            [
+              23.0129185813396,
+              58.386230000834374
+            ],
+            [
+              23.012561371986763,
+              58.386133306243835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.389007",
+        "fid": 389007,
+        "etak_id": 169774,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120167069",
+        "ads_oid": "EE01045713",
+        "ads_lahiaadress": "Raigi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-11-07T18:30:03Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025746813966446,
+              58.37983547017518
+            ],
+            [
+              23.025640107123547,
+              58.37980266253014
+            ],
+            [
+              23.02551753616427,
+              58.37991262236051
+            ],
+            [
+              23.025624225886126,
+              58.379945438954756
+            ],
+            [
+              23.025746813966446,
+              58.37983547017518
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.396597",
+        "fid": 396597,
+        "etak_id": 172044,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02471151",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-02T16:05:01Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02321636601397,
+              58.37657499934013
+            ],
+            [
+              23.023214046667082,
+              58.37664016285219
+            ],
+            [
+              23.023624870656402,
+              58.37664403235655
+            ],
+            [
+              23.023627016353636,
+              58.37657893934994
+            ],
+            [
+              23.02321636601397,
+              58.37657499934013
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.397130",
+        "fid": 397130,
+        "etak_id": 162927,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498586",
+        "ads_lahiaadress": "Jaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-06T14:43:06Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.002559708352294,
+              58.38299370830474
+            ],
+            [
+              23.00262351955132,
+              58.383094946658176
+            ],
+            [
+              23.002732436069902,
+              58.38307649151631
+            ],
+            [
+              23.002668805942225,
+              58.382974886477726
+            ],
+            [
+              23.002559708352294,
+              58.38299370830474
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.397209",
+        "fid": 397209,
+        "etak_id": 160020,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106020600",
+        "ads_oid": "ME00812608",
+        "ads_lahiaadress": "Voo",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2019-01-10T18:30:04Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03889450454029,
+              58.3754882204947
+            ],
+            [
+              23.038630118483987,
+              58.375461581760305
+            ],
+            [
+              23.03860626849968,
+              58.37552692443687
+            ],
+            [
+              23.038870637693787,
+              58.37555357206941
+            ],
+            [
+              23.03889450454029,
+              58.3754882204947
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.414935",
+        "fid": 414935,
+        "etak_id": 159671,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "106009109",
+        "ads_oid": "ME00803804",
+        "ads_lahiaadress": "Uus-Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T16:52:36Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.024370082728222,
+              58.380061565230626
+            ],
+            [
+              23.02436056556663,
+              58.38001817605108
+            ],
+            [
+              23.02421131290519,
+              58.38002720924189
+            ],
+            [
+              23.02422081279373,
+              58.38007059830194
+            ],
+            [
+              23.024370082728222,
+              58.380061565230626
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.421652",
+        "fid": 421652,
+        "etak_id": 168938,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-10T18:30:01Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.020741292787456,
+              58.37830577990798
+            ],
+            [
+              23.020774586517717,
+              58.37833860342874
+            ],
+            [
+              23.02088137938169,
+              58.378308946361535
+            ],
+            [
+              23.020848226797387,
+              58.378275962322704
+            ],
+            [
+              23.020741292787456,
+              58.37830577990798
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.457611",
+        "fid": 457611,
+        "etak_id": 169404,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02474608",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-02-28T16:52:36Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.023810204719073,
+              58.376741340137585
+            ],
+            [
+              23.023429331161385,
+              58.37691496206907
+            ],
+            [
+              23.023532718614153,
+              58.37697771940365
+            ],
+            [
+              23.023913597314902,
+              58.37680391761515
+            ],
+            [
+              23.023810204719073,
+              58.376741340137585
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.463755",
+        "fid": 463755,
+        "etak_id": 539241,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120272375",
+        "ads_oid": "ME01168600",
+        "ads_lahiaadress": "Männituka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-03T11:01:35Z",
+        "geom_muutmisaeg": "2013-02-20T15:28:15Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.01239473478798,
+              58.386904640089675
+            ],
+            [
+              23.01242798323059,
+              58.38686835108098
+            ],
+            [
+              23.012445623808297,
+              58.386872806566856
+            ],
+            [
+              23.012512508628898,
+              58.38679980050472
+            ],
+            [
+              23.012365051509878,
+              58.38676255421863
+            ],
+            [
+              23.01230024709363,
+              58.3868333134887
+            ],
+            [
+              23.01231206410325,
+              58.38683629623526
+            ],
+            [
+              23.012276769118444,
+              58.386874832192944
+            ],
+            [
+              23.01239473478798,
+              58.386904640089675
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.463756",
+        "fid": 463756,
+        "etak_id": 168927,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120817386",
+        "ads_oid": "ME03604496",
+        "ads_lahiaadress": "Mihkli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-03T08:57:20Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02289236183464,
+              58.37709564948509
+            ],
+            [
+              23.022822782427184,
+              58.377145221903206
+            ],
+            [
+              23.022971447183306,
+              58.37720257939685
+            ],
+            [
+              23.02304068717881,
+              58.377152914507995
+            ],
+            [
+              23.02289236183464,
+              58.37709564948509
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.506316",
+        "fid": 506316,
+        "etak_id": 164460,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "121372700",
+        "ads_oid": "EE03969050",
+        "ads_lahiaadress": "Uus-Kanepi/1",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2021-12-23T18:30:00Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02464817539799,
+              58.38019605447076
+            ],
+            [
+              23.024521371777492,
+              58.3801635952344
+            ],
+            [
+              23.02448523056074,
+              58.38020254999589
+            ],
+            [
+              23.02461205137991,
+              58.38023500939861
+            ],
+            [
+              23.02464817539799,
+              58.38019605447076
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.508345",
+        "fid": 508345,
+        "etak_id": 172050,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106009087",
+        "ads_oid": "EE00803788",
+        "ads_lahiaadress": "Pärdi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 999,
+        "ruumikujuallika_id": 78,
+        "muutmisaeg": "2020-07-07T11:05:45Z",
+        "geom_muutmisaeg": "2020-07-07T11:09:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.028459736385468,
+              58.36794547316384
+            ],
+            [
+              23.02830370825874,
+              58.36793128343547
+            ],
+            [
+              23.028272452032237,
+              58.36802610108054
+            ],
+            [
+              23.02823226266125,
+              58.36814801329812
+            ],
+            [
+              23.02838829147117,
+              58.36816221209107
+            ],
+            [
+              23.02842848031864,
+              58.36804029982449
+            ],
+            [
+              23.028459736385468,
+              58.36794547316384
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.512546",
+        "fid": 512546,
+        "etak_id": 170004,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02470585",
+        "ads_lahiaadress": "Kadariku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-01T16:49:57Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.017925494488463,
+              58.37980511755026
+            ],
+            [
+              23.017853450992213,
+              58.3797212617516
+            ],
+            [
+              23.017761796451374,
+              58.37974298725829
+            ],
+            [
+              23.017833856865455,
+              58.37982684324
+            ],
+            [
+              23.017925494488463,
+              58.37980511755026
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.541536",
+        "fid": 541536,
+        "etak_id": 169969,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106026167",
+        "ads_oid": "EE00820908",
+        "ads_lahiaadress": "Vana-Saadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 23,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-03T11:18:10Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022787507237183,
+              58.380044121373395
+            ],
+            [
+              23.02265313994855,
+              58.38005638250057
+            ],
+            [
+              23.022700641113254,
+              58.38019897927316
+            ],
+            [
+              23.022835353005036,
+              58.38018663991478
+            ],
+            [
+              23.022787507237183,
+              58.380044121373395
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.541842",
+        "fid": 541842,
+        "etak_id": 167087,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498343",
+        "ads_lahiaadress": "Jaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:55:35Z",
+        "geom_muutmisaeg": "2023-02-09T11:57:23Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.003028017202077,
+              58.382863464234035
+            ],
+            [
+              23.003008288995545,
+              58.38284468692781
+            ],
+            [
+              23.00293363052093,
+              58.382866328081995
+            ],
+            [
+              23.003007332487638,
+              58.38293647593843
+            ],
+            [
+              23.003236771887003,
+              58.38286998754929
+            ],
+            [
+              23.003182798120488,
+              58.382818608129874
+            ],
+            [
+              23.003028017202077,
+              58.382863464234035
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.546144",
+        "fid": 546144,
+        "etak_id": 165887,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498335",
+        "ads_lahiaadress": "Vana-Saadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T14:27:42Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02270635281629,
+              58.379901258097675
+            ],
+            [
+              23.022650779100204,
+              58.379877737820436
+            ],
+            [
+              23.022558575066224,
+              58.379937849352714
+            ],
+            [
+              23.022614165907207,
+              58.37996136980078
+            ],
+            [
+              23.02270635281629,
+              58.379901258097675
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.555281",
+        "fid": 555281,
+        "etak_id": 511692,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 40,
+        "tyyp_tekst": "Vare",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T17:24:45Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.041192333356953,
+              58.38529303370762
+            ],
+            [
+              23.041101700318606,
+              58.385262173724215
+            ],
+            [
+              23.041062747411925,
+              58.38529373094285
+            ],
+            [
+              23.04115338074171,
+              58.38532458197635
+            ],
+            [
+              23.041192333356953,
+              58.38529303370762
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.560742",
+        "fid": 560742,
+        "etak_id": 5591517,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02641474",
+        "ads_lahiaadress": "Meremaa",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T13:30:54Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.037279999515704,
+              58.3700192993681
+            ],
+            [
+              23.037204288187457,
+              58.36994176638941
+            ],
+            [
+              23.036901231409733,
+              58.37002345526498
+            ],
+            [
+              23.03697692515985,
+              58.370100988294084
+            ],
+            [
+              23.037279999515704,
+              58.3700192993681
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.560743",
+        "fid": 560743,
+        "etak_id": 5591519,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120530288",
+        "ads_oid": "EE01068448",
+        "ads_lahiaadress": "Mäimäe",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-07T18:54:05Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03626906802445,
+              58.37182977434279
+            ],
+            [
+              23.03598663449058,
+              58.371788554873135
+            ],
+            [
+              23.03594534189755,
+              58.371866650742156
+            ],
+            [
+              23.036227793342327,
+              58.37190786145446
+            ],
+            [
+              23.03626906802445,
+              58.37182977434279
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.560744",
+        "fid": 560744,
+        "etak_id": 5591525,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "121271106",
+        "ads_oid": "EE02715739",
+        "ads_lahiaadress": "Männituka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-12-24T18:30:04Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.01679445639987,
+              58.38245941097111
+            ],
+            [
+              23.016801441399352,
+              58.38240699823135
+            ],
+            [
+              23.016699719410322,
+              58.38240325183297
+            ],
+            [
+              23.016692716916847,
+              58.382455673413
+            ],
+            [
+              23.01679445639987,
+              58.38245941097111
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.560745",
+        "fid": 560745,
+        "etak_id": 5591526,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120317118",
+        "ads_oid": "ME01065064",
+        "ads_lahiaadress": "Männituka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-03T11:17:41Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.017294082374637,
+              58.382225976564776
+            ],
+            [
+              23.017262574613707,
+              58.38217324065007
+            ],
+            [
+              23.017181163578,
+              58.38218665787607
+            ],
+            [
+              23.017212671229068,
+              58.38223939381081
+            ],
+            [
+              23.017294082374637,
+              58.382225976564776
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.560873",
+        "fid": 560873,
+        "etak_id": 5591548,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02651791",
+        "ads_lahiaadress": "Sireli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T16:52:30Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.991855526929974,
+              58.36718919791022
+            ],
+            [
+              22.991794024969035,
+              58.36715925960272
+            ],
+            [
+              22.99169221310207,
+              58.367217010342635
+            ],
+            [
+              22.99175373216265,
+              58.36724694883402
+            ],
+            [
+              22.991855526929974,
+              58.36718919791022
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.581254",
+        "fid": 581254,
+        "etak_id": 168700,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02553603",
+        "ads_lahiaadress": "Voo",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-02-28T18:32:52Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03772837883807,
+              58.375669906992414
+            ],
+            [
+              23.037642583686644,
+              58.37561751240148
+            ],
+            [
+              23.037559615037537,
+              58.3756550133111
+            ],
+            [
+              23.037645410402103,
+              58.37570739898015
+            ],
+            [
+              23.03772837883807,
+              58.375669906992414
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.582748",
+        "fid": 582748,
+        "etak_id": 167088,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120817382",
+        "ads_oid": "ME03604492",
+        "ads_lahiaadress": "Mihkli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-02T17:24:38Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022321906357092,
+              58.37740485146653
+            ],
+            [
+              23.02237343274259,
+              58.377359083035515
+            ],
+            [
+              23.02222412229157,
+              58.377312683713356
+            ],
+            [
+              23.02217276419209,
+              58.37735854316773
+            ],
+            [
+              23.022321906357092,
+              58.37740485146653
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.583343",
+        "fid": 583343,
+        "etak_id": 163025,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120817252",
+        "ads_oid": "EE03604196",
+        "ads_lahiaadress": "Mihkli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-02T17:24:38Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.022303535257375,
+              58.37723527004048
+            ],
+            [
+              23.022457828365575,
+              58.37728690647489
+            ],
+            [
+              23.02261405613808,
+              58.37715790154441
+            ],
+            [
+              23.022459934268284,
+              58.37710626660672
+            ],
+            [
+              23.022303535257375,
+              58.37723527004048
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.586441",
+        "fid": 586441,
+        "etak_id": 170005,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106008967",
+        "ads_oid": "ME01887108",
+        "ads_lahiaadress": "Kadaka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-02T16:05:04Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.038210213096527,
+              58.375018799705074
+            ],
+            [
+              23.038065526083532,
+              58.37501366001725
+            ],
+            [
+              23.038050903559512,
+              58.375127282212425
+            ],
+            [
+              23.03816456240751,
+              58.375193346478746
+            ],
+            [
+              23.038447017825717,
+              58.37520541411514
+            ],
+            [
+              23.038458681690514,
+              58.37513001262306
+            ],
+            [
+              23.03821884093673,
+              58.37511976557621
+            ],
+            [
+              23.03819873382861,
+              58.37510808463377
+            ],
+            [
+              23.038210213096527,
+              58.375018799705074
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.586588",
+        "fid": 586588,
+        "etak_id": 509554,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 40,
+        "tyyp_tekst": "Vare",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-01T16:49:55Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.012785906645288,
+              58.38655913839648
+            ],
+            [
+              23.0127076507189,
+              58.386538868632684
+            ],
+            [
+              23.012655308945323,
+              58.386594495375576
+            ],
+            [
+              23.012733388984444,
+              58.38661494339874
+            ],
+            [
+              23.012785906645288,
+              58.38655913839648
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.586713",
+        "fid": 586713,
+        "etak_id": 168883,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.003277243544787,
+              58.38254718846406
+            ],
+            [
+              23.003189582847195,
+              58.38258789931368
+            ],
+            [
+              23.003237514356538,
+              58.3826165585707
+            ],
+            [
+              23.003325336271317,
+              58.382575588543574
+            ],
+            [
+              23.003277243544787,
+              58.38254718846406
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.591161",
+        "fid": 591161,
+        "etak_id": 5591513,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-13T18:30:07Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02419319862637,
+              58.37442833555816
+            ],
+            [
+              23.024111436903958,
+              58.37440949149274
+            ],
+            [
+              23.02408309697868,
+              58.374443450357646
+            ],
+            [
+              23.024164859013354,
+              58.37446228546372
+            ],
+            [
+              23.02419319862637,
+              58.37442833555816
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.599890",
+        "fid": 599890,
+        "etak_id": 5591504,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02469012",
+        "ads_lahiaadress": "Uus-Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-02-28T18:32:47Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025017832435452,
+              58.38006618932001
+            ],
+            [
+              23.024958836697657,
+              58.380029740584924
+            ],
+            [
+              23.02484611858342,
+              58.38008008917942
+            ],
+            [
+              23.024905114288917,
+              58.380116537966444
+            ],
+            [
+              23.025017832435452,
+              58.38006618932001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.599891",
+        "fid": 599891,
+        "etak_id": 5591505,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02613940",
+        "ads_lahiaadress": "Peeteli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T17:24:43Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.031551395929718,
+              58.38078010095732
+            ],
+            [
+              23.031489702863627,
+              58.38074385034981
+            ],
+            [
+              23.031411143116415,
+              58.38078073431732
+            ],
+            [
+              23.03147283616626,
+              58.38081698496268
+            ],
+            [
+              23.031551395929718,
+              58.38078010095732
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.599892",
+        "fid": 599892,
+        "etak_id": 5591508,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02651790",
+        "ads_lahiaadress": "Punni",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-02T14:27:42Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.018972912588477,
+              58.379276704813115
+            ],
+            [
+              23.018971189260757,
+              58.37921274044446
+            ],
+            [
+              23.018894485650637,
+              58.37921330946633
+            ],
+            [
+              23.018896208839138,
+              58.379277273836024
+            ],
+            [
+              23.018972912588477,
+              58.379276704813115
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.599893",
+        "fid": 599893,
+        "etak_id": 5591509,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2019-09-12T18:30:09Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.018613216486962,
+              58.379208023242455
+            ],
+            [
+              23.018538915224617,
+              58.37916715272264
+            ],
+            [
+              23.01848258672743,
+              58.37919540887634
+            ],
+            [
+              23.018556887984023,
+              58.379236279428845
+            ],
+            [
+              23.018613216486962,
+              58.379208023242455
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.614980",
+        "fid": 614980,
+        "etak_id": 166763,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02464805",
+        "ads_lahiaadress": "Jaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-06T15:18:39Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.003198116314586,
+              58.383076014634554
+            ],
+            [
+              23.003115163048967,
+              58.38300168210961
+            ],
+            [
+              23.002953333609117,
+              58.38305150259655
+            ],
+            [
+              23.00303628665059,
+              58.38312583522634
+            ],
+            [
+              23.003198116314586,
+              58.383076014634554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.619872",
+        "fid": 619872,
+        "etak_id": 426697,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498352",
+        "ads_lahiaadress": "Peetri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-05T19:29:07Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02313472437308,
+              58.377307531421025
+            ],
+            [
+              23.023056593787693,
+              58.3772709443355
+            ],
+            [
+              23.022865749304348,
+              58.37738339631357
+            ],
+            [
+              23.022943879940915,
+              58.37741998351557
+            ],
+            [
+              23.02313472437308,
+              58.377307531421025
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.670827",
+        "fid": 670827,
+        "etak_id": 162921,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02444827",
+        "ads_lahiaadress": "Laasu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-02-28T16:52:38Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036974826418877,
+              58.37503646155782
+            ],
+            [
+              23.036874101116304,
+              58.37518206511766
+            ],
+            [
+              23.037006564549205,
+              58.37520731748456
+            ],
+            [
+              23.037107658394753,
+              58.375060719896155
+            ],
+            [
+              23.036974826418877,
+              58.37503646155782
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.670899",
+        "fid": 670899,
+        "etak_id": 171676,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "106019990",
+        "ads_oid": "ME00812184",
+        "ads_lahiaadress": "Aadu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-02-28T16:52:36Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.023916872112252,
+              58.37628957740754
+            ],
+            [
+              23.023753378249612,
+              58.376279518687
+            ],
+            [
+              23.023740614479888,
+              58.376336709478046
+            ],
+            [
+              23.023904125445423,
+              58.376346777323036
+            ],
+            [
+              23.023916872112252,
+              58.37628957740754
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.672428",
+        "fid": 672428,
+        "etak_id": 168747,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02498622",
+        "ads_lahiaadress": "Laasu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 46,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-05T18:02:48Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.0365113176075,
+              58.37489092035651
+            ],
+            [
+              23.03646987587443,
+              58.37486249328401
+            ],
+            [
+              23.036239109753375,
+              58.37495674976761
+            ],
+            [
+              23.036449537694878,
+              58.375099933307006
+            ],
+            [
+              23.036525587202647,
+              58.375069178270714
+            ],
+            [
+              23.036356777112772,
+              58.374954225763894
+            ],
+            [
+              23.0365113176075,
+              58.37489092035651
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.672729",
+        "fid": 672729,
+        "etak_id": 163202,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME02454057",
+        "ads_lahiaadress": "Kanepi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-05T18:11:48Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025832038702607,
+              58.38060560695508
+            ],
+            [
+              23.025831017426185,
+              58.38065490484936
+            ],
+            [
+              23.02595084460648,
+              58.38065536995179
+            ],
+            [
+              23.025951184270987,
+              58.38060598604439
+            ],
+            [
+              23.025832038702607,
+              58.38060560695508
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.688323",
+        "fid": 688323,
+        "etak_id": 5591512,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120294679",
+        "ads_oid": "EE01011619",
+        "ads_lahiaadress": "Kivimäe",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 95,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 95,
+        "muutmisaeg": "2018-03-07T18:54:03Z",
+        "geom_muutmisaeg": "2009-05-19T08:41:35Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.024389490485383,
+              58.374836358666506
+            ],
+            [
+              23.024279968376593,
+              58.374775566477254
+            ],
+            [
+              23.024110900663725,
+              58.374859623243516
+            ],
+            [
+              23.024220439831286,
+              58.37492041570805
+            ],
+            [
+              23.024389490485383,
+              58.374836358666506
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.700175",
+        "fid": 700175,
+        "etak_id": 163582,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "106026517",
+        "ads_oid": "EE00821717",
+        "ads_lahiaadress": "Laasu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 23,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 23,
+        "muutmisaeg": "2018-03-06T15:18:44Z",
+        "geom_muutmisaeg": "2007-04-30T11:57:46Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036974826418877,
+              58.37503646155782
+            ],
+            [
+              23.037107658394753,
+              58.375060719896155
+            ],
+            [
+              23.037185439181957,
+              58.374947816520525
+            ],
+            [
+              23.037053308567298,
+              58.37492292601629
+            ],
+            [
+              23.036974826418877,
+              58.37503646155782
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.729060",
+        "fid": 729060,
+        "etak_id": 6481319,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03229346",
+        "ads_lahiaadress": "Põlde",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-05-16T11:02:04Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.023948873856313,
+              58.380053461605456
+            ],
+            [
+              23.024109300810952,
+              58.37999774957326
+            ],
+            [
+              23.02405537239968,
+              58.379954909911646
+            ],
+            [
+              23.023894945306097,
+              58.38001063085373
+            ],
+            [
+              23.023948873856313,
+              58.380053461605456
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.729081",
+        "fid": 729081,
+        "etak_id": 6481325,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:16:25Z",
+        "geom_muutmisaeg": "2023-02-09T11:18:58Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025300974929106,
+              58.38030618729485
+            ],
+            [
+              23.025326365192534,
+              58.380336336255375
+            ],
+            [
+              23.0254044974671,
+              58.380318192660276
+            ],
+            [
+              23.02537912424169,
+              58.3802880438457
+            ],
+            [
+              23.025300974929106,
+              58.38030618729485
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.729083",
+        "fid": 729083,
+        "etak_id": 6481349,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03229372",
+        "ads_lahiaadress": "Laasu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-02-28T16:52:38Z",
+        "geom_muutmisaeg": "2013-02-20T14:46:34Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.0367712073022,
+              58.37527315659409
+            ],
+            [
+              23.036729923723527,
+              58.37520328214442
+            ],
+            [
+              23.036635114138853,
+              58.37521873861868
+            ],
+            [
+              23.03667639754763,
+              58.37528861309894
+            ],
+            [
+              23.0367712073022,
+              58.37527315659409
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.729091",
+        "fid": 729091,
+        "etak_id": 6481333,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03229379",
+        "ads_lahiaadress": "Uue-Rauna",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-03-06T15:18:41Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.020358454808978,
+              58.378076733655554
+            ],
+            [
+              23.020328921228934,
+              58.37803104448636
+            ],
+            [
+              23.020218044488452,
+              58.37805081937714
+            ],
+            [
+              23.02024757794129,
+              58.378096508571915
+            ],
+            [
+              23.020358454808978,
+              58.378076733655554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.729132",
+        "fid": 729132,
+        "etak_id": 6481235,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03229334",
+        "ads_lahiaadress": "Kadastiku",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2018-02-28T18:32:39Z",
+        "geom_muutmisaeg": "2013-02-19T14:36:52Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.994767961114494,
+              58.36444414833902
+            ],
+            [
+              22.994725491871286,
+              58.36440481617436
+            ],
+            [
+              22.994617656303753,
+              58.36443696624262
+            ],
+            [
+              22.994660108637426,
+              58.36447628933109
+            ],
+            [
+              22.994767961114494,
+              58.36444414833902
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.778254",
+        "fid": 778254,
+        "etak_id": 6848546,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120719720",
+        "ads_oid": "ME03398412",
+        "ads_lahiaadress": "Punni",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 78,
+        "muutmisaeg": "2018-03-01T14:44:24Z",
+        "geom_muutmisaeg": "2015-07-20T15:16:24Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.01807719351726,
+              58.3793936906476
+            ],
+            [
+              23.018233150703164,
+              58.37939861626096
+            ],
+            [
+              23.01824564477783,
+              58.37928950511145
+            ],
+            [
+              23.01808968807315,
+              58.37928457951331
+            ],
+            [
+              23.01807719351726,
+              58.3793936906476
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.778504",
+        "fid": 778504,
+        "etak_id": 6848684,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120726269",
+        "ads_oid": "ME03417113",
+        "ads_lahiaadress": "Peeteli",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-05-16T11:04:12Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.030721191938003,
+              58.38094995905507
+            ],
+            [
+              23.030712727723337,
+              58.38089161880161
+            ],
+            [
+              23.030516937787947,
+              58.38089944411304
+            ],
+            [
+              23.030525401680283,
+              58.38095778437946
+            ],
+            [
+              23.030721191938003,
+              58.38094995905507
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.784985",
+        "fid": 784985,
+        "etak_id": 6966412,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03512950",
+        "ads_lahiaadress": "Voo",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-05-10T12:34:53Z",
+        "geom_muutmisaeg": "2022-05-10T12:56:47Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.037626672053243,
+              58.37611621297283
+            ],
+            [
+              23.0376825566827,
+              58.376156655113554
+            ],
+            [
+              23.03792433634241,
+              58.376064220978655
+            ],
+            [
+              23.03786836515259,
+              58.37602381420962
+            ],
+            [
+              23.037626672053243,
+              58.37611621297283
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.805234",
+        "fid": 805234,
+        "etak_id": 7161103,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03623635",
+        "ads_lahiaadress": "Tõnujaagu",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 78,
+        "muutmisaeg": "2018-02-28T14:42:34Z",
+        "geom_muutmisaeg": "2017-06-12T09:54:00Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.027313456452937,
+              58.368777311460235
+            ],
+            [
+              23.027282760063038,
+              58.368676499658754
+            ],
+            [
+              23.027157080847275,
+              58.36868706245881
+            ],
+            [
+              23.02716823658472,
+              58.36872372942161
+            ],
+            [
+              23.02719199511113,
+              58.368721737471816
+            ],
+            [
+              23.0272115183692,
+              58.368785882206815
+            ],
+            [
+              23.027313456452937,
+              58.368777311460235
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.817840",
+        "fid": 817840,
+        "etak_id": 7387401,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03697901",
+        "ads_lahiaadress": "Punni",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-06-04T18:30:04Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.018128225023855,
+              58.37908259736076
+            ],
+            [
+              23.018276894400096,
+              58.37908889461369
+            ],
+            [
+              23.018283117538108,
+              58.3790483826022
+            ],
+            [
+              23.0181344483317,
+              58.3790420853565
+            ],
+            [
+              23.018128225023855,
+              58.37908259736076
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.817841",
+        "fid": 817841,
+        "etak_id": 7387389,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "120661585",
+        "ads_oid": "ME03206070",
+        "ads_lahiaadress": "Kasetuka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2019-02-13T18:30:04Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.017854525005013,
+              58.38207305915676
+            ],
+            [
+              23.017944172588795,
+              58.382157885365494
+            ],
+            [
+              23.018030665101925,
+              58.38213266293046
+            ],
+            [
+              23.017941034466695,
+              58.38204783691375
+            ],
+            [
+              23.017854525005013,
+              58.38207305915676
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.817848",
+        "fid": 817848,
+        "etak_id": 7387391,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03697895",
+        "ads_lahiaadress": "Kasetuka",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-06-04T18:30:04Z",
+        "geom_muutmisaeg": "2018-05-16T11:04:21Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.018224474580975,
+              58.382279080228905
+            ],
+            [
+              23.01831536334766,
+              58.38225622603666
+            ],
+            [
+              23.018274653197327,
+              58.382211572917065
+            ],
+            [
+              23.01818376451943,
+              58.382234427080405
+            ],
+            [
+              23.018224474580975,
+              58.382279080228905
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.818440",
+        "fid": 818440,
+        "etak_id": 7407968,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03702686",
+        "ads_lahiaadress": "Vahuri",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-06-19T18:30:04Z",
+        "geom_muutmisaeg": "2018-06-13T17:54:54Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036454481932683,
+              58.37600735150934
+            ],
+            [
+              23.03648917818502,
+              58.37595995995165
+            ],
+            [
+              23.036365474167535,
+              58.37593496174363
+            ],
+            [
+              23.036330777773436,
+              58.37598235326778
+            ],
+            [
+              23.036454481932683,
+              58.37600735150934
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.819046",
+        "fid": 819046,
+        "etak_id": 7425819,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 206,
+        "korgusallika_id": 206,
+        "ruumikujuallika_id": 206,
+        "muutmisaeg": "2018-07-05T16:31:11Z",
+        "geom_muutmisaeg": "2018-07-05T17:03:26Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.036278405981978,
+              58.368836084751656
+            ],
+            [
+              23.03632728038167,
+              58.36887054830958
+            ],
+            [
+              23.03638255943442,
+              58.36884891231648
+            ],
+            [
+              23.036333668169885,
+              58.36881443967319
+            ],
+            [
+              23.036278405981978,
+              58.368836084751656
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.844832",
+        "fid": 844832,
+        "etak_id": 8064904,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": null,
+        "ads_oid": "EE03871018",
+        "ads_lahiaadress": "Kadakavahe/1",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-05-05T12:43:20Z",
+        "geom_muutmisaeg": "2022-05-05T12:50:39Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.994293709707208,
+              58.365140458198574
+            ],
+            [
+              22.99434214041445,
+              58.36517868810345
+            ],
+            [
+              22.99444230263736,
+              58.36514365825649
+            ],
+            [
+              22.994393872125755,
+              58.36510541941209
+            ],
+            [
+              22.994293709707208,
+              58.365140458198574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.845493",
+        "fid": 845493,
+        "etak_id": 8099823,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME03875316",
+        "ads_lahiaadress": "Suurpea",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:31:50Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.027780953179235,
+              58.373856863199904
+            ],
+            [
+              23.02778332582616,
+              58.373904678421674
+            ],
+            [
+              23.027890244448976,
+              58.37390321179116
+            ],
+            [
+              23.0278878714094,
+              58.37385540554886
+            ],
+            [
+              23.027780953179235,
+              58.373856863199904
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.846394",
+        "fid": 846394,
+        "etak_id": 8125457,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": null,
+        "ads_oid": "EE03878944",
+        "ads_lahiaadress": "Suurpea",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:31:21Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02784641273161,
+              58.3737696512255
+            ],
+            [
+              23.027948137727446,
+              58.373768082147556
+            ],
+            [
+              23.02794575248486,
+              58.3737256724111
+            ],
+            [
+              23.027844044699968,
+              58.373727241617274
+            ],
+            [
+              23.02784641273161,
+              58.3737696512255
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.846863",
+        "fid": 846863,
+        "etak_id": 6481330,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "120541164",
+        "ads_oid": "EE01088799",
+        "ads_lahiaadress": "Peeteli/2",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 210,
+        "ruumikujuallika_id": 135,
+        "muutmisaeg": "2021-02-22T18:30:00Z",
+        "geom_muutmisaeg": "2013-02-20T09:24:37Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03078849073809,
+              58.38116583965648
+            ],
+            [
+              23.030827685861993,
+              58.38116169235255
+            ],
+            [
+              23.03086796084001,
+              58.38114066306795
+            ],
+            [
+              23.03081462758519,
+              58.38111249414117
+            ],
+            [
+              23.030768628442203,
+              58.38113652396396
+            ],
+            [
+              23.030678459798697,
+              58.38114604010398
+            ],
+            [
+              23.030690023440453,
+              58.381176235652184
+            ],
+            [
+              23.03078849073809,
+              58.38116583965648
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.852897",
+        "fid": 852897,
+        "etak_id": 8284890,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": "121295898",
+        "ads_oid": "ME03781803",
+        "ads_lahiaadress": "Kadakavahe",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-05-05T12:43:55Z",
+        "geom_muutmisaeg": "2021-01-18T11:01:11Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.99382970154794,
+              58.3650074256282
+            ],
+            [
+              22.993771456430117,
+              58.36504185158738
+            ],
+            [
+              22.993874034959724,
+              58.36508979326452
+            ],
+            [
+              22.993932297140876,
+              58.36505536739328
+            ],
+            [
+              22.99382970154794,
+              58.3650074256282
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.869239",
+        "fid": 869239,
+        "etak_id": 8624691,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-03-30T17:25:39Z",
+        "geom_muutmisaeg": "2022-04-04T11:08:32Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.025541640264503,
+              58.37916539989539
+            ],
+            [
+              23.025607120870404,
+              58.37921396612105
+            ],
+            [
+              23.025664016650616,
+              58.37919280489506
+            ],
+            [
+              23.025598553096856,
+              58.379144238828914
+            ],
+            [
+              23.025541640264503,
+              58.37916539989539
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.869273",
+        "fid": 869273,
+        "etak_id": 8624690,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 10,
+        "tyyp_tekst": "Elu- või ühiskondlik hoone",
+        "ehr_gid": "121358911",
+        "ads_oid": "ME03956956",
+        "ads_lahiaadress": "Roose",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:19:16Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02463138228578,
+              58.378835947255915
+            ],
+            [
+              23.024545540193017,
+              58.37878875146194
+            ],
+            [
+              23.024492007808334,
+              58.37881562182488
+            ],
+            [
+              23.024577832803754,
+              58.378862817524215
+            ],
+            [
+              23.02463138228578,
+              58.378835947255915
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.870360",
+        "fid": 870360,
+        "etak_id": 8649751,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-05-10T12:47:37Z",
+        "geom_muutmisaeg": "2022-05-10T12:56:47Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.035531760002005,
+              58.37508723005883
+            ],
+            [
+              23.03549610763984,
+              58.37513269255925
+            ],
+            [
+              23.035568698249463,
+              58.37514840702152
+            ],
+            [
+              23.03560435102531,
+              58.3751029265459
+            ],
+            [
+              23.035531760002005,
+              58.37508723005883
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.881029",
+        "fid": 881029,
+        "etak_id": 8791147,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-11-29T14:51:22Z",
+        "geom_muutmisaeg": "2022-11-29T14:58:18Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.00884663909233,
+              58.36165154886109
+            ],
+            [
+              23.008800631440476,
+              58.36168171256973
+            ],
+            [
+              23.0088881709564,
+              58.36171857941153
+            ],
+            [
+              23.00893417858146,
+              58.361688415671416
+            ],
+            [
+              23.00884663909233,
+              58.36165154886109
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.881030",
+        "fid": 881030,
+        "etak_id": 8791151,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-11-29T14:53:53Z",
+        "geom_muutmisaeg": "2022-11-29T14:58:18Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.007058421750358,
+              58.36172745225554
+            ],
+            [
+              23.007073812383844,
+              58.36176885034852
+            ],
+            [
+              23.00718008984555,
+              58.361757950009846
+            ],
+            [
+              23.007164698839144,
+              58.361716560907105
+            ],
+            [
+              23.007058421750358,
+              58.36172745225554
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.881037",
+        "fid": 881037,
+        "etak_id": 8791430,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": "ME04020769",
+        "ads_lahiaadress": "Pärdi",
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 78,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-12-12T18:30:00Z",
+        "geom_muutmisaeg": "2022-11-29T16:30:30Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.028500848263693,
+              58.36820231756336
+            ],
+            [
+              23.028665279650973,
+              58.36821176702255
+            ],
+            [
+              23.02867613061006,
+              58.36815971539229
+            ],
+            [
+              23.02851169971019,
+              58.368150256969564
+            ],
+            [
+              23.028500848263693,
+              58.36820231756336
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.881078",
+        "fid": 881078,
+        "etak_id": 8792714,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 30,
+        "tyyp_tekst": "Vundament",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2022-12-16T12:08:20Z",
+        "geom_muutmisaeg": "2022-12-01T10:07:38Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.03626143863813,
+              58.37569645730635
+            ],
+            [
+              23.03632154875796,
+              58.375751065446046
+            ],
+            [
+              23.036601001408684,
+              58.37566617345566
+            ],
+            [
+              23.036540891000588,
+              58.3756115654472
+            ],
+            [
+              23.03626143863813,
+              58.37569645730635
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.884911",
+        "fid": 884911,
+        "etak_id": 8850064,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:17:32Z",
+        "geom_muutmisaeg": "2023-02-09T11:18:58Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.02588745258051,
+              58.3798250854383
+            ],
+            [
+              23.02596671144303,
+              58.379834157575885
+            ],
+            [
+              23.025984587416225,
+              58.37979107625159
+            ],
+            [
+              23.025905328646015,
+              58.379782004125076
+            ],
+            [
+              23.02588745258051,
+              58.3798250854383
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.885053",
+        "fid": 885053,
+        "etak_id": 8850087,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:20:17Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.020892297033022,
+              58.37829869481728
+            ],
+            [
+              23.020919940191956,
+              58.378330630909794
+            ],
+            [
+              23.020999650997663,
+              58.37831158623135
+            ],
+            [
+              23.020972007531956,
+              58.378279659133504
+            ],
+            [
+              23.020892297033022,
+              58.37829869481728
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e_401_hoone_ka.885071",
+        "fid": 885071,
+        "etak_id": 8850152,
+        "kood": 401,
+        "kood_tekst": "Hoone",
+        "tyyp": 20,
+        "tyyp_tekst": "Kõrval- või tootmishoone",
+        "ehr_gid": null,
+        "ads_oid": null,
+        "ads_lahiaadress": null,
+        "kov_id": null,
+        "markused": null,
+        "korgus_m": null,
+        "vajalik": 30,
+        "vajalik_tekst": "Korras",
+        "andmeallika_id": 222,
+        "korgusallika_id": 222,
+        "ruumikujuallika_id": 222,
+        "muutmisaeg": "2023-02-09T11:32:17Z",
+        "geom_muutmisaeg": "2023-02-09T11:39:27Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              23.027521316318282,
+              58.37360251180425
+            ],
+            [
+              23.027633364341412,
+              58.37359847147121
+            ],
+            [
+              23.027628807445844,
+              58.373563542955075
+            ],
+            [
+              23.02751675953325,
+              58.373567583284114
+            ],
+            [
+              23.027521316318282,
+              58.37360251180425
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
