@@ -247,238 +247,318 @@
             };
         }
         
-        // Create map centered on Ruhve, Saaremaa
-        const map = new maplibregl.Map({
-            container: 'map',
-            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-            center: [23.02, 58.38], // Ruhve, Saaremaa - proper coordinates from pyproj
-            zoom: 12
-        });
-        
-        // Add sea highlighting after map loads
-        map.on('load', () => {
-            // Add sea background layer
-            map.addSource('sea-background', {
-                type: 'geojson',
-                data: {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Polygon',
-                        coordinates: [[
-                            [22.9, 58.3],
-                            [23.2, 58.3],
-                            [23.2, 58.5],
-                            [22.9, 58.5],
-                            [22.9, 58.3]
-                        ]]
-                    },
-                    properties: {}
-                }
+        // Create map centered on Ruhve, Saaremaa with error handling
+        let map;
+        let mapInitialized = false;
+        try {
+            map = new maplibregl.Map({
+                container: 'map',
+                style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+                center: [23.02, 58.38], // Ruhve, Saaremaa - proper coordinates from pyproj
+                zoom: 12
             });
-            
-            map.addLayer({
-                id: 'sea-background',
-                type: 'fill',
-                source: 'sea-background',
-                paint: {
-                    'fill-color': '#e3f2fd',
-                    'fill-opacity': 0.3
-                }
+            mapInitialized = true;
+        } catch (error) {
+            console.error('❌ Map initialization failed:', error);
+            document.getElementById('info').innerHTML = `
+                <h3>❌ Kaardi viga</h3>
+                <p><span class="status error"></span>Kaardi initsialiseerimine ebaõnnestus</p>
+                <p>Palun värskendage lehte ja proovige uuesti.</p>
+                <p><small>Tehniline viga: ${error.message}</small></p>
+            `;
+            // Disable all checkboxes when map fails to initialize
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.disabled = true;
             });
-        });
+            // Don't return - continue with event handler setup
+        }
         
-        map.on('load', () => {
+        // Add sea highlighting after map loads with error handling
+        if (mapInitialized) {
+            map.on('load', () => {
+            try {
+                // Add sea background layer
+                map.addSource('sea-background', {
+                    type: 'geojson',
+                    data: {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Polygon',
+                            coordinates: [[
+                                [22.9, 58.3],
+                                [23.2, 58.3],
+                                [23.2, 58.5],
+                                [22.9, 58.5],
+                                [22.9, 58.3]
+                            ]]
+                        },
+                        properties: {}
+                    }
+                });
+                
+                map.addLayer({
+                    id: 'sea-background',
+                    type: 'fill',
+                    source: 'sea-background',
+                    paint: {
+                        'fill-color': '#e3f2fd',
+                        'fill-opacity': 0.3
+                    }
+                });
+            } catch (error) {
+                console.warn('⚠️ Sea background layer failed to load:', error);
+                // Continue without sea background - not critical
+            }
+            });
+        }
+        
+        if (mapInitialized) {
+            map.on('load', () => {
             console.log('✅ Map loaded, adding data...');
             
-            // Load the properly transformed WGS84 parcels data
+            // Load the properly transformed WGS84 parcels data with error handling
             fetch('/output/parcels_wgs84_proper.geojson')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    if (!data || !data.features || !Array.isArray(data.features)) {
+                        throw new Error('Invalid GeoJSON data format');
+                    }
                     console.log('📊 WGS84 parcels loaded:', data.features.length, 'features');
                     
-                    // Add parcels source
-                    map.addSource('parcels', {
-                        type: 'geojson',
-                        data: data
-                    });
+                    try {
+                        // Add parcels source
+                        map.addSource('parcels', {
+                            type: 'geojson',
+                            data: data
+                        });
+                    } catch (error) {
+                        console.error('❌ Failed to add parcels source:', error);
+                        throw new Error('Failed to add parcels to map');
+                    }
                     
-                    // Add village boundary (convex hull of all parcels)
-                    const villageBoundary = createVillageBoundary(data);
-                    map.addSource('village-boundary', {
-                        type: 'geojson',
-                        data: villageBoundary
-                    });
+                    // Add village boundary (convex hull of all parcels) with error handling
+                    try {
+                        const villageBoundary = createVillageBoundary(data);
+                        map.addSource('village-boundary', {
+                            type: 'geojson',
+                            data: villageBoundary
+                        });
+                        
+                        map.addLayer({
+                            id: 'village-boundary',
+                            type: 'line',
+                            source: 'village-boundary',
+                            paint: {
+                                'line-color': '#e74c3c',
+                                'line-width': 3,
+                                'line-dasharray': [2, 2]
+                            }
+                        });
+                    } catch (error) {
+                        console.warn('⚠️ Village boundary layer failed to load:', error);
+                        // Continue without village boundary - not critical
+                    }
                     
-                    map.addLayer({
-                        id: 'village-boundary',
-                        type: 'line',
-                        source: 'village-boundary',
-                        paint: {
-                            'line-color': '#e74c3c',
-                            'line-width': 3,
-                            'line-dasharray': [2, 2]
-                        }
-                    });
+                    // Add parcels outline with error handling
+                    try {
+                        map.addLayer({
+                            id: 'parcels-outline',
+                            type: 'line',
+                            source: 'parcels',
+                            paint: {
+                                'line-color': '#7b5a3d',
+                                'line-width': 0.8
+                            }
+                        });
+                        
+                        // Add building highlights
+                        map.addLayer({
+                            id: 'parcels-highlight',
+                            type: 'fill',
+                            source: 'parcels',
+                            filter: ['==', ['get', 'has_bldg'], true],
+                            paint: {
+                                'fill-color': '#e6d7c3',
+                                'fill-opacity': 0.6
+                            }
+                        });
+                        
+                        // Add T. plots highlight layer
+                        map.addLayer({
+                            id: 'tamkivi-highlight',
+                            type: 'fill',
+                            source: 'parcels',
+                            filter: ['in', ['get', 'tunnus'], ['literal', [
+                                '38601:004:0294',
+                                '38601:004:0337',
+                                '38601:004:0336',
+                                '38601:004:0437',
+                                '38601:004:0438',
+                                '38601:004:0439',
+                                '38601:004:0393',
+                                '38601:004:0606'
+                            ]]],
+                            paint: {
+                                'fill-color': '#9b59b6',
+                                'fill-opacity': 0.8
+                            },
+                            layout: {
+                                'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
+                            }
+                        });
+                        
+                        // Add T. plots outline
+                        map.addLayer({
+                            id: 'tamkivi-outline',
+                            type: 'line',
+                            source: 'parcels',
+                            filter: ['in', ['get', 'tunnus'], ['literal', [
+                                '38601:004:0294',
+                                '38601:004:0337',
+                                '38601:004:0336',
+                                '38601:004:0437',
+                                '38601:004:0438',
+                                '38601:004:0439',
+                                '38601:004:0393',
+                                '38601:004:0606'
+                            ]]],
+                            paint: {
+                                'line-color': '#8e44ad',
+                                'line-width': 2.5
+                            },
+                            layout: {
+                                'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
+                            }
+                        });
+                    } catch (error) {
+                        console.error('❌ Failed to add parcel layers:', error);
+                        throw new Error('Failed to add parcel layers to map');
+                    }
                     
-                    // Add parcels outline
-                    map.addLayer({
-                        id: 'parcels-outline',
-                        type: 'line',
-                        source: 'parcels',
-                        paint: {
-                            'line-color': '#7b5a3d',
-                            'line-width': 0.8
-                        }
-                    });
+                    // Add labels with error handling
+                    try {
+                        map.addLayer({
+                            id: 'parcel-labels',
+                            type: 'symbol',
+                            source: 'parcels',
+                            layout: {
+                                'text-field': ['get', 'l_aadress'],
+                                'text-font': ['Open Sans Regular'],
+                                'text-size': 11,
+                                'text-allow-overlap': false
+                            },
+                            paint: {
+                                'text-color': '#2c3e50',
+                                'text-halo-color': '#ffffff',
+                                'text-halo-width': 1.5
+                            }
+                        });
+                    } catch (error) {
+                        console.warn('⚠️ Parcel labels layer failed to load:', error);
+                        // Continue without labels - not critical
+                    }
                     
-                    // Add building highlights
-                    map.addLayer({
-                        id: 'parcels-highlight',
-                        type: 'fill',
-                        source: 'parcels',
-                        filter: ['==', ['get', 'has_bldg'], true],
-                        paint: {
-                            'fill-color': '#e6d7c3',
-                            'fill-opacity': 0.6
-                        }
-                    });
-                    
-                    // Add T. plots highlight layer
-                    map.addLayer({
-                        id: 'tamkivi-highlight',
-                        type: 'fill',
-                        source: 'parcels',
-                        filter: ['in', ['get', 'tunnus'], ['literal', [
-                            '38601:004:0294',
-                            '38601:004:0337',
-                            '38601:004:0336',
-                            '38601:004:0437',
-                            '38601:004:0438',
-                            '38601:004:0439',
-                            '38601:004:0393',
-                            '38601:004:0606'
-                        ]]],
-                        paint: {
-                            'fill-color': '#9b59b6',
-                            'fill-opacity': 0.8
-                        },
-                        layout: {
-                            'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
-                        }
-                    });
-                    
-                    // Add T. plots outline
-                    map.addLayer({
-                        id: 'tamkivi-outline',
-                        type: 'line',
-                        source: 'parcels',
-                        filter: ['in', ['get', 'tunnus'], ['literal', [
-                            '38601:004:0294',
-                            '38601:004:0337',
-                            '38601:004:0336',
-                            '38601:004:0437',
-                            '38601:004:0438',
-                            '38601:004:0439',
-                            '38601:004:0393',
-                            '38601:004:0606'
-                        ]]],
-                        paint: {
-                            'line-color': '#8e44ad',
-                            'line-width': 2.5
-                        },
-                        layout: {
-                            'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
-                        }
-                    });
-                    
-                    // Add labels
-                    map.addLayer({
-                        id: 'parcel-labels',
-                        type: 'symbol',
-                        source: 'parcels',
-                        layout: {
-                            'text-field': ['get', 'l_aadress'],
-                            'text-font': ['Open Sans Regular'],
-                            'text-size': 11,
-                            'text-allow-overlap': false
-                        },
-                        paint: {
-                            'text-color': '#2c3e50',
-                            'text-halo-color': '#ffffff',
-                            'text-halo-width': 1.5
-                        }
-                    });
-                    
-                    // Load roads and buildings data
+                    // Load roads and buildings data with error handling
                     Promise.all([
-                        fetch('/output/roads.geojson'),
-                        fetch('/output/buildings_wgs84_proper.geojson')
+                        fetch('/output/roads.geojson').then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Roads data: HTTP ${response.status}`);
+                            }
+                            return response.json();
+                        }),
+                        fetch('/output/buildings_wgs84_proper.geojson').then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Buildings data: HTTP ${response.status}`);
+                            }
+                            return response.json();
+                        })
                     ])
-                    .then(responses => Promise.all(responses.map(r => r.json())))
                     .then(([roadsData, buildingsData]) => {
+                        // Validate data format
+                        if (!roadsData || !roadsData.features || !Array.isArray(roadsData.features)) {
+                            throw new Error('Invalid roads GeoJSON format');
+                        }
+                        if (!buildingsData || !buildingsData.features || !Array.isArray(buildingsData.features)) {
+                            throw new Error('Invalid buildings GeoJSON format');
+                        }
                         console.log('🛣️ Roads loaded:', roadsData.features.length, 'features');
                         console.log('🏠 Buildings loaded:', buildingsData.features.length, 'features');
                         
-                        // Add roads source and layer
-                        map.addSource('roads', {
-                            type: 'geojson',
-                            data: roadsData
-                        });
+                        // Add roads source and layer with error handling
+                        try {
+                            map.addSource('roads', {
+                                type: 'geojson',
+                                data: roadsData
+                            });
+                            
+                            map.addLayer({
+                                id: 'roads-line',
+                                type: 'line',
+                                source: 'roads',
+                                paint: {
+                                    'line-color': '#2c3e50',
+                                    'line-width': 2.5
+                                }
+                            });
+                            
+                            // Add road name labels
+                            map.addLayer({
+                                id: 'road-labels',
+                                type: 'symbol',
+                                source: 'roads',
+                                layout: {
+                                    'text-field': ['get', 'nimetus'],
+                                    'text-font': ['Open Sans Regular'],
+                                    'text-size': 9,
+                                    'text-allow-overlap': false,
+                                    'symbol-placement': 'line'
+                                },
+                                paint: {
+                                    'text-color': '#34495e',
+                                    'text-halo-color': '#ffffff',
+                                    'text-halo-width': 1
+                                }
+                            });
+                        } catch (error) {
+                            console.warn('⚠️ Roads layers failed to load:', error);
+                            // Continue without roads - not critical
+                        }
                         
-                        map.addLayer({
-                            id: 'roads-line',
-                            type: 'line',
-                            source: 'roads',
-                            paint: {
-                                'line-color': '#2c3e50',
-                                'line-width': 2.5
-                            }
-                        });
-                        
-                        // Add road name labels
-                        map.addLayer({
-                            id: 'road-labels',
-                            type: 'symbol',
-                            source: 'roads',
-                            layout: {
-                                'text-field': ['get', 'nimetus'],
-                                'text-font': ['Open Sans Regular'],
-                                'text-size': 9,
-                                'text-allow-overlap': false,
-                                'symbol-placement': 'line'
-                            },
-                            paint: {
-                                'text-color': '#34495e',
-                                'text-halo-color': '#ffffff',
-                                'text-halo-width': 1
-                            }
-                        });
-                        
-                        // Add buildings source and layers
-                        map.addSource('buildings', {
-                            type: 'geojson',
-                            data: buildingsData
-                        });
-                        
-                        map.addLayer({
-                            id: 'buildings-fill',
-                            type: 'fill',
-                            source: 'buildings',
-                            paint: {
-                                'fill-color': '#e74c3c',
-                                'fill-opacity': 0.7
-                            }
-                        });
-                        
-                        map.addLayer({
-                            id: 'buildings-outline',
-                            type: 'line',
-                            source: 'buildings',
-                            paint: {
-                                'line-color': '#c0392b',
-                                'line-width': 1
-                            }
-                        });
+                        // Add buildings source and layers with error handling
+                        try {
+                            map.addSource('buildings', {
+                                type: 'geojson',
+                                data: buildingsData
+                            });
+                            
+                            map.addLayer({
+                                id: 'buildings-fill',
+                                type: 'fill',
+                                source: 'buildings',
+                                paint: {
+                                    'fill-color': '#e74c3c',
+                                    'fill-opacity': 0.7
+                                }
+                            });
+                            
+                            map.addLayer({
+                                id: 'buildings-outline',
+                                type: 'line',
+                                source: 'buildings',
+                                paint: {
+                                    'line-color': '#c0392b',
+                                    'line-width': 1
+                                }
+                            });
+                        } catch (error) {
+                            console.warn('⚠️ Buildings layers failed to load:', error);
+                            // Continue without buildings - not critical
+                        }
                         
                         // Update info to include all data
                         const buildingCount = data.features.filter(f => f.properties.has_bldg).length;
@@ -512,14 +592,15 @@
                         `;
                     })
                     .catch(error => {
-                        console.log('⚠️ Some data not available, continuing without it');
+                        console.warn('⚠️ Some data not available, continuing without it:', error);
                         // Update info without roads/buildings
                         const buildingCount = data.features.filter(f => f.properties.has_bldg).length;
                         document.getElementById('info').innerHTML = `
                             <h3>📊 Kaardi info</h3>
-                            <p><span class="status success"></span>Kaart laetud edukalt</p>
+                            <p><span class="status warning"></span>Kaart laetud osaliselt</p>
                             <p>🏘️ Krundid: ${data.features.length}</p>
                             <p>🏠 Hoonetega: ${buildingCount}</p>
+                            <p>⚠️ Teed/hooned: ${error.message}</p>
                             <p>📍 Asukoht: Ruhve, Saaremaa</p>
                         `;
                     });
@@ -543,22 +624,53 @@
                 })
                 .catch(error => {
                     console.error('❌ Error loading parcels:', error);
+                    
+                    // Disable all checkboxes when critical data fails to load
+                    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                        checkbox.disabled = true;
+                    });
+                    
+                    // Show user-friendly error message
                     document.getElementById('info').innerHTML = `
-                        <h3>❌ Viga</h3>
-                        <p><span class="status error"></span>Andmete laadimine ebaõnnestus</p>
-                        <p>${error.message}</p>
+                        <h3>❌ Andmete laadimise viga</h3>
+                        <p><span class="status error"></span>Krundi andmete laadimine ebaõnnestus</p>
+                        <p><strong>Võimalikud põhjused:</strong></p>
+                        <ul>
+                            <li>GeoJSON failid puuduvad või on vigased</li>
+                            <li>Võrguühenduse probleem</li>
+                            <li>Serveri viga</li>
+                        </ul>
+                        <p><strong>Lahendused:</strong></p>
+                        <ul>
+                            <li>Värskendage lehte (F5)</li>
+                            <li>Kontrollige, et ETL protsess on lõpetatud</li>
+                            <li>Kontaktige administraatorit</li>
+                        </ul>
+                        <p><small>Tehniline viga: ${error.message}</small></p>
                     `;
                 });
-        });
+            });
+        }
         
-        // Toggle building highlights
+        // Toggle building highlights with error handling
         document.getElementById('toggleHighlight').addEventListener('change', (e) => {
             console.log('🏠 Toggle building highlights:', e.target.checked);
-            if (map.getLayer('parcels-highlight')) {
-                map.setLayoutProperty('parcels-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ Building highlights visibility set to:', e.target.checked ? 'visible' : 'none');
-            } else {
-                console.log('⚠️ Building highlights layer not found');
+            if (!mapInitialized) {
+                console.log('⚠️ Map not initialized, skipping toggle');
+                e.target.checked = !e.target.checked;
+                return;
+            }
+            try {
+                if (map.getLayer('parcels-highlight')) {
+                    map.setLayoutProperty('parcels-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
+                    console.log('✅ Building highlights visibility set to:', e.target.checked ? 'visible' : 'none');
+                } else {
+                    console.log('⚠️ Building highlights layer not found');
+                }
+            } catch (error) {
+                console.error('❌ Error toggling building highlights:', error);
+                e.target.checked = !e.target.checked;
+                alert('Viga hoonetega krundide kuvamisel. Palun proovige uuesti.');
             }
         });
         
@@ -609,29 +721,46 @@
         // Toggle T. plots
         document.getElementById('toggleTamkivi').addEventListener('change', (e) => {
             console.log('🏘️ Toggle T. plots:', e.target.checked);
-            if (map.getLayer('tamkivi-highlight')) {
-                map.setLayoutProperty('tamkivi-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ T. highlight visibility set to:', e.target.checked ? 'visible' : 'none');
-            } else {
-                console.log('⚠️ T. highlight layer not found');
+            if (!mapInitialized) {
+                console.log('⚠️ Map not initialized, skipping toggle');
+                e.target.checked = !e.target.checked;
+                return;
             }
-            if (map.getLayer('tamkivi-outline')) {
-                map.setLayoutProperty('tamkivi-outline', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ T. outline visibility set to:', e.target.checked ? 'visible' : 'none');
-            } else {
-                console.log('⚠️ T. outline layer not found');
-            }
-            
-            // Show/hide T. info box
-            const tamkiviInfo = document.getElementById('tamkivi-info');
-            if (tamkiviInfo) {
-                tamkiviInfo.style.display = e.target.checked ? 'block' : 'none';
+            try {
+                if (map.getLayer('tamkivi-highlight')) {
+                    map.setLayoutProperty('tamkivi-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
+                    console.log('✅ T. highlight visibility set to:', e.target.checked ? 'visible' : 'none');
+                } else {
+                    console.log('⚠️ T. highlight layer not found');
+                }
+                if (map.getLayer('tamkivi-outline')) {
+                    map.setLayoutProperty('tamkivi-outline', 'visibility', e.target.checked ? 'visible' : 'none');
+                    console.log('✅ T. outline visibility set to:', e.target.checked ? 'visible' : 'none');
+                } else {
+                    console.log('⚠️ T. outline layer not found');
+                }
+                
+                // Show/hide T. info box
+                const tamkiviInfo = document.getElementById('tamkivi-info');
+                if (tamkiviInfo) {
+                    tamkiviInfo.style.display = e.target.checked ? 'block' : 'none';
+                }
+            } catch (error) {
+                console.error('❌ Error toggling T. plots:', error);
+                // Revert checkbox state on error
+                e.target.checked = !e.target.checked;
+                alert('Viga T. maade kuvamisel. Palun proovige uuesti.');
             }
         });
         
-        // Export high DPI map
+        // Export high DPI map with error handling
         document.getElementById('exportBtn').addEventListener('click', () => {
-            exportHighDPIMap();
+            try {
+                exportHighDPIMap();
+            } catch (error) {
+                console.error('❌ Error starting export:', error);
+                alert('Viga kaardi eksportimisel. Palun proovige uuesti.');
+            }
         });
         
         function exportHighDPIMap() {
@@ -664,15 +793,26 @@
             tempContainer.style.top = '-9999px';
             document.body.appendChild(tempContainer);
             
-            // Create temporary map
-            const tempMap = new maplibregl.Map({
-                container: tempContainer,
-                style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-                center: center,
-                zoom: zoom,
-                preserveDrawingBuffer: true,
-                fadeDuration: 0
-            });
+            // Create temporary map with error handling
+            let tempMap;
+            try {
+                tempMap = new maplibregl.Map({
+                    container: tempContainer,
+                    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+                    center: center,
+                    zoom: zoom,
+                    preserveDrawingBuffer: true,
+                    fadeDuration: 0
+                });
+            } catch (error) {
+                console.error('❌ Failed to create temporary map for export:', error);
+                // Clean up and restore button
+                document.body.removeChild(tempContainer);
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+                alert('Viga ajutise kaardi loomisel. Palun proovige uuesti.');
+                return;
+            }
             
             // Wait for map to load and add data
             tempMap.on('load', () => {
