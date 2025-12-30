@@ -610,14 +610,36 @@
                     // Debug: List all available layers
                     console.log('🔍 Available map layers:', map.getStyle().layers.map(l => l.id));
                     
-                    // Fit to data bounds
+                    // Fit to data bounds - handle all geometry types properly
                     const bounds = new maplibregl.LngLatBounds();
+
+                    // Helper function to recursively extract all coordinates
+                    function extractCoordinates(coords, depth) {
+                        if (depth === 0) {
+                            // We've reached actual coordinate pairs [lng, lat]
+                            bounds.extend(coords);
+                        } else {
+                            // Still nested arrays, recurse deeper
+                            coords.forEach(c => extractCoordinates(c, depth - 1));
+                        }
+                    }
+
                     data.features.forEach(feature => {
-                        feature.geometry.coordinates[0].forEach(coord => {
-                            bounds.extend(coord);
-                        });
+                        const geomType = feature.geometry.type;
+                        const coords = feature.geometry.coordinates;
+
+                        // Determine nesting depth based on geometry type
+                        if (geomType === 'Point') {
+                            bounds.extend(coords);
+                        } else if (geomType === 'LineString' || geomType === 'MultiPoint') {
+                            coords.forEach(coord => bounds.extend(coord));
+                        } else if (geomType === 'Polygon' || geomType === 'MultiLineString') {
+                            extractCoordinates(coords, 1);
+                        } else if (geomType === 'MultiPolygon') {
+                            extractCoordinates(coords, 2);
+                        }
                     });
-                    
+
                     console.log('🗺️ Calculated bounds:', bounds);
                     map.fitBounds(bounds, { padding: 50 });
                     
