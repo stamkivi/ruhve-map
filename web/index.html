@@ -123,23 +123,23 @@
         .status.warning { background: #f39c12; }
         .status.error { background: #e74c3c; }
         
-        #tamkivi-info {
+        #t-info {
             top: 200px;
             background: rgba(248, 244, 255, 0.95);
             border-left: 4px solid #9b59b6;
         }
-        
-        #tamkivi-info h3 {
+
+        #t-info h3 {
             color: #8e44ad;
             margin-top: 0;
         }
-        
-        #tamkivi-info ul {
+
+        #t-info ul {
             margin: 10px 0;
             padding-left: 20px;
         }
-        
-        #tamkivi-info li {
+
+        #t-info li {
             margin: 5px 0;
             font-size: 13px;
         }
@@ -178,8 +178,8 @@
                     <button id="exportBtn" class="export-btn">🖨️ Ekspordi kaart</button>
                 </div>
                 <div class="control-group">
-                    <input type="checkbox" id="toggleTamkivi" unchecked>
-                    <label for="toggleTamkivi">🏘️ T. maad (7.06%)</label>
+                    <input type="checkbox" id="toggleT" unchecked>
+                    <label for="toggleT">🏘️ T. maad (7.06%)</label>
                 </div>
         </div>
     </div>
@@ -191,7 +191,7 @@
         <p><span class="status success"></span>Laetakse...</p>
     </div>
     
-    <div class="info" id="tamkivi-info" style="display: none;">
+    <div class="info" id="t-info" style="display: none;">
         <h3>🏘️ T. maad</h3>
         <p><strong>Kogupindala:</strong> 67.34 ha</p>
         <p><strong>Protsent külast:</strong> 7.06%</p>
@@ -390,7 +390,7 @@
                         
                         // Add T. plots highlight layer
                         map.addLayer({
-                            id: 'tamkivi-highlight',
+                            id: 't-highlight',
                             type: 'fill',
                             source: 'parcels',
                             filter: ['in', ['get', 'tunnus'], ['literal', [
@@ -408,13 +408,13 @@
                                 'fill-opacity': 0.8
                             },
                             layout: {
-                                'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
+                                'visibility': document.getElementById('toggleT').checked ? 'visible' : 'none'
                             }
                         });
                         
                         // Add T. plots outline
                         map.addLayer({
-                            id: 'tamkivi-outline',
+                            id: 't-outline',
                             type: 'line',
                             source: 'parcels',
                             filter: ['in', ['get', 'tunnus'], ['literal', [
@@ -432,7 +432,7 @@
                                 'line-width': 2.5
                             },
                             layout: {
-                                'visibility': document.getElementById('toggleTamkivi').checked ? 'visible' : 'none'
+                                'visibility': document.getElementById('toggleT').checked ? 'visible' : 'none'
                             }
                         });
                     } catch (error) {
@@ -563,7 +563,7 @@
                         // Update info to include all data
                         const buildingCount = data.features.filter(f => f.properties.has_bldg).length;
                         const namedRoads = roadsData.features.filter(f => f.properties.nimetus && f.properties.nimetus !== 'None').length;
-                        const tamkiviPlots = data.features.filter(f => [
+                        const tPlots = data.features.filter(f => [
                             '38601:004:0294',
                             '38601:004:0337',
                             '38601:004:0336',
@@ -575,9 +575,9 @@
                         ].includes(f.properties.tunnus));
                         
                         // Calculate T. area and percentage
-                        const tamkiviArea = tamkiviPlots.reduce((sum, f) => sum + (f.properties.area_ha || 0), 0);
+                        const tArea = tPlots.reduce((sum, f) => sum + (f.properties.area_ha || 0), 0);
                         const totalArea = data.features.reduce((sum, f) => sum + (f.properties.area_ha || 0), 0);
-                        const tamkiviPercentage = totalArea > 0 ? (tamkiviArea / totalArea * 100) : 0;
+                        const tPercentage = totalArea > 0 ? (tArea / totalArea * 100) : 0;
                         
                         document.getElementById('info').innerHTML = `
                             <h3>📊 Kaardi info</h3>
@@ -587,7 +587,7 @@
                             <p>🛣️ Teed: ${roadsData.features.length}</p>
                             <p>🏷️ Nimetatud teed: ${namedRoads}</p>
                             <p>🏠 Hooneid: ${buildingsData.features.length}</p>
-                            <p>🏘️ T. maad: ${tamkiviPlots.length} (${tamkiviArea.toFixed(2)} ha, ${tamkiviPercentage.toFixed(2)}%)</p>
+                            <p>🏘️ T. maad: ${tPlots.length} (${tArea.toFixed(2)} ha, ${tPercentage.toFixed(2)}%)</p>
                             <p>📍 Asukoht: Ruhve, Saaremaa</p>
                         `;
                     })
@@ -719,7 +719,7 @@
         });
         
         // Toggle T. plots
-        document.getElementById('toggleTamkivi').addEventListener('change', (e) => {
+        document.getElementById('toggleT').addEventListener('change', (e) => {
             console.log('🏘️ Toggle T. plots:', e.target.checked);
             if (!mapInitialized) {
                 console.log('⚠️ Map not initialized, skipping toggle');
@@ -727,23 +727,23 @@
                 return;
             }
             try {
-                if (map.getLayer('tamkivi-highlight')) {
-                    map.setLayoutProperty('tamkivi-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
+                if (map.getLayer('t-highlight')) {
+                    map.setLayoutProperty('t-highlight', 'visibility', e.target.checked ? 'visible' : 'none');
                     console.log('✅ T. highlight visibility set to:', e.target.checked ? 'visible' : 'none');
                 } else {
                     console.log('⚠️ T. highlight layer not found');
                 }
-                if (map.getLayer('tamkivi-outline')) {
-                    map.setLayoutProperty('tamkivi-outline', 'visibility', e.target.checked ? 'visible' : 'none');
+                if (map.getLayer('t-outline')) {
+                    map.setLayoutProperty('t-outline', 'visibility', e.target.checked ? 'visible' : 'none');
                     console.log('✅ T. outline visibility set to:', e.target.checked ? 'visible' : 'none');
                 } else {
                     console.log('⚠️ T. outline layer not found');
                 }
                 
                 // Show/hide T. info box
-                const tamkiviInfo = document.getElementById('tamkivi-info');
-                if (tamkiviInfo) {
-                    tamkiviInfo.style.display = e.target.checked ? 'block' : 'none';
+                const tInfo = document.getElementById('t-info');
+                if (tInfo) {
+                    tInfo.style.display = e.target.checked ? 'block' : 'none';
                 }
             } catch (error) {
                 console.error('❌ Error toggling T. plots:', error);
@@ -766,11 +766,19 @@
         function exportHighDPIMap() {
             const exportBtn = document.getElementById('exportBtn');
             const originalText = exportBtn.innerHTML;
-            
+
+            // Get current UI toggle states
+            const showHighlight = document.getElementById('toggleHighlight').checked;
+            const showLabels = document.getElementById('toggleLabels').checked;
+            const showRoads = document.getElementById('toggleRoads').checked;
+            const showBuildings = document.getElementById('toggleBuildings').checked;
+            const showVillageBoundary = document.getElementById('toggleVillageBoundary').checked;
+            const showT = document.getElementById('toggleT').checked;
+
             // Show loading state
             exportBtn.innerHTML = '⏳ Eksporditakse...';
             exportBtn.disabled = true;
-            
+
             // Get current map bounds and center
             const bounds = map.getBounds();
             const center = map.getCenter();
@@ -815,23 +823,58 @@
             }
             
             // Wait for map to load and add data
-            tempMap.on('load', () => {
+            tempMap.on('load', async () => {
+                // Fetch parcels data for village boundary
+                let parcelsData = null;
+                if (showVillageBoundary) {
+                    try {
+                        const response = await fetch('/output/parcels_wgs84_proper.geojson');
+                        parcelsData = await response.json();
+                    } catch (error) {
+                        console.warn('Failed to load parcels for village boundary:', error);
+                    }
+                }
+
                 // Add all the same data sources and layers
                 tempMap.addSource('parcels', {
                     type: 'geojson',
                     data: '/output/parcels_wgs84_proper.geojson'
                 });
-                
+
                 tempMap.addSource('roads', {
                     type: 'geojson',
                     data: '/output/roads.geojson'
                 });
-                
+
                 tempMap.addSource('buildings', {
                     type: 'geojson',
                     data: '/output/buildings_wgs84_proper.geojson'
                 });
-                
+
+                // Add village boundary (only if enabled)
+                if (showVillageBoundary && parcelsData) {
+                    try {
+                        const villageBoundary = createVillageBoundary(parcelsData);
+                        tempMap.addSource('village-boundary', {
+                            type: 'geojson',
+                            data: villageBoundary
+                        });
+
+                        tempMap.addLayer({
+                            id: 'village-boundary',
+                            type: 'line',
+                            source: 'village-boundary',
+                            paint: {
+                                'line-color': '#e74c3c',
+                                'line-width': 3,
+                                'line-dasharray': [2, 2]
+                            }
+                        });
+                    } catch (error) {
+                        console.warn('Village boundary failed to load in export:', error);
+                    }
+                }
+
                 // Add layers with same styling
                 tempMap.addLayer({
                     id: 'parcels-outline',
@@ -842,124 +885,138 @@
                         'line-width': 0.8
                     }
                 });
-                
-                tempMap.addLayer({
-                    id: 'parcels-highlight',
-                    type: 'fill',
-                    source: 'parcels',
-                    filter: ['==', ['get', 'has_bldg'], true],
-                    paint: {
-                        'fill-color': '#e6d7c3',
-                        'fill-opacity': 0.6
-                    }
-                });
-                
-                // Add T. plots highlight for export
-                tempMap.addLayer({
-                    id: 'tamkivi-highlight-export',
-                    type: 'fill',
-                    source: 'parcels',
-                    filter: ['in', ['get', 'tunnus'], ['literal', [
-                        '38601:004:0294',
-                        '38601:004:0337',
-                        '38601:004:0336',
-                        '38601:004:0437',
-                        '38601:004:0438',
-                        '38601:004:0439',
-                        '38601:004:0393',
-                        '38601:004:0606'
-                    ]]],
-                    paint: {
-                        'fill-color': '#9b59b6',
-                        'fill-opacity': 0.8
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'tamkivi-outline-export',
-                    type: 'line',
-                    source: 'parcels',
-                    filter: ['in', ['get', 'tunnus'], ['literal', [
-                        '38601:004:0294',
-                        '38601:004:0337',
-                        '38601:004:0336',
-                        '38601:004:0437',
-                        '38601:004:0438',
-                        '38601:004:0439',
-                        '38601:004:0393',
-                        '38601:004:0606'
-                    ]]],
-                    paint: {
-                        'line-color': '#8e44ad',
-                        'line-width': 2.5
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'parcel-labels',
-                    type: 'symbol',
-                    source: 'parcels',
-                    layout: {
-                        'text-field': ['get', 'l_aadress'],
-                        'text-font': ['Open Sans Regular'],
-                        'text-size': 11,
-                        'text-allow-overlap': false
-                    },
-                    paint: {
-                        'text-color': '#2c3e50',
-                        'text-halo-color': '#ffffff',
-                        'text-halo-width': 1.5
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'roads-line',
-                    type: 'line',
-                    source: 'roads',
-                    paint: {
-                        'line-color': '#2c3e50',
-                        'line-width': 2.5
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'road-labels',
-                    type: 'symbol',
-                    source: 'roads',
-                    layout: {
-                        'text-field': ['get', 'nimetus'],
-                        'text-font': ['Open Sans Regular'],
-                        'text-size': 9,
-                        'text-allow-overlap': false,
-                        'symbol-placement': 'line'
-                    },
-                    paint: {
-                        'text-color': '#34495e',
-                        'text-halo-color': '#ffffff',
-                        'text-halo-width': 1
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'buildings-fill',
-                    type: 'fill',
-                    source: 'buildings',
-                    paint: {
-                        'fill-color': '#e74c3c',
-                        'fill-opacity': 0.7
-                    }
-                });
-                
-                tempMap.addLayer({
-                    id: 'buildings-outline',
-                    type: 'line',
-                    source: 'buildings',
-                    paint: {
-                        'line-color': '#c0392b',
-                        'line-width': 1
-                    }
-                });
-                
+
+                // Add parcels highlight layer (only if enabled)
+                if (showHighlight) {
+                    tempMap.addLayer({
+                        id: 'parcels-highlight',
+                        type: 'fill',
+                        source: 'parcels',
+                        filter: ['==', ['get', 'has_bldg'], true],
+                        paint: {
+                            'fill-color': '#e6d7c3',
+                            'fill-opacity': 0.6
+                        }
+                    });
+                }
+
+                // Add T. plots highlight for export (only if enabled)
+                if (showT) {
+                    tempMap.addLayer({
+                        id: 't-highlight-export',
+                        type: 'fill',
+                        source: 'parcels',
+                        filter: ['in', ['get', 'tunnus'], ['literal', [
+                            '38601:004:0294',
+                            '38601:004:0337',
+                            '38601:004:0336',
+                            '38601:004:0437',
+                            '38601:004:0438',
+                            '38601:004:0439',
+                            '38601:004:0393',
+                            '38601:004:0606'
+                        ]]],
+                        paint: {
+                            'fill-color': '#9b59b6',
+                            'fill-opacity': 0.8
+                        }
+                    });
+
+                    tempMap.addLayer({
+                        id: 't-outline-export',
+                        type: 'line',
+                        source: 'parcels',
+                        filter: ['in', ['get', 'tunnus'], ['literal', [
+                            '38601:004:0294',
+                            '38601:004:0337',
+                            '38601:004:0336',
+                            '38601:004:0437',
+                            '38601:004:0438',
+                            '38601:004:0439',
+                            '38601:004:0393',
+                            '38601:004:0606'
+                        ]]],
+                        paint: {
+                            'line-color': '#8e44ad',
+                            'line-width': 2.5
+                        }
+                    });
+                }
+
+                // Add parcel labels (only if enabled)
+                if (showLabels) {
+                    tempMap.addLayer({
+                        id: 'parcel-labels',
+                        type: 'symbol',
+                        source: 'parcels',
+                        layout: {
+                            'text-field': ['get', 'l_aadress'],
+                            'text-font': ['Open Sans Regular'],
+                            'text-size': 11,
+                            'text-allow-overlap': false
+                        },
+                        paint: {
+                            'text-color': '#2c3e50',
+                            'text-halo-color': '#ffffff',
+                            'text-halo-width': 1.5
+                        }
+                    });
+                }
+
+                // Add roads (only if enabled)
+                if (showRoads) {
+                    tempMap.addLayer({
+                        id: 'roads-line',
+                        type: 'line',
+                        source: 'roads',
+                        paint: {
+                            'line-color': '#2c3e50',
+                            'line-width': 2.5
+                        }
+                    });
+
+                    tempMap.addLayer({
+                        id: 'road-labels',
+                        type: 'symbol',
+                        source: 'roads',
+                        layout: {
+                            'text-field': ['get', 'nimetus'],
+                            'text-font': ['Open Sans Regular'],
+                            'text-size': 9,
+                            'text-allow-overlap': false,
+                            'symbol-placement': 'line'
+                        },
+                        paint: {
+                            'text-color': '#34495e',
+                            'text-halo-color': '#ffffff',
+                            'text-halo-width': 1
+                        }
+                    });
+                }
+
+                // Add buildings (only if enabled)
+                if (showBuildings) {
+                    tempMap.addLayer({
+                        id: 'buildings-fill',
+                        type: 'fill',
+                        source: 'buildings',
+                        paint: {
+                            'fill-color': '#e74c3c',
+                            'fill-opacity': 0.7
+                        }
+                    });
+
+                    tempMap.addLayer({
+                        id: 'buildings-outline',
+                        type: 'line',
+                        source: 'buildings',
+                        paint: {
+                            'line-color': '#c0392b',
+                            'line-width': 1
+                        }
+                    });
+                }
+
                 // Wait for rendering to complete
                 setTimeout(() => {
                     try {
