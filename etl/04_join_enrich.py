@@ -24,8 +24,17 @@ def main():
     # Cadastral unit name column (if any)
     name_cp_col = next((c for c in parcels.columns if 'nimi' in c.lower() or 'name' in c.lower()), None)
 
-    # Compute has_bldg
-    parcels['has_bldg'] = parcels.geometry.apply(lambda g: buildings.intersects(g).any())
+    # Compute has_bldg using spatial join (much faster than row-by-row apply)
+    # This uses spatial indexing for O(n log m) instead of O(n*m) complexity
+    if not buildings.empty:
+        # Spatial join to find which parcels intersect with buildings
+        parcels_with_buildings = gpd.sjoin(parcels, buildings, how='inner', predicate='intersects')
+        # Get unique parcel indices that have buildings
+        parcel_indices_with_buildings = set(parcels_with_buildings.index)
+        # Mark parcels that have buildings
+        parcels['has_bldg'] = parcels.index.isin(parcel_indices_with_buildings)
+    else:
+        parcels['has_bldg'] = False
 
     # Join ADS names (if available)
     ads_csv = os.path.join(csv_dir,'ads_names.csv')
