@@ -7,11 +7,11 @@
     <script src="maplibre-gl.js?v=5.6.2"></script>
     <link href="maplibre-gl.css?v=5.6.2" rel="stylesheet" />
     <style>
-        body { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f1e9d2;
         }
         
         #topbar {
@@ -19,11 +19,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
+            background: linear-gradient(135deg, #3d2b1f, #4a3728);
+            color: #f1e9d2;
             padding: 15px 20px;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 2px solid #8b7355;
         }
         
         .title { 
@@ -61,54 +62,57 @@
         }
         
         .export-btn {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            border: none;
+            background: linear-gradient(135deg, #8b7355, #a0896d);
+            color: #f1e9d2;
+            border: 1px solid #6b5a42;
             padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
-        
+
         .export-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #a0896d, #b39e82);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
-        
+
         .export-btn:active {
             transform: translateY(0);
         }
         
-        #map { 
-            width: 100vw; 
-            height: 100vh; 
+        #map {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            z-index: 0;
         }
         
-        .info { 
-            position: absolute; 
-            bottom: 20px; 
-            left: 20px; 
-            background: rgba(255,255,255,0.95); 
-            padding: 15px; 
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(241, 233, 210, 0.95);
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(74, 55, 40, 0.15);
+            border-left: 4px solid #8b7355;
             max-width: 300px;
+            font-family: 'Georgia', serif;
         }
-        
+
         .info h3 {
             margin: 0 0 10px 0;
-            color: #2c3e50;
-            font-size: 16px;
+            color: #3d2b1f;
+            font-size: 15px;
         }
-        
+
         .info p {
             margin: 5px 0;
-            font-size: 14px;
-            color: #555;
+            font-size: 13px;
+            color: #5c4a38;
         }
         
         .status {
@@ -119,18 +123,18 @@
             margin-right: 8px;
         }
         
-        .status.success { background: #27ae60; }
-        .status.warning { background: #f39c12; }
-        .status.error { background: #e74c3c; }
+        .status.success { background: #6b8e5a; }
+        .status.warning { background: #c4993d; }
+        .status.error { background: #9e391a; }
         
         #t-info {
             top: 200px;
-            background: rgba(248, 244, 255, 0.95);
-            border-left: 4px solid #9b59b6;
+            background: rgba(241, 233, 210, 0.95);
+            border-left: 4px solid #7a5c8a;
         }
 
         #t-info h3 {
-            color: #8e44ad;
+            color: #5c3d6e;
             margin-top: 0;
         }
 
@@ -142,6 +146,52 @@
         #t-info li {
             margin: 5px 0;
             font-size: 13px;
+        }
+
+        /* Vintage popup styling */
+        .maplibregl-popup-content {
+            background: #f1e9d2;
+            border: 1px solid #9c8b75;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(74, 55, 40, 0.2);
+            font-family: 'Georgia', serif;
+            color: #4a3728;
+            padding: 12px 15px;
+        }
+        .maplibregl-popup-content h4 {
+            margin: 0 0 8px 0;
+            color: #3d2b1f;
+            font-size: 14px;
+            border-bottom: 1px solid #c4b89c;
+            padding-bottom: 6px;
+        }
+        .maplibregl-popup-content p {
+            margin: 3px 0;
+            font-size: 12px;
+        }
+        .maplibregl-popup-anchor-bottom .maplibregl-popup-tip { border-top-color: #9c8b75; }
+        .maplibregl-popup-anchor-top .maplibregl-popup-tip { border-bottom-color: #9c8b75; }
+        .maplibregl-popup-anchor-left .maplibregl-popup-tip { border-right-color: #9c8b75; }
+        .maplibregl-popup-anchor-right .maplibregl-popup-tip { border-left-color: #9c8b75; }
+        .maplibregl-popup-close-button { color: #8b7355; font-size: 18px; }
+        .maplibregl-popup-close-button:hover { color: #4a3728; }
+
+        /* Subtle paper grain texture */
+        #map::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 115, 85, 0.015) 2px, rgba(139, 115, 85, 0.015) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 115, 85, 0.015) 2px, rgba(139, 115, 85, 0.015) 4px);
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: multiply;
+        }
+
+        /* Control label styling */
+        .control-group label {
+            font-family: 'Georgia', serif;
         }
     </style>
 </head>
@@ -211,26 +261,35 @@
     <script>
         console.log('🚀 Ruhve village map starting...');
         
-        // Function to create village boundary from parcels
+        // Filter to land parcels only (exclude road parcels that extend far from village)
+        function getLandParcels(parcelsData) {
+            return parcelsData.features.filter(feature => {
+                const addr = (feature.properties.l_aadress || '').toLowerCase();
+                // Exclude road/path parcels (names like "21168 Kahtla-Ruhve tee")
+                return !/^\d+\s.*tee$/i.test(addr);
+            });
+        }
+
+        // Function to create village boundary from land parcels
         function createVillageBoundary(parcelsData) {
-            // Simple approach: create a bounding box with some padding
+            const landParcels = getLandParcels(parcelsData);
             const coords = [];
-            parcelsData.features.forEach(feature => {
+            landParcels.forEach(feature => {
                 if (feature.geometry.type === 'Polygon') {
                     feature.geometry.coordinates[0].forEach(coord => {
                         coords.push(coord);
                     });
                 }
             });
-            
+
             const lngs = coords.map(c => c[0]);
             const lats = coords.map(c => c[1]);
-            
+
             const minLng = Math.min(...lngs) - 0.001;
             const maxLng = Math.max(...lngs) + 0.001;
             const minLat = Math.min(...lats) - 0.001;
             const maxLat = Math.max(...lats) + 0.001;
-            
+
             return {
                 type: 'Feature',
                 geometry: {
@@ -301,8 +360,8 @@
                     type: 'fill',
                     source: 'sea-background',
                     paint: {
-                        'fill-color': '#e3f2fd',
-                        'fill-opacity': 0.3
+                        'fill-color': '#c5d1c0',
+                        'fill-opacity': 0.25
                     }
                 });
             } catch (error) {
@@ -354,9 +413,9 @@
                             type: 'line',
                             source: 'village-boundary',
                             paint: {
-                                'line-color': '#e74c3c',
-                                'line-width': 3,
-                                'line-dasharray': [2, 2]
+                                'line-color': '#8c4a2e',
+                                'line-width': 2,
+                                'line-dasharray': [4, 3]
                             }
                         });
                     } catch (error) {
@@ -371,20 +430,20 @@
                             type: 'line',
                             source: 'parcels',
                             paint: {
-                                'line-color': '#7b5a3d',
-                                'line-width': 0.8
+                                'line-color': '#9c8b75',
+                                'line-width': 0.7
                             }
                         });
-                        
-                        // Add building highlights
+
+                        // Add building highlights - warm parchment tint
                         map.addLayer({
                             id: 'parcels-highlight',
                             type: 'fill',
                             source: 'parcels',
                             filter: ['==', ['get', 'has_bldg'], true],
                             paint: {
-                                'fill-color': '#e6d7c3',
-                                'fill-opacity': 0.6
+                                'fill-color': '#e4d4b8',
+                                'fill-opacity': 0.5
                             }
                         });
                         
@@ -404,8 +463,8 @@
                                 '38601:004:0606'
                             ]]],
                             paint: {
-                                'fill-color': '#9b59b6',
-                                'fill-opacity': 0.8
+                                'fill-color': '#8e6d8a',
+                                'fill-opacity': 0.4
                             },
                             layout: {
                                 'visibility': document.getElementById('toggleT').checked ? 'visible' : 'none'
@@ -428,8 +487,8 @@
                                 '38601:004:0606'
                             ]]],
                             paint: {
-                                'line-color': '#8e44ad',
-                                'line-width': 2.5
+                                'line-color': '#6b4d6e',
+                                'line-width': 1.5
                             },
                             layout: {
                                 'visibility': document.getElementById('toggleT').checked ? 'visible' : 'none'
@@ -440,32 +499,60 @@
                         throw new Error('Failed to add parcel layers to map');
                     }
                     
-                    // Add labels with error handling
+                    // Add labels with priority system:
+                    // Priority 1: Building parcels (paper label effect, placed first)
+                    // Priority 2: Other parcels (regular style, avoids building labels)
+                    // Road labels are added later as Priority 3
                     try {
+                        // P1: Building parcel labels - paper label style
                         map.addLayer({
-                            id: 'parcel-labels',
+                            id: 'parcel-labels-bldg',
                             type: 'symbol',
                             source: 'parcels',
+                            filter: ['==', ['get', 'has_bldg'], true],
+                            layout: {
+                                'text-field': ['get', 'l_aadress'],
+                                'text-font': ['Open Sans Bold'],
+                                'text-size': 12,
+                                'text-allow-overlap': false,
+                                'text-letter-spacing': 0.04,
+                                'text-padding': 6
+                            },
+                            paint: {
+                                'text-color': '#3d2b1f',
+                                'text-halo-color': 'rgba(237, 228, 208, 0.95)',
+                                'text-halo-width': 3.5,
+                                'text-halo-blur': 0.3
+                            }
+                        });
+
+                        // P2: Other parcel labels - lighter style
+                        map.addLayer({
+                            id: 'parcel-labels-other',
+                            type: 'symbol',
+                            source: 'parcels',
+                            filter: ['!=', ['get', 'has_bldg'], true],
                             layout: {
                                 'text-field': ['get', 'l_aadress'],
                                 'text-font': ['Open Sans Regular'],
-                                'text-size': 11,
-                                'text-allow-overlap': false
+                                'text-size': 10,
+                                'text-allow-overlap': false,
+                                'text-letter-spacing': 0.02,
+                                'text-padding': 3
                             },
                             paint: {
-                                'text-color': '#2c3e50',
-                                'text-halo-color': '#ffffff',
+                                'text-color': '#6b5d4f',
+                                'text-halo-color': 'rgba(241, 233, 210, 0.8)',
                                 'text-halo-width': 1.5
                             }
                         });
                     } catch (error) {
-                        console.warn('⚠️ Parcel labels layer failed to load:', error);
-                        // Continue without labels - not critical
+                        console.warn('⚠️ Parcel labels layers failed to load:', error);
                     }
                     
                     // Load roads and buildings data with error handling
                     Promise.all([
-                        fetch('/output/roads.geojson').then(response => {
+                        fetch('/output/roads_wgs84.geojson').then(response => {
                             if (!response.ok) {
                                 throw new Error(`Roads data: HTTP ${response.status}`);
                             }
@@ -495,33 +582,52 @@
                                 type: 'geojson',
                                 data: roadsData
                             });
-                            
+
+                            // Road casing (wider, darker)
+                            map.addLayer({
+                                id: 'roads-casing',
+                                type: 'line',
+                                source: 'roads',
+                                paint: {
+                                    'line-color': '#7a6b5a',
+                                    'line-width': 2.8,
+                                    'line-cap': 'round',
+                                    'line-join': 'round'
+                                }
+                            });
+
+                            // Road fill (narrower, lighter)
                             map.addLayer({
                                 id: 'roads-line',
                                 type: 'line',
                                 source: 'roads',
                                 paint: {
-                                    'line-color': '#2c3e50',
-                                    'line-width': 2.5
+                                    'line-color': '#d4c8a8',
+                                    'line-width': 1.6,
+                                    'line-cap': 'round',
+                                    'line-join': 'round'
                                 }
                             });
-                            
-                            // Add road name labels
+
+                            // P3: Road name labels - lowest priority, never hides parcel labels
                             map.addLayer({
                                 id: 'road-labels',
                                 type: 'symbol',
                                 source: 'roads',
                                 layout: {
                                     'text-field': ['get', 'nimetus'],
-                                    'text-font': ['Open Sans Regular'],
+                                    'text-font': ['Open Sans Italic'],
                                     'text-size': 9,
                                     'text-allow-overlap': false,
-                                    'symbol-placement': 'line'
+                                    'text-optional': true,
+                                    'symbol-placement': 'line',
+                                    'text-letter-spacing': 0.05,
+                                    'text-padding': 8
                                 },
                                 paint: {
-                                    'text-color': '#34495e',
-                                    'text-halo-color': '#ffffff',
-                                    'text-halo-width': 1
+                                    'text-color': '#7a6b5a',
+                                    'text-halo-color': 'rgba(241, 233, 210, 0.8)',
+                                    'text-halo-width': 1.2
                                 }
                             });
                         } catch (error) {
@@ -541,18 +647,18 @@
                                 type: 'fill',
                                 source: 'buildings',
                                 paint: {
-                                    'fill-color': '#e74c3c',
-                                    'fill-opacity': 0.7
+                                    'fill-color': '#9e391a',
+                                    'fill-opacity': 0.8
                                 }
                             });
-                            
+
                             map.addLayer({
                                 id: 'buildings-outline',
                                 type: 'line',
                                 source: 'buildings',
                                 paint: {
-                                    'line-color': '#c0392b',
-                                    'line-width': 1
+                                    'line-color': '#704214',
+                                    'line-width': 0.8
                                 }
                             });
                         } catch (error) {
@@ -606,51 +712,29 @@
                     });
                     
                     console.log('✅ All layers added successfully!');
-                    
-                    // Debug: List all available layers
-                    console.log('🔍 Available map layers:', map.getStyle().layers.map(l => l.id));
-                    
-                    // Fit to data bounds - handle all geometry types properly
-                    const bounds = new maplibregl.LngLatBounds();
 
-                    // Helper function to recursively extract all coordinates
-                    function extractCoordinates(coords, depth) {
-                        if (depth === 0) {
-                            // We've reached actual coordinate pairs [lng, lat]
-                            bounds.extend(coords);
-                        } else {
-                            // Still nested arrays, recurse deeper
-                            coords.forEach(c => extractCoordinates(c, depth - 1));
-                        }
+                    // Fit to land parcel bounds (exclude road parcels)
+                    try {
+                        const bounds = new maplibregl.LngLatBounds();
+                        getLandParcels(data).forEach(feature => {
+                            if (!feature.geometry) return;
+                            const geomType = feature.geometry.type;
+                            const coords = feature.geometry.coordinates;
+                            if (geomType === 'Polygon') {
+                                coords[0].forEach(coord => bounds.extend(coord));
+                            } else if (geomType === 'MultiPolygon') {
+                                coords.forEach(poly => poly[0].forEach(coord => bounds.extend(coord)));
+                            }
+                        });
+                        console.log('🗺️ Calculated bounds:', bounds);
+                        map.fitBounds(bounds, { padding: 50 });
+                    } catch (boundsError) {
+                        console.warn('⚠️ fitBounds failed:', boundsError);
                     }
 
-                    data.features.forEach(feature => {
-                        const geomType = feature.geometry.type;
-                        const coords = feature.geometry.coordinates;
-
-                        // Determine nesting depth based on geometry type
-                        if (geomType === 'Point') {
-                            bounds.extend(coords);
-                        } else if (geomType === 'LineString' || geomType === 'MultiPoint') {
-                            coords.forEach(coord => bounds.extend(coord));
-                        } else if (geomType === 'Polygon' || geomType === 'MultiLineString') {
-                            extractCoordinates(coords, 1);
-                        } else if (geomType === 'MultiPolygon') {
-                            extractCoordinates(coords, 2);
-                        }
-                    });
-
-                    console.log('🗺️ Calculated bounds:', bounds);
-                    map.fitBounds(bounds, { padding: 50 });
-                    
                 })
                 .catch(error => {
                     console.error('❌ Error loading parcels:', error);
-                    
-                    // Disable all checkboxes when critical data fails to load
-                    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                        checkbox.disabled = true;
-                    });
                     
                     // Show user-friendly error message
                     document.getElementById('info').innerHTML = `
@@ -696,25 +780,25 @@
             }
         });
         
-        // Toggle labels
+        // Toggle parcel labels (both building and other)
         document.getElementById('toggleLabels').addEventListener('change', (e) => {
-            console.log('🏷️ Toggle parcel labels:', e.target.checked);
-            if (map.getLayer('parcel-labels')) {
-                map.setLayoutProperty('parcel-labels', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ Parcel labels visibility set to:', e.target.checked ? 'visible' : 'none');
-            } else {
-                console.log('⚠️ Parcel labels layer not found');
+            const vis = e.target.checked ? 'visible' : 'none';
+            if (map.getLayer('parcel-labels-bldg')) {
+                map.setLayoutProperty('parcel-labels-bldg', 'visibility', vis);
+            }
+            if (map.getLayer('parcel-labels-other')) {
+                map.setLayoutProperty('parcel-labels-other', 'visibility', vis);
             }
         });
         
-        // Toggle roads
+        // Toggle roads (both casing and fill layers)
         document.getElementById('toggleRoads').addEventListener('change', (e) => {
-            console.log('🛣️ Toggle roads:', e.target.checked);
+            const vis = e.target.checked ? 'visible' : 'none';
+            if (map.getLayer('roads-casing')) {
+                map.setLayoutProperty('roads-casing', 'visibility', vis);
+            }
             if (map.getLayer('roads-line')) {
-                map.setLayoutProperty('roads-line', 'visibility', e.target.checked ? 'visible' : 'none');
-                console.log('✅ Roads visibility set to:', e.target.checked ? 'visible' : 'none');
-            } else {
-                console.log('⚠️ Roads layer not found');
+                map.setLayoutProperty('roads-line', 'visibility', vis);
             }
         });
         
@@ -787,34 +871,23 @@
         
         function exportHighDPIMap() {
             const exportBtn = document.getElementById('exportBtn');
-            const originalText = exportBtn.innerHTML;
+            const originalText = exportBtn.textContent;
 
-            // Get current UI toggle states
             const showHighlight = document.getElementById('toggleHighlight').checked;
             const showLabels = document.getElementById('toggleLabels').checked;
             const showRoads = document.getElementById('toggleRoads').checked;
+            const showRoadNames = document.getElementById('toggleRoadNames').checked;
             const showBuildings = document.getElementById('toggleBuildings').checked;
-            const showVillageBoundary = document.getElementById('toggleVillageBoundary').checked;
             const showT = document.getElementById('toggleT').checked;
 
-            // Show loading state
-            exportBtn.innerHTML = '⏳ Eksporditakse...';
+            exportBtn.textContent = 'Eksporditakse...';
             exportBtn.disabled = true;
 
-            // Get current map bounds and center
-            const bounds = map.getBounds();
-            const center = map.getCenter();
-            const zoom = map.getZoom();
-            
-            // Create a temporary canvas with high DPI
-            const dpi = 300; // High DPI for printing
-            const scale = dpi / 96; // 96 DPI is standard screen DPI
-            
-            // Calculate dimensions (A4 landscape at 300 DPI)
-            const width = Math.round(11.69 * dpi); // A4 landscape width in inches
-            const height = Math.round(8.27 * dpi); // A4 landscape height in inches
-            
-            // Create temporary map container
+            // A3 landscape at 300 DPI for large scale print
+            const dpi = 300;
+            const width = Math.round(16.54 * dpi);
+            const height = Math.round(11.69 * dpi);
+
             const tempContainer = document.createElement('div');
             tempContainer.style.width = width + 'px';
             tempContainer.style.height = height + 'px';
@@ -822,221 +895,102 @@
             tempContainer.style.left = '-9999px';
             tempContainer.style.top = '-9999px';
             document.body.appendChild(tempContainer);
-            
-            // Create temporary map with error handling
+
             let tempMap;
             try {
                 tempMap = new maplibregl.Map({
                     container: tempContainer,
                     style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-                    center: center,
-                    zoom: zoom,
+                    center: [23.02, 58.38],
+                    zoom: 13,
                     preserveDrawingBuffer: true,
                     fadeDuration: 0
                 });
             } catch (error) {
-                console.error('❌ Failed to create temporary map for export:', error);
-                // Clean up and restore button
                 document.body.removeChild(tempContainer);
-                exportBtn.innerHTML = originalText;
+                exportBtn.textContent = originalText;
                 exportBtn.disabled = false;
-                alert('Viga ajutise kaardi loomisel. Palun proovige uuesti.');
                 return;
             }
-            
-            // Wait for map to load and add data
+
             tempMap.on('load', async () => {
-                // Fetch parcels data for village boundary
+                // Fetch parcels to compute tight crop bounds
                 let parcelsData = null;
-                if (showVillageBoundary) {
-                    try {
-                        const response = await fetch('/output/parcels_wgs84_proper.geojson');
-                        parcelsData = await response.json();
-                    } catch (error) {
-                        console.warn('Failed to load parcels for village boundary:', error);
-                    }
+                try {
+                    const response = await fetch('/output/parcels_wgs84_proper.geojson');
+                    parcelsData = await response.json();
+                } catch (error) {
+                    console.warn('Failed to load parcels for export bounds:', error);
                 }
 
-                // Add all the same data sources and layers
-                tempMap.addSource('parcels', {
-                    type: 'geojson',
-                    data: '/output/parcels_wgs84_proper.geojson'
-                });
-
-                tempMap.addSource('roads', {
-                    type: 'geojson',
-                    data: '/output/roads.geojson'
-                });
-
-                tempMap.addSource('buildings', {
-                    type: 'geojson',
-                    data: '/output/buildings_wgs84_proper.geojson'
-                });
-
-                // Add village boundary (only if enabled)
-                if (showVillageBoundary && parcelsData) {
-                    try {
-                        const villageBoundary = createVillageBoundary(parcelsData);
-                        tempMap.addSource('village-boundary', {
-                            type: 'geojson',
-                            data: villageBoundary
-                        });
-
-                        tempMap.addLayer({
-                            id: 'village-boundary',
-                            type: 'line',
-                            source: 'village-boundary',
-                            paint: {
-                                'line-color': '#e74c3c',
-                                'line-width': 3,
-                                'line-dasharray': [2, 2]
-                            }
-                        });
-                    } catch (error) {
-                        console.warn('Village boundary failed to load in export:', error);
-                    }
+                // Crop to land parcel bounds (no boundary line drawn)
+                if (parcelsData) {
+                    const exportBounds = new maplibregl.LngLatBounds();
+                    getLandParcels(parcelsData).forEach(feature => {
+                        if (!feature.geometry) return;
+                        const coords = feature.geometry.coordinates;
+                        if (feature.geometry.type === 'Polygon') {
+                            coords[0].forEach(c => exportBounds.extend(c));
+                        } else if (feature.geometry.type === 'MultiPolygon') {
+                            coords.forEach(poly => poly[0].forEach(c => exportBounds.extend(c)));
+                        }
+                    });
+                    tempMap.fitBounds(exportBounds, { padding: 40 });
                 }
 
-                // Add layers with same styling
-                tempMap.addLayer({
-                    id: 'parcels-outline',
-                    type: 'line',
-                    source: 'parcels',
-                    paint: {
-                        'line-color': '#7b5a3d',
-                        'line-width': 0.8
-                    }
-                });
+                // Add data sources
+                tempMap.addSource('parcels', { type: 'geojson', data: '/output/parcels_wgs84_proper.geojson' });
+                tempMap.addSource('roads', { type: 'geojson', data: '/output/roads_wgs84.geojson' });
+                tempMap.addSource('buildings', { type: 'geojson', data: '/output/buildings_wgs84_proper.geojson' });
 
-                // Add parcels highlight layer (only if enabled)
+                // Parcel outlines
+                tempMap.addLayer({ id: 'parcels-outline', type: 'line', source: 'parcels', paint: { 'line-color': '#9c8b75', 'line-width': 0.7 } });
+
                 if (showHighlight) {
-                    tempMap.addLayer({
-                        id: 'parcels-highlight',
-                        type: 'fill',
-                        source: 'parcels',
-                        filter: ['==', ['get', 'has_bldg'], true],
-                        paint: {
-                            'fill-color': '#e6d7c3',
-                            'fill-opacity': 0.6
-                        }
-                    });
+                    tempMap.addLayer({ id: 'parcels-highlight', type: 'fill', source: 'parcels', filter: ['==', ['get', 'has_bldg'], true], paint: { 'fill-color': '#e4d4b8', 'fill-opacity': 0.5 } });
                 }
 
-                // Add T. plots highlight for export (only if enabled)
                 if (showT) {
-                    tempMap.addLayer({
-                        id: 't-highlight-export',
-                        type: 'fill',
-                        source: 'parcels',
-                        filter: ['in', ['get', 'tunnus'], ['literal', [
-                            '38601:004:0294',
-                            '38601:004:0337',
-                            '38601:004:0336',
-                            '38601:004:0437',
-                            '38601:004:0438',
-                            '38601:004:0439',
-                            '38601:004:0393',
-                            '38601:004:0606'
-                        ]]],
-                        paint: {
-                            'fill-color': '#9b59b6',
-                            'fill-opacity': 0.8
-                        }
-                    });
-
-                    tempMap.addLayer({
-                        id: 't-outline-export',
-                        type: 'line',
-                        source: 'parcels',
-                        filter: ['in', ['get', 'tunnus'], ['literal', [
-                            '38601:004:0294',
-                            '38601:004:0337',
-                            '38601:004:0336',
-                            '38601:004:0437',
-                            '38601:004:0438',
-                            '38601:004:0439',
-                            '38601:004:0393',
-                            '38601:004:0606'
-                        ]]],
-                        paint: {
-                            'line-color': '#8e44ad',
-                            'line-width': 2.5
-                        }
-                    });
+                    const tFilter = ['in', ['get', 'tunnus'], ['literal', ['38601:004:0294','38601:004:0337','38601:004:0336','38601:004:0437','38601:004:0438','38601:004:0439','38601:004:0393','38601:004:0606']]];
+                    tempMap.addLayer({ id: 't-hl', type: 'fill', source: 'parcels', filter: tFilter, paint: { 'fill-color': '#8e6d8a', 'fill-opacity': 0.4 } });
+                    tempMap.addLayer({ id: 't-ol', type: 'line', source: 'parcels', filter: tFilter, paint: { 'line-color': '#6b4d6e', 'line-width': 1.5 } });
                 }
 
-                // Add parcel labels (only if enabled)
+                // Labels with priority system (same as main map)
                 if (showLabels) {
+                    // P1: Building parcel labels - paper label effect
                     tempMap.addLayer({
-                        id: 'parcel-labels',
-                        type: 'symbol',
-                        source: 'parcels',
-                        layout: {
-                            'text-field': ['get', 'l_aadress'],
-                            'text-font': ['Open Sans Regular'],
-                            'text-size': 11,
-                            'text-allow-overlap': false
-                        },
-                        paint: {
-                            'text-color': '#2c3e50',
-                            'text-halo-color': '#ffffff',
-                            'text-halo-width': 1.5
-                        }
+                        id: 'parcel-labels-bldg', type: 'symbol', source: 'parcels',
+                        filter: ['==', ['get', 'has_bldg'], true],
+                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Bold'], 'text-size': 12, 'text-allow-overlap': false, 'text-letter-spacing': 0.04, 'text-padding': 6 },
+                        paint: { 'text-color': '#3d2b1f', 'text-halo-color': 'rgba(237, 228, 208, 0.95)', 'text-halo-width': 3.5, 'text-halo-blur': 0.3 }
+                    });
+                    // P2: Other parcel labels
+                    tempMap.addLayer({
+                        id: 'parcel-labels-other', type: 'symbol', source: 'parcels',
+                        filter: ['!=', ['get', 'has_bldg'], true],
+                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Regular'], 'text-size': 10, 'text-allow-overlap': false, 'text-letter-spacing': 0.02, 'text-padding': 3 },
+                        paint: { 'text-color': '#6b5d4f', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.5 }
                     });
                 }
 
-                // Add roads (only if enabled)
+                // Roads (casing + fill)
                 if (showRoads) {
-                    tempMap.addLayer({
-                        id: 'roads-line',
-                        type: 'line',
-                        source: 'roads',
-                        paint: {
-                            'line-color': '#2c3e50',
-                            'line-width': 2.5
-                        }
-                    });
-
-                    tempMap.addLayer({
-                        id: 'road-labels',
-                        type: 'symbol',
-                        source: 'roads',
-                        layout: {
-                            'text-field': ['get', 'nimetus'],
-                            'text-font': ['Open Sans Regular'],
-                            'text-size': 9,
-                            'text-allow-overlap': false,
-                            'symbol-placement': 'line'
-                        },
-                        paint: {
-                            'text-color': '#34495e',
-                            'text-halo-color': '#ffffff',
-                            'text-halo-width': 1
-                        }
-                    });
+                    tempMap.addLayer({ id: 'roads-casing', type: 'line', source: 'roads', paint: { 'line-color': '#7a6b5a', 'line-width': 2.8, 'line-cap': 'round', 'line-join': 'round' } });
+                    tempMap.addLayer({ id: 'roads-line', type: 'line', source: 'roads', paint: { 'line-color': '#d4c8a8', 'line-width': 1.6, 'line-cap': 'round', 'line-join': 'round' } });
+                    // P3: Road labels (lowest priority)
+                    if (showRoadNames) {
+                        tempMap.addLayer({
+                            id: 'road-labels', type: 'symbol', source: 'roads',
+                            layout: { 'text-field': ['get', 'nimetus'], 'text-font': ['Open Sans Italic'], 'text-size': 9, 'text-allow-overlap': false, 'text-optional': true, 'symbol-placement': 'line', 'text-letter-spacing': 0.05, 'text-padding': 8 },
+                            paint: { 'text-color': '#7a6b5a', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.2 }
+                        });
+                    }
                 }
 
-                // Add buildings (only if enabled)
                 if (showBuildings) {
-                    tempMap.addLayer({
-                        id: 'buildings-fill',
-                        type: 'fill',
-                        source: 'buildings',
-                        paint: {
-                            'fill-color': '#e74c3c',
-                            'fill-opacity': 0.7
-                        }
-                    });
-
-                    tempMap.addLayer({
-                        id: 'buildings-outline',
-                        type: 'line',
-                        source: 'buildings',
-                        paint: {
-                            'line-color': '#c0392b',
-                            'line-width': 1
-                        }
-                    });
+                    tempMap.addLayer({ id: 'buildings-fill', type: 'fill', source: 'buildings', paint: { 'fill-color': '#9e391a', 'fill-opacity': 0.8 } });
+                    tempMap.addLayer({ id: 'buildings-outline', type: 'line', source: 'buildings', paint: { 'line-color': '#704214', 'line-width': 0.8 } });
                 }
 
                 // Wait for rendering to complete
@@ -1059,18 +1013,15 @@
                             tempMap.remove();
                             document.body.removeChild(tempContainer);
                             
-                            // Reset button
-                            exportBtn.innerHTML = originalText;
+                            exportBtn.textContent = originalText;
                             exportBtn.disabled = false;
-                            
-                            // Show success message
-                            showExportMessage('✅ Kaart edukalt eksporditud!', 'success');
+                            showExportMessage('Kaart edukalt eksporditud!', 'success');
                         }, 'image/png');
                     } catch (error) {
                         console.error('Export error:', error);
-                        exportBtn.innerHTML = originalText;
+                        exportBtn.textContent = originalText;
                         exportBtn.disabled = false;
-                        showExportMessage('❌ Eksport ebaõnnestus', 'error');
+                        showExportMessage('Eksport ebaõnnestus', 'error');
                         
                         // Clean up on error
                         tempMap.remove();
@@ -1089,7 +1040,7 @@
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                background: ${type === 'success' ? '#6b8e5a' : '#9e391a'};
                 color: white;
                 padding: 10px 15px;
                 border-radius: 6px;
