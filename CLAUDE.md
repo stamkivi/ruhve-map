@@ -4,123 +4,89 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This project generates an interactive map of Ruhve village (Saaremaa, Estonia) from Estonian Land Board (Maa- ja Ruumiamet) data. It consists of:
-- **Python ETL pipeline** that fetches WFS data (parcels, buildings, roads), enriches with ADS names, and applies overrides
-- **MapLibre GL JS web app** for interactive visualization with two-line labels (cadastral + ADS)
-- **Export placeholder** for high-DPI PDF/SVG generation via QGIS/Mapnik
+Interactive map of Ruhve village (Saaremaa, Estonia) built from Estonian Land Board (Maa- ja Ruumiamet) WFS data. Two main components:
+- **Python ETL pipeline** (`etl/01-05`) fetches WFS data (parcels, buildings, roads), enriches with ADS names, and applies overrides
+- **MapLibre GL JS web app** (`web/index.html`) for interactive visualization with toggleable layers
 
 ## Common Commands
 
-### Initial Setup
 ```bash
-# Create Python virtual environment and install dependencies
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-# Install web dependencies
+# Setup
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 npm install
-```
 
-### Running the ETL Pipeline
-```bash
-# Run complete ETL pipeline (all 5 steps)
+# Run full ETL pipeline (steps must run in order)
 bash scripts/build_all.sh
 
-# Run individual ETL steps (must be run in order)
+# Run individual ETL steps
 source .venv/bin/activate
-python etl/01_fetch_parcels.py
-python etl/02_fetch_roads_buildings.py
-python etl/03_fetch_ads_names.py
-python etl/04_join_enrich.py
-python etl/05_apply_overrides.py
-```
+python etl/01_fetch_parcels.py    # Fetch admin boundaries + parcels from WFS
+python etl/02_fetch_roads_buildings.py  # Fetch buildings + roads within bbox
+python etl/03_fetch_ads_names.py  # Fetch ADS address names (stub)
+python etl/04_join_enrich.py      # Join data, compute has_bldg, build labels
+python etl/05_apply_overrides.py  # Apply manual overrides from overrides/overrides.geojson
 
-### Running the Web App
-```bash
-# Development server (localhost:5173)
+# Dev server (localhost:5173)
 npm run serve
 
-# Build for production
+# Production build (outputs to outputs/web-dist/)
 npm run build
 ```
 
-## Configuration
+## Architecture
 
-All configuration is in `config/config.yaml`:
-- **WFS endpoints**: Configure Maa- ja Ruumiamet service URLs and layer names
-- **CRS**: Default is EPSG:3301 (Estonian coordinate system)
-- **Village name**: Filter admin boundaries by settlement name
-- **ADS API**: Optional In-ADS endpoint for address data
-- **Output paths**: Locations for GeoJSON, CSV, and tiles
-- **Feature flags**: Enable/disable dual labels, leader lines, building-based highlighting
-
-**IMPORTANT**: WFS URLs must be configured before running ETL. See `.env.sample` for optional environment variables.
-
-## ETL Pipeline Architecture
-
-The ETL pipeline runs in 5 sequential steps:
-
-1. **01_fetch_parcels.py**: Fetches admin boundaries for the village, then fetches all parcels within that bounding box from WFS
-2. **02_fetch_roads_buildings.py**: Fetches building footprints and road geometries using the same bounding box
-3. **03_fetch_ads_names.py**: Optionally fetches ADS (address data system) names from In-ADS API and saves to CSV
-4. **04_join_enrich.py**: Joins all data together:
-   - Identifies parcel ID and name columns heuristically (`tunnus`, `nimi`)
-   - Computes `has_bldg` by intersecting parcels with buildings
-   - Joins ADS names from CSV (if available)
-   - Calculates area in hectares
-   - Builds two-line labels (`label1` = cadastral name/ID, `label2` = ADS name)
-   - Outputs `parcels_enriched.geojson` and cleaned `roads.geojson`
-5. **05_apply_overrides.py**: Applies manual overrides from `overrides/overrides.geojson`:
-   - Can exclude parcels (`include: false`)
-   - Can override label text (`label1`, `label2`)
-   - Outputs final `parcels_final.geojson`
-
-### Key Helper Function
-`wfs_get_gdf(url, layer, bbox, crs_epsg)` in `01_fetch_parcels.py` is the reusable WFS fetcher that returns a GeoDataFrame. It handles WFS 1.0.0 requests with optional bounding box filtering.
-
-## Web App Architecture
-
-The web app (`web/index.html`) is a single-file MapLibre GL JS application:
-- **Data loading**: Fetches GeoJSON files from `output/` (symlinked as `web/output`)
-- **Layer structure**:
-  - Background: Sea water highlighting (light blue polygon)
-  - Village boundary (red dashed outline)
-  - Roads layer (toggleable)
-  - Parcels with conditional styling (highlight parcels with buildings)
-  - Building footprints (red polygons)
-  - Two separate label layers for `label1` and `label2` (creates two-line effect)
-- **Interactivity**: Click parcels to see popup with details; hover for cursor change
-- **Export function**: Creates offscreen map with higher pixel ratio for high-DPI exports
-
-### Key Patterns
-- Map initialization uses local style with no external basemap tiles
-- All layers use inline GeoJSON sources loaded via fetch
-- Labels use MapLibre's `symbol` layer type with text fields from properties
-- Layer visibility toggled via `map.setLayoutProperty(layerId, 'visibility', 'visible'|'none')`
-- Export creates a temporary map with `pixelRatio: 3` for 3x resolution
-
-## Data Flow
+### ETL Pipeline Data Flow
 
 ```
-config/config.yaml → ETL steps 01-05 → output/*.geojson → web app (MapLibre GL JS)
-                                    ↓
-                              outputs/csv/ruhve_parcels_debug.csv (for inspection)
+config/config.yaml
+    |
+    v
+01_fetch_parcels.py  --> output/ruhve_parcels.geojson (EPSG:3301)
+02_fetch_roads_buildings.py --> output/buildings_raw.geojson, output/roads_raw.geojson
+03_fetch_ads_names.py --> outputs/csv/ads_names.csv
+04_join_enrich.py --> output/parcels_enriched.geojson, output/roads.geojson, outputs/csv/debug.csv
+05_apply_overrides.py --> output/parcels_final.geojson
 ```
 
-Overrides are applied at the end: `overrides/overrides.geojson` can manually adjust which parcels to show and what labels to use.
+**CRS note**: ETL outputs are in EPSG:3301 (Estonian coordinate system). The web app loads `parcels_wgs84_proper.geojson` and `buildings_wgs84_proper.geojson` (WGS84/EPSG:4326). These WGS84 files are not produced by the current ETL scripts — they must be generated separately (e.g. via `gdf.to_crs(epsg=4326)`).
 
-## Legal & Attribution
+The `wfs_get_gdf(url, layer, bbox, crs_epsg)` helper is duplicated in both `01_fetch_parcels.py` and `02_fetch_roads_buildings.py`. It handles WFS 1.0.0 requests with optional bounding box filtering and returns a GeoDataFrame.
 
-- Respect Maa- ja Ruumiamet terms of service
-- Include attribution on both web and print outputs
-- Owner data is **intentionally excluded** unless provided via a legally compliant dataset
-- No sensitive data should be committed to version control
+### Web App
 
-## Development Notes
+Single-file app at `web/index.html` using pre-bundled MapLibre GL JS (no build step for development). Vite dev server (`vite.config.js`) sets root to `web/` and serves on port 5173.
 
-- The project is designed to be "Cursor-friendly" (minimal dependencies, single-file web app)
-- `vite.config.js` sets root to `web/` directory with dev server on port 5173
-- Python dependencies use GeoPandas/Shapely for spatial operations
-- Web app has no build step for development (uses pre-bundled MapLibre GL JS)
-- `print/export_map.py` is a placeholder for future QGIS/Mapnik integration
+Key details:
+- Uses CARTO Positron basemap (`basemaps.cartocdn.com/gl/positron-gl-style/style.json`)
+- Data loaded via `fetch('/output/...')` — relies on symlink `web/output -> ../output`
+- Labels use single `l_aadress` property field (not the dual `label1`/`label2` from ETL)
+- Layer visibility toggled via `map.setLayoutProperty(layerId, 'visibility', ...)`
+- Export creates offscreen map with `preserveDrawingBuffer: true`, renders to PNG
+- UI is in Estonian
+
+Map layers (in order): sea background, village boundary, parcels outline, parcels highlight (has_bldg), T. family plots highlight, parcel labels, roads, road labels, buildings.
+
+### Configuration
+
+All in `config/config.yaml`:
+- WFS endpoint URLs and layer names for parcels, buildings, roads, admin boundaries
+- CRS (`crs_epsg: 3301`), village name filter
+- ADS API settings (currently stub — `base_url` empty)
+- Output paths for GeoJSON and CSV
+- Feature flags: `dual_names`, `leader_lines`, `by_building_intersection`
+
+`config/tamkivi_plots.yaml` holds cadastral codes for family plot highlighting (the "T. maad" toggle in the UI). These codes are currently hardcoded in `web/index.html`.
+
+### Overrides
+
+`overrides/overrides.geojson` is a GeoJSON FeatureCollection. Each feature's properties can:
+- `parcel_id`: match against the parcel ID column
+- `include: false`: exclude a parcel from output
+- `label1`, `label2`: override label text
+
+Currently empty (no overrides applied).
+
+## Legal
+
+- Owner data is intentionally excluded
+- Include Maa- ja Ruumiamet attribution on all outputs
