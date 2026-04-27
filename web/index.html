@@ -225,11 +225,22 @@
                     <label for="toggleVillageBoundary">🏘️ Näita küla piiri</label>
                 </div>
                 <div class="control-group">
-                    <button id="exportBtn" class="export-btn">🖨️ Ekspordi kaart</button>
+                    <button id="exportBtn" class="export-btn">🖨️ Ekspordi PNG</button>
+                </div>
+                <div class="control-group">
+                    <button id="exportSvgBtn" class="export-btn">📐 Ekspordi SVG</button>
                 </div>
                 <div class="control-group">
                     <input type="checkbox" id="toggleT" unchecked>
                     <label for="toggleT">🏘️ T. maad (7.06%)</label>
+                </div>
+                <div class="control-group">
+                    <input type="checkbox" id="toggleManualBldg" checked>
+                    <label for="toggleManualBldg">🏚️ Väikemajadega krundid (käsitsi)</label>
+                </div>
+                <div class="control-group">
+                    <input type="checkbox" id="toggleHere">
+                    <label for="toggleHere">📍 OLED SIIN (külasilt)</label>
                 </div>
         </div>
     </div>
@@ -260,7 +271,49 @@
     
     <script>
         console.log('🚀 Ruhve village map starting...');
-        
+
+        // The fetched parcel set is bbox-filtered, so it includes parcels from
+        // neighbouring villages (Randvere, Viltina, Asva, ...). The registry
+        // tags each parcel with its real settlement in `ay_nimi`; we use that
+        // to keep only true Ruhve parcels.
+        const VILLAGE_NAME = 'Ruhve küla';
+
+        // Cadastral codes of plots known to have small/unregistered buildings
+        // that the ETAK building registry does not cover. Add new tunnus values
+        // here as villagers report them.
+        const MANUAL_BUILDING_TUNNUSED = [
+            '38601:004:0296', // Rannaääre
+        ];
+
+        // Village-sign location: Kahtla-Ruhve tee, just north of the Peetri tee
+        // crossing, on the Vahi (west) side of the road. Adjust if it needs
+        // nudging on the printed map.
+        const HERE_MARKER_LNGLAT = [23.01724, 58.38142];
+
+        // PNG export: logical canvas is A3 at 300 DPI (4962×3507 px) so font
+        // sizes, line widths, and tile fetches keep their visual proportions.
+        // EXPORT_PIXEL_RATIO oversamples the render — 2 ⇒ 9924×7014 backing
+        // canvas, vectors render crisp, basemap fetches @2x vector tiles.
+        // Bump to 3 for even sharper output if the GPU can take it.
+        const EXPORT_DPI = 300;
+        const EXPORT_PIXEL_RATIO = 2;
+
+        // T. family plots (used by both interactive map and exporters)
+        const T_TUNNUSED = [
+            '38601:004:0294', '38601:004:0337', '38601:004:0336',
+            '38601:004:0437', '38601:004:0438', '38601:004:0439',
+            '38601:004:0393', '38601:004:0606',
+        ];
+
+        function filterToVillage(geojson) {
+            return {
+                ...geojson,
+                features: geojson.features.filter(f =>
+                    (f.properties && f.properties.ay_nimi) === VILLAGE_NAME
+                ),
+            };
+        }
+
         // Filter to land parcels only (exclude road parcels that extend far from village)
         function getLandParcels(parcelsData) {
             return parcelsData.features.filter(feature => {
@@ -383,17 +436,39 @@
                     }
                     return response.json();
                 })
-                .then(data => {
-                    if (!data || !data.features || !Array.isArray(data.features)) {
+                .then(rawData => {
+                    if (!rawData || !rawData.features || !Array.isArray(rawData.features)) {
                         throw new Error('Invalid GeoJSON data format');
                     }
-                    console.log('📊 WGS84 parcels loaded:', data.features.length, 'features');
-                    
+                    const data = filterToVillage(rawData);
+                    console.log('📊 WGS84 parcels loaded:', rawData.features.length,
+                        '→', data.features.length, 'after ay_nimi filter');
+
                     try {
                         // Add parcels source
                         map.addSource('parcels', {
                             type: 'geojson',
                             data: data
+                        });
+
+                        // Centroid points per parcel — used by label layers so
+                        // big plots that span multiple internal tiles get one
+                        // label, not one per tile fragment.
+                        map.addSource('parcel-label-points', {
+                            type: 'geojson',
+                            data: {
+                                type: 'FeatureCollection',
+                                features: data.features
+                                    .map(f => {
+                                        const c = polygonCentroidLngLat(f.geometry);
+                                        return c ? {
+                                            type: 'Feature',
+                                            geometry: { type: 'Point', coordinates: c },
+                                            properties: f.properties,
+                                        } : null;
+                                    })
+                                    .filter(Boolean),
+                            },
                         });
                     } catch (error) {
                         console.error('❌ Failed to add parcels source:', error);
@@ -435,12 +510,18 @@
                             }
                         });
 
-                        // Add building highlights - warm parchment tint
+                        // Add building highlights - warm parchment tint.
+                        // Excludes road parcels (siht1=Transpordimaa) so a
+                        // building that clips into a road polygon doesn't
+                        // light up the road.
                         map.addLayer({
                             id: 'parcels-highlight',
                             type: 'fill',
                             source: 'parcels',
-                            filter: ['==', ['get', 'has_bldg'], true],
+                            filter: ['all',
+                                ['==', ['get', 'has_bldg'], true],
+                                ['!=', ['get', 'siht1'], 'Transpordimaa']
+                            ],
                             paint: {
                                 'fill-color': '#e4d4b8',
                                 'fill-opacity': 0.5
@@ -471,6 +552,69 @@
                             }
                         });
                         
+                        // "OLED SIIN" village-sign marker (toggle-able).
+                        map.addSource('here-marker', {
+                            type: 'geojson',
+                            data: {
+                                type: 'Feature',
+                                geometry: { type: 'Point', coordinates: HERE_MARKER_LNGLAT },
+                                properties: { label: 'OLED SIIN' }
+                            }
+                        });
+                        map.addLayer({
+                            id: 'here-marker',
+                            type: 'circle',
+                            source: 'here-marker',
+                            paint: {
+                                'circle-radius': 9,
+                                'circle-color': '#c4202a',
+                                'circle-stroke-color': '#f1e9d2',
+                                'circle-stroke-width': 2
+                            },
+                            layout: {
+                                'visibility': document.getElementById('toggleHere').checked ? 'visible' : 'none'
+                            }
+                        });
+                        map.addLayer({
+                            id: 'here-marker-label',
+                            type: 'symbol',
+                            source: 'here-marker',
+                            layout: {
+                                'text-field': ['get', 'label'],
+                                'text-font': ['Open Sans Bold'],
+                                'text-size': 13,
+                                'text-offset': [0, 1.2],
+                                'text-anchor': 'top',
+                                'text-allow-overlap': true,
+                                'text-ignore-placement': true,
+                                'text-letter-spacing': 0.08,
+                                'visibility': document.getElementById('toggleHere').checked ? 'visible' : 'none'
+                            },
+                            paint: {
+                                'text-color': '#c4202a',
+                                'text-halo-color': 'rgba(241, 233, 210, 0.95)',
+                                'text-halo-width': 2.5
+                            }
+                        });
+
+                        // Manual-buildings highlight: identical fill to the
+                        // has_bldg layer, just toggled separately. ETAK doesn't
+                        // know about these small/unregistered houses, so we
+                        // mark them by tunnus and render them the same way.
+                        map.addLayer({
+                            id: 'manual-bldg-highlight',
+                            type: 'fill',
+                            source: 'parcels',
+                            filter: ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]],
+                            paint: {
+                                'fill-color': '#e4d4b8',
+                                'fill-opacity': 0.5
+                            },
+                            layout: {
+                                'visibility': document.getElementById('toggleManualBldg').checked ? 'visible' : 'none'
+                            }
+                        });
+
                         // Add T. plots outline
                         map.addLayer({
                             id: 't-outline',
@@ -499,58 +643,8 @@
                         throw new Error('Failed to add parcel layers to map');
                     }
                     
-                    // Add labels with priority system:
-                    // Priority 1: Building parcels (paper label effect, placed first)
-                    // Priority 2: Other parcels (regular style, avoids building labels)
-                    // Road labels are added later as Priority 3
-                    try {
-                        // P1: Building parcel labels - paper label style
-                        map.addLayer({
-                            id: 'parcel-labels-bldg',
-                            type: 'symbol',
-                            source: 'parcels',
-                            filter: ['==', ['get', 'has_bldg'], true],
-                            layout: {
-                                'text-field': ['get', 'l_aadress'],
-                                'text-font': ['Open Sans Bold'],
-                                'text-size': 12,
-                                'text-allow-overlap': false,
-                                'text-letter-spacing': 0.04,
-                                'text-padding': 6
-                            },
-                            paint: {
-                                'text-color': '#3d2b1f',
-                                'text-halo-color': 'rgba(237, 228, 208, 0.95)',
-                                'text-halo-width': 3.5,
-                                'text-halo-blur': 0.3
-                            }
-                        });
-
-                        // P2: Other parcel labels - lighter style
-                        map.addLayer({
-                            id: 'parcel-labels-other',
-                            type: 'symbol',
-                            source: 'parcels',
-                            filter: ['!=', ['get', 'has_bldg'], true],
-                            layout: {
-                                'text-field': ['get', 'l_aadress'],
-                                'text-font': ['Open Sans Regular'],
-                                'text-size': 10,
-                                'text-allow-overlap': false,
-                                'text-letter-spacing': 0.02,
-                                'text-padding': 3
-                            },
-                            paint: {
-                                'text-color': '#6b5d4f',
-                                'text-halo-color': 'rgba(241, 233, 210, 0.8)',
-                                'text-halo-width': 1.5
-                            }
-                        });
-                    } catch (error) {
-                        console.warn('⚠️ Parcel labels layers failed to load:', error);
-                    }
-                    
                     // Load roads and buildings data with error handling
+                    // NOTE: Buildings and roads are added BEFORE labels so labels render on top
                     Promise.all([
                         fetch('/output/roads_wgs84.geojson').then(response => {
                             if (!response.ok) {
@@ -577,71 +671,90 @@
                         console.log('🏠 Buildings loaded:', buildingsData.features.length, 'features');
                         
                         // Add roads source and layer with error handling
+                        // Layer order: roads → buildings → labels (so labels are always on top)
                         try {
                             map.addSource('roads', {
                                 type: 'geojson',
                                 data: roadsData
                             });
 
-                            // Road casing (wider, darker)
+                            // Three road tiers via ETAK tyyp_tekst:
+                            // Kõrvalmaantee = main, Muu tee = secondary,
+                            // Rada = footpath/track. Casings drawn first
+                            // (main → secondary), then lines on top, then
+                            // dashed tracks.
                             map.addLayer({
-                                id: 'roads-casing',
+                                id: 'roads-main-casing',
                                 type: 'line',
                                 source: 'roads',
+                                filter: ['==', ['get', 'tyyp_tekst'], 'Kõrvalmaantee'],
+                                paint: {
+                                    'line-color': '#5a4a38',
+                                    'line-width': 4.0,
+                                    'line-cap': 'round',
+                                    'line-join': 'round'
+                                }
+                            });
+                            map.addLayer({
+                                id: 'roads-secondary-casing',
+                                type: 'line',
+                                source: 'roads',
+                                filter: ['==', ['get', 'tyyp_tekst'], 'Muu tee'],
                                 paint: {
                                     'line-color': '#7a6b5a',
-                                    'line-width': 2.8,
+                                    'line-width': 2.0,
                                     'line-cap': 'round',
                                     'line-join': 'round'
                                 }
                             });
-
-                            // Road fill (narrower, lighter)
                             map.addLayer({
-                                id: 'roads-line',
+                                id: 'roads-main-line',
                                 type: 'line',
                                 source: 'roads',
+                                filter: ['==', ['get', 'tyyp_tekst'], 'Kõrvalmaantee'],
                                 paint: {
-                                    'line-color': '#d4c8a8',
-                                    'line-width': 1.6,
+                                    'line-color': '#e8dcb4',
+                                    'line-width': 2.6,
                                     'line-cap': 'round',
                                     'line-join': 'round'
                                 }
                             });
-
-                            // P3: Road name labels - lowest priority, never hides parcel labels
                             map.addLayer({
-                                id: 'road-labels',
-                                type: 'symbol',
+                                id: 'roads-secondary-line',
+                                type: 'line',
                                 source: 'roads',
-                                layout: {
-                                    'text-field': ['get', 'nimetus'],
-                                    'text-font': ['Open Sans Italic'],
-                                    'text-size': 9,
-                                    'text-allow-overlap': false,
-                                    'text-optional': true,
-                                    'symbol-placement': 'line',
-                                    'text-letter-spacing': 0.05,
-                                    'text-padding': 8
-                                },
+                                filter: ['==', ['get', 'tyyp_tekst'], 'Muu tee'],
                                 paint: {
-                                    'text-color': '#7a6b5a',
-                                    'text-halo-color': 'rgba(241, 233, 210, 0.8)',
-                                    'text-halo-width': 1.2
+                                    'line-color': '#d4c8a8',
+                                    'line-width': 1.0,
+                                    'line-cap': 'round',
+                                    'line-join': 'round'
+                                }
+                            });
+                            map.addLayer({
+                                id: 'roads-tracks',
+                                type: 'line',
+                                source: 'roads',
+                                filter: ['==', ['get', 'tyyp_tekst'], 'Rada'],
+                                paint: {
+                                    'line-color': '#8a7860',
+                                    'line-width': 0.6,
+                                    'line-dasharray': [3, 2],
+                                    'line-cap': 'round',
+                                    'line-join': 'round'
                                 }
                             });
                         } catch (error) {
                             console.warn('⚠️ Roads layers failed to load:', error);
-                            // Continue without roads - not critical
                         }
-                        
-                        // Add buildings source and layers with error handling
+
+                        // Buildings (rendered below labels)
                         try {
                             map.addSource('buildings', {
                                 type: 'geojson',
                                 data: buildingsData
                             });
-                            
+
                             map.addLayer({
                                 id: 'buildings-fill',
                                 type: 'fill',
@@ -663,7 +776,130 @@
                             });
                         } catch (error) {
                             console.warn('⚠️ Buildings layers failed to load:', error);
-                            // Continue without buildings - not critical
+                        }
+
+                        // Bias farm-label anchors toward the building cluster
+                        // inside each parcel — same logic as the SVG export, so
+                        // big plots like Endrikelu get their name pulled toward
+                        // the houses instead of sitting at the geometric centre.
+                        try {
+                            const bldgCentroids = buildingsData.features
+                                .map(f => polygonCentroidLngLat(f.geometry))
+                                .filter(Boolean);
+                            const farmAnchor = (parcelGeom) => {
+                                const parcelC = polygonCentroidLngLat(parcelGeom);
+                                if (!parcelC) return null;
+                                const inside = bldgCentroids.filter(c => pointInPolygon(c, parcelGeom));
+                                if (inside.length === 0) return parcelC;
+                                let sx = 0, sy = 0;
+                                for (const [lng, lat] of inside) { sx += lng; sy += lat; }
+                                const cluster = [sx / inside.length, sy / inside.length];
+                                const a = [(cluster[0] + parcelC[0]) / 2, (cluster[1] + parcelC[1]) / 2];
+                                return pointInPolygon(a, parcelGeom) ? a : cluster;
+                            };
+                            const manualSet = new Set(MANUAL_BUILDING_TUNNUSED);
+                            map.getSource('parcel-label-points').setData({
+                                type: 'FeatureCollection',
+                                features: data.features.map(f => {
+                                    const hasBldg = f.properties.has_bldg === true || manualSet.has(f.properties.tunnus);
+                                    const c = hasBldg ? farmAnchor(f.geometry) : polygonCentroidLngLat(f.geometry);
+                                    return c ? {
+                                        type: 'Feature',
+                                        geometry: { type: 'Point', coordinates: c },
+                                        properties: f.properties,
+                                    } : null;
+                                }).filter(Boolean),
+                            });
+                        } catch (error) {
+                            console.warn('⚠️ Failed to bias label anchors:', error);
+                        }
+
+                        // Labels added LAST so they render on top of all geometry
+                        // Priority system: P1 first (gets placement priority), P2 avoids P1, P3 avoids both
+                        try {
+                            // P1: Building parcel labels - paper label style.
+                            // Always rendered (allow-overlap + ignore-placement)
+                            // so every house name is visible on the printed map
+                            // regardless of zoom. Includes both registry-known
+                            // houses (has_bldg) and manually flagged plots.
+                            map.addLayer({
+                                id: 'parcel-labels-bldg',
+                                type: 'symbol',
+                                source: 'parcel-label-points',
+                                filter: ['all',
+                                    ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                                    ['any',
+                                        ['==', ['get', 'has_bldg'], true],
+                                        ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]]
+                                    ]
+                                ],
+                                layout: {
+                                    'text-field': ['get', 'l_aadress'],
+                                    'text-font': ['Open Sans Bold'],
+                                    'text-size': 12,
+                                    'text-allow-overlap': true,
+                                    'text-ignore-placement': true,
+                                    'text-letter-spacing': 0.04,
+                                    'text-padding': 14
+                                },
+                                paint: {
+                                    'text-color': '#3d2b1f',
+                                    'text-halo-color': 'rgba(237, 228, 208, 0.95)',
+                                    'text-halo-width': 3.5,
+                                    'text-halo-blur': 0.3
+                                }
+                            });
+
+                            // P2: Other parcel labels - lighter style.
+                            // Anything that's already in the bldg label layer
+                            // (real or manual) is excluded here.
+                            map.addLayer({
+                                id: 'parcel-labels-other',
+                                type: 'symbol',
+                                source: 'parcel-label-points',
+                                filter: ['all',
+                                    ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                                    ['!=', ['get', 'has_bldg'], true],
+                                    ['!', ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]]]
+                                ],
+                                layout: {
+                                    'text-field': ['get', 'l_aadress'],
+                                    'text-font': ['Open Sans Regular'],
+                                    'text-size': 10,
+                                    'text-allow-overlap': false,
+                                    'text-letter-spacing': 0.02,
+                                    'text-padding': 10
+                                },
+                                paint: {
+                                    'text-color': '#6b5d4f',
+                                    'text-halo-color': 'rgba(241, 233, 210, 0.8)',
+                                    'text-halo-width': 1.5
+                                }
+                            });
+
+                            // P3: Road name labels - lowest priority
+                            map.addLayer({
+                                id: 'road-labels',
+                                type: 'symbol',
+                                source: 'roads',
+                                layout: {
+                                    'text-field': ['get', 'nimetus'],
+                                    'text-font': ['Open Sans Italic'],
+                                    'text-size': 9,
+                                    'text-allow-overlap': false,
+                                    'text-optional': true,
+                                    'symbol-placement': 'line',
+                                    'text-letter-spacing': 0.05,
+                                    'text-padding': 8
+                                },
+                                paint: {
+                                    'text-color': '#7a6b5a',
+                                    'text-halo-color': 'rgba(241, 233, 210, 0.8)',
+                                    'text-halo-width': 1.2
+                                }
+                            });
+                        } catch (error) {
+                            console.warn('⚠️ Label layers failed to load:', error);
                         }
                         
                         // Update info to include all data
@@ -791,14 +1027,11 @@
             }
         });
         
-        // Toggle roads (both casing and fill layers)
+        // Toggle roads (all tier layers)
         document.getElementById('toggleRoads').addEventListener('change', (e) => {
             const vis = e.target.checked ? 'visible' : 'none';
-            if (map.getLayer('roads-casing')) {
-                map.setLayoutProperty('roads-casing', 'visibility', vis);
-            }
-            if (map.getLayer('roads-line')) {
-                map.setLayoutProperty('roads-line', 'visibility', vis);
+            for (const id of ['roads-main-casing', 'roads-secondary-casing', 'roads-main-line', 'roads-secondary-line', 'roads-tracks']) {
+                if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', vis);
             }
         });
         
@@ -859,6 +1092,43 @@
             }
         });
         
+        // Toggle manual-buildings highlight. Also folds the manual tunnus list
+        // in/out of the bldg label filter so the "always-visible" house labels
+        // include manual plots when the toggle is on, and don't when it's off.
+        function applyManualBldgState(on) {
+            if (map.getLayer('manual-bldg-highlight')) {
+                map.setLayoutProperty('manual-bldg-highlight', 'visibility', on ? 'visible' : 'none');
+            }
+            const manualList = on ? MANUAL_BUILDING_TUNNUSED : [];
+            if (map.getLayer('parcel-labels-bldg')) {
+                map.setFilter('parcel-labels-bldg', ['all',
+                    ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                    ['any',
+                        ['==', ['get', 'has_bldg'], true],
+                        ['in', ['get', 'tunnus'], ['literal', manualList]]
+                    ]
+                ]);
+            }
+            if (map.getLayer('parcel-labels-other')) {
+                map.setFilter('parcel-labels-other', ['all',
+                    ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                    ['!=', ['get', 'has_bldg'], true],
+                    ['!', ['in', ['get', 'tunnus'], ['literal', manualList]]]
+                ]);
+            }
+        }
+        document.getElementById('toggleManualBldg').addEventListener('change', (e) => {
+            applyManualBldgState(e.target.checked);
+        });
+
+        // Toggle "OLED SIIN" village-sign marker
+        document.getElementById('toggleHere').addEventListener('change', (e) => {
+            const vis = e.target.checked ? 'visible' : 'none';
+            ['here-marker', 'here-marker-label'].forEach(id => {
+                if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', vis);
+            });
+        });
+
         // Export high DPI map with error handling
         document.getElementById('exportBtn').addEventListener('click', () => {
             try {
@@ -879,12 +1149,14 @@
             const showRoadNames = document.getElementById('toggleRoadNames').checked;
             const showBuildings = document.getElementById('toggleBuildings').checked;
             const showT = document.getElementById('toggleT').checked;
+            const showManualBldg = document.getElementById('toggleManualBldg').checked;
+            const showHere = document.getElementById('toggleHere').checked;
 
             exportBtn.textContent = 'Eksporditakse...';
             exportBtn.disabled = true;
 
-            // A3 landscape at 300 DPI for large scale print
-            const dpi = 300;
+            // A3 landscape, DPI per EXPORT_DPI constant
+            const dpi = EXPORT_DPI;
             const width = Math.round(16.54 * dpi);
             const height = Math.round(11.69 * dpi);
 
@@ -903,6 +1175,7 @@
                     style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
                     center: [23.02, 58.38],
                     zoom: 13,
+                    pixelRatio: EXPORT_PIXEL_RATIO,
                     preserveDrawingBuffer: true,
                     fadeDuration: 0
                 });
@@ -918,7 +1191,7 @@
                 let parcelsData = null;
                 try {
                     const response = await fetch('/output/parcels_wgs84_proper.geojson');
-                    parcelsData = await response.json();
+                    parcelsData = filterToVillage(await response.json());
                 } catch (error) {
                     console.warn('Failed to load parcels for export bounds:', error);
                 }
@@ -938,16 +1211,36 @@
                     tempMap.fitBounds(exportBounds, { padding: 40 });
                 }
 
-                // Add data sources
-                tempMap.addSource('parcels', { type: 'geojson', data: '/output/parcels_wgs84_proper.geojson' });
+                // Add data sources (parcels filtered to village to match interactive view)
+                tempMap.addSource('parcels', { type: 'geojson', data: parcelsData || '/output/parcels_wgs84_proper.geojson' });
                 tempMap.addSource('roads', { type: 'geojson', data: '/output/roads_wgs84.geojson' });
                 tempMap.addSource('buildings', { type: 'geojson', data: '/output/buildings_wgs84_proper.geojson' });
+
+                // Pre-computed centroid point per parcel for label placement.
+                // Without this, MapLibre places one label per tile-clipped
+                // fragment of a polygon — large parcels (e.g. Endrikuelu)
+                // end up with 3-4 duplicate labels in a high-DPI export.
+                // A points source guarantees exactly one label per parcel.
+                const labelPoints = parcelsData ? {
+                    type: 'FeatureCollection',
+                    features: parcelsData.features
+                        .map(f => {
+                            const c = polygonCentroidLngLat(f.geometry);
+                            return c ? {
+                                type: 'Feature',
+                                geometry: { type: 'Point', coordinates: c },
+                                properties: f.properties,
+                            } : null;
+                        })
+                        .filter(Boolean),
+                } : { type: 'FeatureCollection', features: [] };
+                tempMap.addSource('parcel-label-points', { type: 'geojson', data: labelPoints });
 
                 // Parcel outlines
                 tempMap.addLayer({ id: 'parcels-outline', type: 'line', source: 'parcels', paint: { 'line-color': '#9c8b75', 'line-width': 0.7 } });
 
                 if (showHighlight) {
-                    tempMap.addLayer({ id: 'parcels-highlight', type: 'fill', source: 'parcels', filter: ['==', ['get', 'has_bldg'], true], paint: { 'fill-color': '#e4d4b8', 'fill-opacity': 0.5 } });
+                    tempMap.addLayer({ id: 'parcels-highlight', type: 'fill', source: 'parcels', filter: ['all', ['==', ['get', 'has_bldg'], true], ['!=', ['get', 'siht1'], 'Transpordimaa']], paint: { 'fill-color': '#e4d4b8', 'fill-opacity': 0.5 } });
                 }
 
                 if (showT) {
@@ -956,41 +1249,74 @@
                     tempMap.addLayer({ id: 't-ol', type: 'line', source: 'parcels', filter: tFilter, paint: { 'line-color': '#6b4d6e', 'line-width': 1.5 } });
                 }
 
-                // Labels with priority system (same as main map)
-                if (showLabels) {
-                    // P1: Building parcel labels - paper label effect
-                    tempMap.addLayer({
-                        id: 'parcel-labels-bldg', type: 'symbol', source: 'parcels',
-                        filter: ['==', ['get', 'has_bldg'], true],
-                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Bold'], 'text-size': 12, 'text-allow-overlap': false, 'text-letter-spacing': 0.04, 'text-padding': 6 },
-                        paint: { 'text-color': '#3d2b1f', 'text-halo-color': 'rgba(237, 228, 208, 0.95)', 'text-halo-width': 3.5, 'text-halo-blur': 0.3 }
-                    });
-                    // P2: Other parcel labels
-                    tempMap.addLayer({
-                        id: 'parcel-labels-other', type: 'symbol', source: 'parcels',
-                        filter: ['!=', ['get', 'has_bldg'], true],
-                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Regular'], 'text-size': 10, 'text-allow-overlap': false, 'text-letter-spacing': 0.02, 'text-padding': 3 },
-                        paint: { 'text-color': '#6b5d4f', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.5 }
-                    });
+                if (showManualBldg) {
+                    const mbFilter = ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]];
+                    tempMap.addLayer({ id: 'manual-bldg-hl', type: 'fill', source: 'parcels', filter: mbFilter, paint: { 'fill-color': '#e4d4b8', 'fill-opacity': 0.5 } });
                 }
 
-                // Roads (casing + fill)
+                // Roads — three tiers (main / secondary / track)
                 if (showRoads) {
-                    tempMap.addLayer({ id: 'roads-casing', type: 'line', source: 'roads', paint: { 'line-color': '#7a6b5a', 'line-width': 2.8, 'line-cap': 'round', 'line-join': 'round' } });
-                    tempMap.addLayer({ id: 'roads-line', type: 'line', source: 'roads', paint: { 'line-color': '#d4c8a8', 'line-width': 1.6, 'line-cap': 'round', 'line-join': 'round' } });
-                    // P3: Road labels (lowest priority)
-                    if (showRoadNames) {
-                        tempMap.addLayer({
-                            id: 'road-labels', type: 'symbol', source: 'roads',
-                            layout: { 'text-field': ['get', 'nimetus'], 'text-font': ['Open Sans Italic'], 'text-size': 9, 'text-allow-overlap': false, 'text-optional': true, 'symbol-placement': 'line', 'text-letter-spacing': 0.05, 'text-padding': 8 },
-                            paint: { 'text-color': '#7a6b5a', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.2 }
-                        });
-                    }
+                    tempMap.addLayer({ id: 'roads-main-casing', type: 'line', source: 'roads', filter: ['==', ['get', 'tyyp_tekst'], 'Kõrvalmaantee'], paint: { 'line-color': '#5a4a38', 'line-width': 4.0, 'line-cap': 'round', 'line-join': 'round' } });
+                    tempMap.addLayer({ id: 'roads-secondary-casing', type: 'line', source: 'roads', filter: ['==', ['get', 'tyyp_tekst'], 'Muu tee'], paint: { 'line-color': '#7a6b5a', 'line-width': 2.0, 'line-cap': 'round', 'line-join': 'round' } });
+                    tempMap.addLayer({ id: 'roads-main-line', type: 'line', source: 'roads', filter: ['==', ['get', 'tyyp_tekst'], 'Kõrvalmaantee'], paint: { 'line-color': '#e8dcb4', 'line-width': 2.6, 'line-cap': 'round', 'line-join': 'round' } });
+                    tempMap.addLayer({ id: 'roads-secondary-line', type: 'line', source: 'roads', filter: ['==', ['get', 'tyyp_tekst'], 'Muu tee'], paint: { 'line-color': '#d4c8a8', 'line-width': 1.0, 'line-cap': 'round', 'line-join': 'round' } });
+                    tempMap.addLayer({ id: 'roads-tracks', type: 'line', source: 'roads', filter: ['==', ['get', 'tyyp_tekst'], 'Rada'], paint: { 'line-color': '#8a7860', 'line-width': 0.6, 'line-dasharray': [3, 2], 'line-cap': 'round', 'line-join': 'round' } });
                 }
 
+                // Buildings (below labels)
                 if (showBuildings) {
                     tempMap.addLayer({ id: 'buildings-fill', type: 'fill', source: 'buildings', paint: { 'fill-color': '#9e391a', 'fill-opacity': 0.8 } });
                     tempMap.addLayer({ id: 'buildings-outline', type: 'line', source: 'buildings', paint: { 'line-color': '#704214', 'line-width': 0.8 } });
+                }
+
+                // Labels LAST (on top of everything)
+                if (showLabels) {
+                    const manualList = showManualBldg ? MANUAL_BUILDING_TUNNUSED : [];
+                    tempMap.addLayer({
+                        id: 'parcel-labels-bldg', type: 'symbol', source: 'parcel-label-points',
+                        filter: ['all',
+                            ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                            ['any',
+                                ['==', ['get', 'has_bldg'], true],
+                                ['in', ['get', 'tunnus'], ['literal', manualList]]
+                            ]
+                        ],
+                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Bold'], 'text-size': 18, 'text-allow-overlap': true, 'text-ignore-placement': true, 'text-letter-spacing': 0.04, 'text-padding': 14 },
+                        paint: { 'text-color': '#3d2b1f', 'text-halo-color': 'rgba(237, 228, 208, 0.95)', 'text-halo-width': 3.5, 'text-halo-blur': 0.3 }
+                    });
+                    tempMap.addLayer({
+                        id: 'parcel-labels-other', type: 'symbol', source: 'parcel-label-points',
+                        filter: ['all',
+                            ['!=', ['get', 'siht1'], 'Transpordimaa'],
+                            ['!=', ['get', 'has_bldg'], true],
+                            ['!', ['in', ['get', 'tunnus'], ['literal', manualList]]]
+                        ],
+                        layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Regular'], 'text-size': 15, 'text-allow-overlap': false, 'text-letter-spacing': 0.02, 'text-padding': 10 },
+                        paint: { 'text-color': '#6b5d4f', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.5 }
+                    });
+                }
+                if (showHere) {
+                    tempMap.addSource('here-marker', {
+                        type: 'geojson',
+                        data: { type: 'Feature', geometry: { type: 'Point', coordinates: HERE_MARKER_LNGLAT }, properties: { label: 'OLED SIIN' } }
+                    });
+                    tempMap.addLayer({
+                        id: 'here-marker', type: 'circle', source: 'here-marker',
+                        paint: { 'circle-radius': 11, 'circle-color': '#c4202a', 'circle-stroke-color': '#f1e9d2', 'circle-stroke-width': 2.5 }
+                    });
+                    tempMap.addLayer({
+                        id: 'here-marker-label', type: 'symbol', source: 'here-marker',
+                        layout: { 'text-field': ['get', 'label'], 'text-font': ['Open Sans Bold'], 'text-size': 20, 'text-offset': [0, 1.3], 'text-anchor': 'top', 'text-allow-overlap': true, 'text-ignore-placement': true, 'text-letter-spacing': 0.08 },
+                        paint: { 'text-color': '#c4202a', 'text-halo-color': 'rgba(241, 233, 210, 0.95)', 'text-halo-width': 2.5 }
+                    });
+                }
+
+                if (showRoads && showRoadNames) {
+                    tempMap.addLayer({
+                        id: 'road-labels', type: 'symbol', source: 'roads',
+                        layout: { 'text-field': ['get', 'nimetus'], 'text-font': ['Open Sans Italic'], 'text-size': 13, 'text-allow-overlap': false, 'text-optional': true, 'symbol-placement': 'line', 'text-letter-spacing': 0.05, 'text-padding': 8 },
+                        paint: { 'text-color': '#7a6b5a', 'text-halo-color': 'rgba(241, 233, 210, 0.8)', 'text-halo-width': 1.2 }
+                    });
                 }
 
                 // Wait for rendering to complete
@@ -1031,6 +1357,354 @@
             });
         }
         
+        // -----------------------------------------------------------
+        // SVG (vector) export
+        // -----------------------------------------------------------
+        // Re-projects every visible GeoJSON feature into SVG paths/text using
+        // a Web-Mercator projection so the output is print-resolution-free
+        // and editable in Illustrator / Inkscape. The basemap is intentionally
+        // omitted — those are raster tiles and would defeat the point of a
+        // vector export.
+
+        function lngLatToMercator(lng, lat) {
+            return [lng, Math.log(Math.tan((90 + lat) * Math.PI / 360)) * (180 / Math.PI)];
+        }
+
+        function escapeXML(s) {
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function pointInRing(pt, ring) {
+            const [x, y] = pt;
+            let inside = false;
+            for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+                const [xi, yi] = ring[i];
+                const [xj, yj] = ring[j];
+                const intersect = ((yi > y) !== (yj > y)) &&
+                    (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+
+        function pointInPolygon(pt, geom) {
+            const inSimple = (rings) => {
+                if (!pointInRing(pt, rings[0])) return false;
+                for (let k = 1; k < rings.length; k++) {
+                    if (pointInRing(pt, rings[k])) return false;
+                }
+                return true;
+            };
+            if (geom.type === 'Polygon') return inSimple(geom.coordinates);
+            if (geom.type === 'MultiPolygon') {
+                for (const poly of geom.coordinates) if (inSimple(poly)) return true;
+                return false;
+            }
+            return false;
+        }
+
+        function polygonCentroidLngLat(geom) {
+            let ring;
+            if (geom.type === 'Polygon') ring = geom.coordinates[0];
+            else if (geom.type === 'MultiPolygon') ring = geom.coordinates[0][0];
+            else return null;
+            // Area-weighted centroid of the outer ring.
+            let twiceA = 0, cx = 0, cy = 0;
+            for (let i = 0, n = ring.length - 1; i < n; i++) {
+                const [x0, y0] = ring[i];
+                const [x1, y1] = ring[i + 1];
+                const cross = x0 * y1 - x1 * y0;
+                twiceA += cross;
+                cx += (x0 + x1) * cross;
+                cy += (y0 + y1) * cross;
+            }
+            if (twiceA === 0) {
+                // Degenerate ring — fall back to mean.
+                let sx = 0, sy = 0;
+                for (const [x, y] of ring) { sx += x; sy += y; }
+                return [sx / ring.length, sy / ring.length];
+            }
+            return [cx / (3 * twiceA), cy / (3 * twiceA)];
+        }
+
+        async function exportSVG() {
+            const showHighlight = document.getElementById('toggleHighlight').checked;
+            const showLabels = document.getElementById('toggleLabels').checked;
+            const showRoads = document.getElementById('toggleRoads').checked;
+            const showBuildings = document.getElementById('toggleBuildings').checked;
+            const showT = document.getElementById('toggleT').checked;
+            const showManualBldg = document.getElementById('toggleManualBldg').checked;
+            const showHere = document.getElementById('toggleHere').checked;
+
+            const btn = document.getElementById('exportSvgBtn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Eksporditakse...';
+            btn.disabled = true;
+
+            try {
+                const [pRaw, rRaw, bRaw] = await Promise.all([
+                    fetch('/output/parcels_wgs84_proper.geojson').then(r => r.json()),
+                    fetch('/output/roads_wgs84.geojson').then(r => r.json()),
+                    fetch('/output/buildings_wgs84_proper.geojson').then(r => r.json()),
+                ]);
+                const parcels = filterToVillage(pRaw);
+
+                // Tight bounds from land parcels only (matches PNG export crop).
+                let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+                getLandParcels(parcels).forEach(f => {
+                    const visit = ([lng, lat]) => {
+                        if (lng < minLng) minLng = lng;
+                        if (lng > maxLng) maxLng = lng;
+                        if (lat < minLat) minLat = lat;
+                        if (lat > maxLat) maxLat = lat;
+                    };
+                    if (f.geometry.type === 'Polygon') f.geometry.coordinates[0].forEach(visit);
+                    else if (f.geometry.type === 'MultiPolygon') f.geometry.coordinates.forEach(p => p[0].forEach(visit));
+                });
+                const padDeg = 0.0008;
+                minLng -= padDeg; maxLng += padDeg; minLat -= padDeg; maxLat += padDeg;
+
+                const [mxMin, myMin] = lngLatToMercator(minLng, minLat);
+                const [mxMax, myMax] = lngLatToMercator(maxLng, maxLat);
+                const mw = mxMax - mxMin;
+                const mh = myMax - myMin;
+
+                // Target canvas: A3-ish landscape in pixel-ish units. SVG scales
+                // anyway — these just set sensible stroke/text proportions.
+                const W = 5000;
+                const H = Math.round(W * (mh / mw));
+
+                const project = (lng, lat) => {
+                    const [mx, my] = lngLatToMercator(lng, lat);
+                    return [
+                        (mx - mxMin) / mw * W,
+                        H - (my - myMin) / mh * H,
+                    ];
+                };
+
+                const fmt = n => n.toFixed(1);
+                const ringPath = ring => 'M' + ring.map(([lng, lat]) => {
+                    const [x, y] = project(lng, lat);
+                    return `${fmt(x)},${fmt(y)}`;
+                }).join('L') + 'Z';
+                const lineCoordsPath = coords => 'M' + coords.map(([lng, lat]) => {
+                    const [x, y] = project(lng, lat);
+                    return `${fmt(x)},${fmt(y)}`;
+                }).join('L');
+                const featurePath = (geom) => {
+                    if (geom.type === 'Polygon') return geom.coordinates.map(ringPath).join(' ');
+                    if (geom.type === 'MultiPolygon') return geom.coordinates.flatMap(p => p.map(ringPath)).join(' ');
+                    if (geom.type === 'LineString') return lineCoordsPath(geom.coordinates);
+                    if (geom.type === 'MultiLineString') return geom.coordinates.map(lineCoordsPath).join(' ');
+                    return '';
+                };
+
+                const tSet = new Set(T_TUNNUSED);
+                const manualSet = new Set(showManualBldg ? MANUAL_BUILDING_TUNNUSED : []);
+
+                const parts = [];
+                // Sans-serif stack to match the PNG export (MapLibre renders
+                // labels in Open Sans). Keeps both outputs visually unified.
+                parts.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif">`);
+                // Background = sea. We then paint land on top using every
+                // parcel we know about (Ruhve + neighbouring villages we
+                // pulled in via the bbox), so anywhere with no parcel reads
+                // as sea/empty.
+                parts.push(`<rect id="sea" width="${W}" height="${H}" fill="#c5d1c0"/>`);
+
+                // Land mask: ALL parcels in the bbox, including neighbours,
+                // so the rim of the village blends into the surrounding land
+                // instead of looking like ocean.
+                parts.push('<g id="land-fill" fill="#f1e9d2" stroke="none">');
+                for (const f of pRaw.features) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                parts.push('</g>');
+
+                // Parcel outlines: only Ruhve, so the village stands out from
+                // the surrounding land mass (which is filled but unbordered).
+                parts.push('<g id="parcels-outline" fill="none" stroke="#9c8b75" stroke-width="2">');
+                for (const f of parcels.features) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                parts.push('</g>');
+
+                // Highlights: has_bldg + manual share the same warm fill.
+                // Road parcels (siht1=Transpordimaa) are skipped so a building
+                // clipping a road polygon doesn't light up the road itself.
+                if (showHighlight || showManualBldg) {
+                    parts.push('<g id="parcels-highlight" fill="#e4d4b8" fill-opacity="0.5" stroke="none">');
+                    for (const f of parcels.features) {
+                        if (f.properties.siht1 === 'Transpordimaa') continue;
+                        const isReal = showHighlight && f.properties.has_bldg === true;
+                        const isManual = manualSet.has(f.properties.tunnus);
+                        if (isReal || isManual) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    }
+                    parts.push('</g>');
+                }
+
+                if (showT) {
+                    parts.push('<g id="t-plots" fill="#8e6d8a" fill-opacity="0.4" stroke="#6b4d6e" stroke-width="3.5">');
+                    for (const f of parcels.features) {
+                        if (tSet.has(f.properties.tunnus)) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    }
+                    parts.push('</g>');
+                }
+
+                if (showRoads) {
+                    // Split by ETAK road class so primary roads read clearly:
+                    //   Kõrvalmaantee = main (widest), Muu tee = secondary,
+                    //   Rada = footpath/track (thin, dashed, no casing).
+                    const mainRoads = rRaw.features.filter(f => f.properties.tyyp_tekst === 'Kõrvalmaantee');
+                    const secondaryRoads = rRaw.features.filter(f => f.properties.tyyp_tekst === 'Muu tee');
+                    const tracks = rRaw.features.filter(f => f.properties.tyyp_tekst === 'Rada');
+
+                    parts.push('<g id="roads-main-casing" fill="none" stroke="#5a4a38" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">');
+                    for (const f of mainRoads) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                    parts.push('<g id="roads-secondary-casing" fill="none" stroke="#7a6b5a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">');
+                    for (const f of secondaryRoads) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                    parts.push('<g id="roads-main-line" fill="none" stroke="#e8dcb4" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">');
+                    for (const f of mainRoads) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                    parts.push('<g id="roads-secondary-line" fill="none" stroke="#d4c8a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">');
+                    for (const f of secondaryRoads) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                    parts.push('<g id="roads-tracks" fill="none" stroke="#8a7860" stroke-width="2.5" stroke-dasharray="8 6" stroke-linecap="round" stroke-linejoin="round">');
+                    for (const f of tracks) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                }
+
+                if (showBuildings) {
+                    parts.push('<g id="buildings" fill="#9e391a" fill-opacity="0.85" stroke="#704214" stroke-width="2">');
+                    for (const f of bRaw.features) parts.push(`<path d="${featurePath(f.geometry)}"/>`);
+                    parts.push('</g>');
+                }
+
+                if (showLabels) {
+                    // SVG has no automatic label collision (unlike MapLibre).
+                    // We place bldg labels first, sorted by plot area so the
+                    // largest farms win when neighbours collide. Then "other"
+                    // labels drop in only where they don't overlap anything
+                    // already placed. Result: a readable map at the cost of
+                    // some smaller plots going unlabelled.
+                    const placed = [];
+                    function placeLabel(x, y, text, fontSize, charWidth) {
+                        const halfW = (text.length * fontSize * charWidth) / 2;
+                        const halfH = fontSize * 0.55;
+                        const pad = 6;
+                        const minX = x - halfW - pad, maxX = x + halfW + pad;
+                        const minY = y - halfH - pad, maxY = y + halfH + pad;
+                        for (const b of placed) {
+                            if (!(maxX < b.minX || minX > b.maxX || maxY < b.minY || minY > b.maxY)) return false;
+                        }
+                        placed.push({ minX, maxX, minY, maxY });
+                        return true;
+                    }
+                    function approxArea(geom) {
+                        let ring;
+                        if (geom.type === 'Polygon') ring = geom.coordinates[0];
+                        else if (geom.type === 'MultiPolygon') ring = geom.coordinates[0][0];
+                        else return 0;
+                        let a = 0;
+                        for (let i = 0, n = ring.length - 1; i < n; i++) {
+                            a += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1];
+                        }
+                        return Math.abs(a);
+                    }
+
+                    const labelable = parcels.features.filter(f =>
+                        f.properties.siht1 !== 'Transpordimaa' && f.properties.l_aadress
+                    );
+                    const bldgFeats = labelable
+                        .filter(f => f.properties.has_bldg === true || manualSet.has(f.properties.tunnus))
+                        .sort((a, b) => approxArea(b.geometry) - approxArea(a.geometry));
+                    const otherFeats = labelable
+                        .filter(f => !(f.properties.has_bldg === true || manualSet.has(f.properties.tunnus)))
+                        .sort((a, b) => approxArea(b.geometry) - approxArea(a.geometry));
+
+                    // Precompute building centroids so farm labels can gravitate
+                    // toward the actual house cluster instead of sitting at the
+                    // geometric centroid of a long/L-shaped parcel.
+                    const bldgCentroids = bRaw.features
+                        .map(f => polygonCentroidLngLat(f.geometry))
+                        .filter(Boolean);
+
+                    function farmLabelAnchor(parcelGeom) {
+                        const parcelC = polygonCentroidLngLat(parcelGeom);
+                        if (!parcelC) return null;
+                        const inside = bldgCentroids.filter(c => pointInPolygon(c, parcelGeom));
+                        if (inside.length === 0) return parcelC;
+                        let sx = 0, sy = 0;
+                        for (const [lng, lat] of inside) { sx += lng; sy += lat; }
+                        const cluster = [sx / inside.length, sy / inside.length];
+                        // Pull mostly toward the building cluster but keep a
+                        // hint of the parcel centroid so dense neighbours don't
+                        // collapse onto the same spot.
+                        const anchor = [
+                            (cluster[0] + parcelC[0]) / 2,
+                            (cluster[1] + parcelC[1]) / 2,
+                        ];
+                        return pointInPolygon(anchor, parcelGeom) ? anchor : cluster;
+                    }
+
+                    // Bold labels for any plot that reads as "has a house"
+                    parts.push('<g id="parcel-labels-bldg" font-family="Georgia, &quot;Times New Roman&quot;, &quot;Hoefler Text&quot;, serif" font-size="60" font-weight="bold" fill="#3d2b1f" text-anchor="middle" stroke="rgba(237, 228, 208, 0.95)" stroke-width="9" paint-order="stroke fill">');
+                    for (const f of bldgFeats) {
+                        const c = farmLabelAnchor(f.geometry);
+                        if (!c) continue;
+                        const [x, y] = project(c[0], c[1]);
+                        const txt = f.properties.l_aadress;
+                        if (!placeLabel(x, y, txt, 60, 0.55)) continue;
+                        parts.push(`<text x="${fmt(x)}" y="${fmt(y)}">${escapeXML(txt)}</text>`);
+                    }
+                    parts.push('</g>');
+
+                    // Lighter labels for the rest — only where they fit
+                    parts.push('<g id="parcel-labels-other" font-family="Georgia, &quot;Times New Roman&quot;, &quot;Hoefler Text&quot;, serif" font-style="italic" font-size="44" fill="#6b5d4f" text-anchor="middle" stroke="rgba(241, 233, 210, 0.8)" stroke-width="6" paint-order="stroke fill">');
+                    for (const f of otherFeats) {
+                        const c = polygonCentroidLngLat(f.geometry);
+                        if (!c) continue;
+                        const [x, y] = project(c[0], c[1]);
+                        const txt = f.properties.l_aadress;
+                        if (!placeLabel(x, y, txt, 44, 0.5)) continue;
+                        parts.push(`<text x="${fmt(x)}" y="${fmt(y)}">${escapeXML(txt)}</text>`);
+                    }
+                    parts.push('</g>');
+                }
+
+                if (showHere) {
+                    const [hx, hy] = project(...HERE_MARKER_LNGLAT);
+                    parts.push(`<circle cx="${fmt(hx)}" cy="${fmt(hy)}" r="36" fill="#c4202a" stroke="#f1e9d2" stroke-width="9"/>`);
+                }
+
+                parts.push('</svg>');
+
+                const blob = new Blob([parts.join('\n')], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ruhve_village_map_${new Date().toISOString().split('T')[0]}.svg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showExportMessage('SVG eksporditud!', 'success');
+            } catch (error) {
+                console.error('SVG export failed:', error);
+                showExportMessage('SVG eksport ebaõnnestus', 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        document.getElementById('exportSvgBtn').addEventListener('click', () => {
+            try { exportSVG(); }
+            catch (e) { console.error(e); alert('Viga SVG eksportimisel.'); }
+        });
+
         function showExportMessage(message, type) {
             const infoDiv = document.getElementById('info');
             const messageDiv = document.createElement('div');
