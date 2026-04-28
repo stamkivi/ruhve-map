@@ -76,8 +76,22 @@ def main():
     if parcels_gdf.empty:
         print("❌ No parcels found")
         return
-    
-    print(f"✅ Found {len(parcels_gdf)} parcels")
+
+    print(f"✅ Found {len(parcels_gdf)} parcels in bbox")
+
+    # Filter parcels to those whose registered settlement (ay_nimi) matches the
+    # configured village. Without this we leak parcels from neighbouring villages
+    # that fall inside Ruhve's bounding box (Randvere, Viltina, Asva, ...).
+    if 'ay_nimi' in parcels_gdf.columns:
+        before = len(parcels_gdf)
+        mask = parcels_gdf['ay_nimi'].str.contains(cfg['village_name'], case=False, na=False)
+        dropped = parcels_gdf.loc[~mask, 'ay_nimi'].value_counts()
+        parcels_gdf = parcels_gdf[mask].copy()
+        print(f"🔎 Filtered by ay_nimi: {before} → {len(parcels_gdf)}")
+        if not dropped.empty:
+            print(f"   Dropped from other settlements: {dropped.to_dict()}")
+    else:
+        print("⚠️  Parcels have no ay_nimi column — skipping settlement filter")
     
     # Save to output
     os.makedirs(cfg['output']['geojson_dir'], exist_ok=True)
