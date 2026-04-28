@@ -285,6 +285,21 @@
             '38601:004:0296', // Rannaääre
         ];
 
+        // Local label corrections where Maa-amet's WFS l_aadress is stale
+        // or wrong vs. the live registry. Map tunnus → display name.
+        // Set to '' to hide a misleading label entirely.
+        const LABEL_OVERRIDES = {
+            '38601:004:0513': 'Vahielu', // WFS l_aadress is stale; registry says Vahielu
+            '38601:004:0337': '', // second "Aadu" parcel with no houses — hide, keep the main Aadu (0336)
+        };
+
+        // Manual [lng, lat] for labels where automatic anchoring still puts
+        // the name in the wrong place (e.g. parcel split by a road, label
+        // wanted in a specific gap). Overrides the building-cluster anchor.
+        const LABEL_POSITION_OVERRIDES = {
+            '38601:004:0423': [23.02520, 58.38040], // Uus-Kanepi → between Kanepi & Merepärli
+        };
+
         // Village-sign location: Kahtla-Ruhve tee, just north of the Peetri tee
         // crossing, on the Vahi (west) side of the road. Adjust if it needs
         // nudging on the printed map.
@@ -797,18 +812,35 @@
                                 const a = [(cluster[0] + parcelC[0]) / 2, (cluster[1] + parcelC[1]) / 2];
                                 return pointInPolygon(a, parcelGeom) ? a : cluster;
                             };
+                            // Trust observed buildings over the ETL has_bldg
+                            // flag — Pihlaka & co. carry stale flags but the
+                            // building geometry says otherwise. The manual
+                            // override list stays separate so its toggle can
+                            // flip layer filters without re-running setData.
+                            const houseTunnused = new Set();
+                            for (const f of data.features) {
+                                if (f.properties.siht1 === 'Transpordimaa') continue;
+                                if (bldgCentroids.some(c => pointInPolygon(c, f.geometry))) {
+                                    houseTunnused.add(f.properties.tunnus);
+                                }
+                            }
                             const manualSet = new Set(MANUAL_BUILDING_TUNNUSED);
                             map.getSource('parcel-label-points').setData({
                                 type: 'FeatureCollection',
                                 features: data.features.map(f => {
-                                    const hasBldg = f.properties.has_bldg === true || manualSet.has(f.properties.tunnus);
-                                    const c = hasBldg ? farmAnchor(f.geometry) : polygonCentroidLngLat(f.geometry);
-                                    return c ? {
+                                    const isHouse = houseTunnused.has(f.properties.tunnus) || manualSet.has(f.properties.tunnus);
+                                    const posOverride = LABEL_POSITION_OVERRIDES[f.properties.tunnus];
+                                    const c = posOverride
+                                        ?? (isHouse ? farmAnchor(f.geometry) : polygonCentroidLngLat(f.geometry));
+                                    if (!c) return null;
+                                    const override = LABEL_OVERRIDES[f.properties.tunnus];
+                                    const name = override !== undefined ? override : f.properties.l_aadress;
+                                    return {
                                         type: 'Feature',
                                         geometry: { type: 'Point', coordinates: c },
-                                        properties: f.properties,
-                                    } : null;
-                                }).filter(Boolean),
+                                        properties: { ...f.properties, l_aadress: name, house_plot: houseTunnused.has(f.properties.tunnus) },
+                                    };
+                                }).filter(f => f && f.properties.l_aadress),
                             });
                         } catch (error) {
                             console.warn('⚠️ Failed to bias label anchors:', error);
@@ -829,7 +861,7 @@
                                 filter: ['all',
                                     ['!=', ['get', 'siht1'], 'Transpordimaa'],
                                     ['any',
-                                        ['==', ['get', 'has_bldg'], true],
+                                        ['==', ['get', 'house_plot'], true],
                                         ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]]
                                     ]
                                 ],
@@ -859,7 +891,7 @@
                                 source: 'parcel-label-points',
                                 filter: ['all',
                                     ['!=', ['get', 'siht1'], 'Transpordimaa'],
-                                    ['!=', ['get', 'has_bldg'], true],
+                                    ['!=', ['get', 'house_plot'], true],
                                     ['!', ['in', ['get', 'tunnus'], ['literal', MANUAL_BUILDING_TUNNUSED]]]
                                 ],
                                 layout: {
@@ -1104,7 +1136,7 @@
                 map.setFilter('parcel-labels-bldg', ['all',
                     ['!=', ['get', 'siht1'], 'Transpordimaa'],
                     ['any',
-                        ['==', ['get', 'has_bldg'], true],
+                        ['==', ['get', 'house_plot'], true],
                         ['in', ['get', 'tunnus'], ['literal', manualList]]
                     ]
                 ]);
@@ -1112,7 +1144,7 @@
             if (map.getLayer('parcel-labels-other')) {
                 map.setFilter('parcel-labels-other', ['all',
                     ['!=', ['get', 'siht1'], 'Transpordimaa'],
-                    ['!=', ['get', 'has_bldg'], true],
+                    ['!=', ['get', 'house_plot'], true],
                     ['!', ['in', ['get', 'tunnus'], ['literal', manualList]]]
                 ]);
             }
@@ -1216,23 +1248,63 @@
                 tempMap.addSource('roads', { type: 'geojson', data: '/output/roads_wgs84.geojson' });
                 tempMap.addSource('buildings', { type: 'geojson', data: '/output/buildings_wgs84_proper.geojson' });
 
+                // Pull buildings up-front so we can derive house_plot from
+                // actual geometry and bias the label anchor toward the
+                // building cluster — same logic as live map / SVG export.
+                let buildingsForLabels = null;
+                try {
+                    buildingsForLabels = await fetch('/output/buildings_wgs84_proper.geojson').then(r => r.json());
+                } catch (error) {
+                    console.warn('Failed to load buildings for label anchors:', error);
+                }
+
                 // Pre-computed centroid point per parcel for label placement.
                 // Without this, MapLibre places one label per tile-clipped
                 // fragment of a polygon — large parcels (e.g. Endrikuelu)
                 // end up with 3-4 duplicate labels in a high-DPI export.
                 // A points source guarantees exactly one label per parcel.
+                const bldgCentroidsExport = buildingsForLabels
+                    ? buildingsForLabels.features.map(f => polygonCentroidLngLat(f.geometry)).filter(Boolean)
+                    : [];
+                const farmAnchorExport = (parcelGeom) => {
+                    const parcelC = polygonCentroidLngLat(parcelGeom);
+                    if (!parcelC) return null;
+                    const inside = bldgCentroidsExport.filter(c => pointInPolygon(c, parcelGeom));
+                    if (inside.length === 0) return parcelC;
+                    let sx = 0, sy = 0;
+                    for (const [lng, lat] of inside) { sx += lng; sy += lat; }
+                    const cluster = [sx / inside.length, sy / inside.length];
+                    const a = [(cluster[0] + parcelC[0]) / 2, (cluster[1] + parcelC[1]) / 2];
+                    return pointInPolygon(a, parcelGeom) ? a : cluster;
+                };
+                const houseTunnusedExport = new Set();
+                if (parcelsData) {
+                    for (const f of parcelsData.features) {
+                        if (f.properties.siht1 === 'Transpordimaa') continue;
+                        if (bldgCentroidsExport.some(c => pointInPolygon(c, f.geometry))) {
+                            houseTunnusedExport.add(f.properties.tunnus);
+                        }
+                    }
+                }
+                const manualSetExport = new Set(MANUAL_BUILDING_TUNNUSED);
                 const labelPoints = parcelsData ? {
                     type: 'FeatureCollection',
                     features: parcelsData.features
                         .map(f => {
-                            const c = polygonCentroidLngLat(f.geometry);
-                            return c ? {
+                            const isHouse = houseTunnusedExport.has(f.properties.tunnus) || manualSetExport.has(f.properties.tunnus);
+                            const posOverride = LABEL_POSITION_OVERRIDES[f.properties.tunnus];
+                            const c = posOverride
+                                ?? (isHouse ? farmAnchorExport(f.geometry) : polygonCentroidLngLat(f.geometry));
+                            if (!c) return null;
+                            const override = LABEL_OVERRIDES[f.properties.tunnus];
+                            const name = override !== undefined ? override : f.properties.l_aadress;
+                            return {
                                 type: 'Feature',
                                 geometry: { type: 'Point', coordinates: c },
-                                properties: f.properties,
-                            } : null;
+                                properties: { ...f.properties, l_aadress: name, house_plot: houseTunnusedExport.has(f.properties.tunnus) },
+                            };
                         })
-                        .filter(Boolean),
+                        .filter(f => f && f.properties.l_aadress),
                 } : { type: 'FeatureCollection', features: [] };
                 tempMap.addSource('parcel-label-points', { type: 'geojson', data: labelPoints });
 
@@ -1277,7 +1349,7 @@
                         filter: ['all',
                             ['!=', ['get', 'siht1'], 'Transpordimaa'],
                             ['any',
-                                ['==', ['get', 'has_bldg'], true],
+                                ['==', ['get', 'house_plot'], true],
                                 ['in', ['get', 'tunnus'], ['literal', manualList]]
                             ]
                         ],
@@ -1288,7 +1360,7 @@
                         id: 'parcel-labels-other', type: 'symbol', source: 'parcel-label-points',
                         filter: ['all',
                             ['!=', ['get', 'siht1'], 'Transpordimaa'],
-                            ['!=', ['get', 'has_bldg'], true],
+                            ['!=', ['get', 'house_plot'], true],
                             ['!', ['in', ['get', 'tunnus'], ['literal', manualList]]]
                         ],
                         layout: { 'text-field': ['get', 'l_aadress'], 'text-font': ['Open Sans Regular'], 'text-size': 15, 'text-allow-overlap': false, 'text-letter-spacing': 0.02, 'text-padding': 10 },
@@ -1584,23 +1656,53 @@
 
                 if (showLabels) {
                     // SVG has no automatic label collision (unlike MapLibre).
-                    // We place bldg labels first, sorted by plot area so the
-                    // largest farms win when neighbours collide. Then "other"
-                    // labels drop in only where they don't overlap anything
-                    // already placed. Result: a readable map at the cost of
-                    // some smaller plots going unlabelled.
+                    // Strategy:
+                    //   1. House plots are MANDATORY — every parcel that
+                    //      contains a building must be named for navigation.
+                    //      We try the building-biased anchor first, then
+                    //      progressively offset N/S/E/W/diagonal at growing
+                    //      radii, then force-place at the anchor as a last
+                    //      resort (overlap allowed rather than dropped).
+                    //   2. Other plots fill the gaps — same offset search,
+                    //      but no force fallback so they yield to house labels.
                     const placed = [];
-                    function placeLabel(x, y, text, fontSize, charWidth) {
+                    function bboxAt(x, y, text, fontSize, charWidth, pad) {
                         const halfW = (text.length * fontSize * charWidth) / 2;
                         const halfH = fontSize * 0.55;
-                        const pad = 6;
-                        const minX = x - halfW - pad, maxX = x + halfW + pad;
-                        const minY = y - halfH - pad, maxY = y + halfH + pad;
+                        return {
+                            minX: x - halfW - pad, maxX: x + halfW + pad,
+                            minY: y - halfH - pad, maxY: y + halfH + pad,
+                        };
+                    }
+                    function fitsBox(box) {
                         for (const b of placed) {
-                            if (!(maxX < b.minX || minX > b.maxX || maxY < b.minY || minY > b.maxY)) return false;
+                            if (!(box.maxX < b.minX || box.minX > b.maxX || box.maxY < b.minY || box.minY > b.maxY)) return false;
                         }
-                        placed.push({ minX, maxX, minY, maxY });
                         return true;
+                    }
+                    function placeLabel(x, y, text, fontSize, charWidth, force) {
+                        const pad = 6;
+                        let box = bboxAt(x, y, text, fontSize, charWidth, pad);
+                        if (fitsBox(box)) { placed.push(box); return [x, y]; }
+                        const halfW = (text.length * fontSize * charWidth) / 2;
+                        const halfH = fontSize * 0.55;
+                        for (const r of [1.0, 1.7, 2.5]) {
+                            const dx = halfW * 0.7 * r;
+                            const dy = halfH * 2.4 * r;
+                            const offsets = [
+                                [0, -dy], [0, dy], [-dx, 0], [dx, 0],
+                                [-dx, -dy], [dx, -dy], [-dx, dy], [dx, dy],
+                            ];
+                            for (const [ox, oy] of offsets) {
+                                const b = bboxAt(x + ox, y + oy, text, fontSize, charWidth, pad);
+                                if (fitsBox(b)) { placed.push(b); return [x + ox, y + oy]; }
+                            }
+                        }
+                        if (force) {
+                            placed.push(bboxAt(x, y, text, fontSize, charWidth, pad));
+                            return [x, y];
+                        }
+                        return null;
                     }
                     function approxArea(geom) {
                         let ring;
@@ -1614,16 +1716,6 @@
                         return Math.abs(a);
                     }
 
-                    const labelable = parcels.features.filter(f =>
-                        f.properties.siht1 !== 'Transpordimaa' && f.properties.l_aadress
-                    );
-                    const bldgFeats = labelable
-                        .filter(f => f.properties.has_bldg === true || manualSet.has(f.properties.tunnus))
-                        .sort((a, b) => approxArea(b.geometry) - approxArea(a.geometry));
-                    const otherFeats = labelable
-                        .filter(f => !(f.properties.has_bldg === true || manualSet.has(f.properties.tunnus)))
-                        .sort((a, b) => approxArea(b.geometry) - approxArea(a.geometry));
-
                     // Precompute building centroids so farm labels can gravitate
                     // toward the actual house cluster instead of sitting at the
                     // geometric centroid of a long/L-shaped parcel.
@@ -1631,45 +1723,78 @@
                         .map(f => polygonCentroidLngLat(f.geometry))
                         .filter(Boolean);
 
-                    function farmLabelAnchor(parcelGeom) {
+                    // Trust observed buildings over the ETL has_bldg flag.
+                    // Otherwise plots like Pihlaka (stale flag) get demoted to
+                    // the "other" tier and lose their farm-name styling.
+                    const houseTunnused = new Set();
+                    for (const f of parcels.features) {
+                        if (f.properties.siht1 === 'Transpordimaa') continue;
+                        if (bldgCentroids.some(c => pointInPolygon(c, f.geometry))) {
+                            houseTunnused.add(f.properties.tunnus);
+                        }
+                    }
+
+                    function farmLabelAnchorWith(centroidsList, parcelGeom) {
                         const parcelC = polygonCentroidLngLat(parcelGeom);
                         if (!parcelC) return null;
-                        const inside = bldgCentroids.filter(c => pointInPolygon(c, parcelGeom));
+                        const inside = centroidsList.filter(c => pointInPolygon(c, parcelGeom));
                         if (inside.length === 0) return parcelC;
                         let sx = 0, sy = 0;
                         for (const [lng, lat] of inside) { sx += lng; sy += lat; }
                         const cluster = [sx / inside.length, sy / inside.length];
-                        // Pull mostly toward the building cluster but keep a
-                        // hint of the parcel centroid so dense neighbours don't
-                        // collapse onto the same spot.
-                        const anchor = [
-                            (cluster[0] + parcelC[0]) / 2,
-                            (cluster[1] + parcelC[1]) / 2,
-                        ];
-                        return pointInPolygon(anchor, parcelGeom) ? anchor : cluster;
+                        // For navigation: anchor right at the house cluster so
+                        // the label always sits on the side of any bisecting
+                        // road where the buildings actually are. The collision
+                        // fallback spreads adjacent labels to avoid piling.
+                        if (pointInPolygon(cluster, parcelGeom)) return cluster;
+                        const blend = [(cluster[0] + parcelC[0]) / 2, (cluster[1] + parcelC[1]) / 2];
+                        return pointInPolygon(blend, parcelGeom) ? blend : parcelC;
                     }
+                    function farmLabelAnchor(parcelGeom) {
+                        return farmLabelAnchorWith(bldgCentroids, parcelGeom);
+                    }
+
+                    const effectiveName = (f) => {
+                        const o = LABEL_OVERRIDES[f.properties.tunnus];
+                        return o !== undefined ? o : f.properties.l_aadress;
+                    };
+                    const labelable = parcels.features.filter(f =>
+                        f.properties.siht1 !== 'Transpordimaa' && effectiveName(f)
+                    );
+                    const isHouse = (f) => houseTunnused.has(f.properties.tunnus) || manualSet.has(f.properties.tunnus);
+                    // House plots placed first, smallest last so the small
+                    // ones (Vahuri, Kadaka, Põlde, ...) get priority anchor
+                    // attempts before bigger neighbours fill the area.
+                    const bldgFeats = labelable
+                        .filter(isHouse)
+                        .sort((a, b) => approxArea(a.geometry) - approxArea(b.geometry));
+                    const otherFeats = labelable
+                        .filter(f => !isHouse(f))
+                        .sort((a, b) => approxArea(b.geometry) - approxArea(a.geometry));
 
                     // Bold labels for any plot that reads as "has a house"
                     parts.push('<g id="parcel-labels-bldg" font-family="Georgia, &quot;Times New Roman&quot;, &quot;Hoefler Text&quot;, serif" font-size="60" font-weight="bold" fill="#3d2b1f" text-anchor="middle" stroke="rgba(237, 228, 208, 0.95)" stroke-width="9" paint-order="stroke fill">');
                     for (const f of bldgFeats) {
-                        const c = farmLabelAnchor(f.geometry);
+                        const c = LABEL_POSITION_OVERRIDES[f.properties.tunnus] ?? farmLabelAnchor(f.geometry);
                         if (!c) continue;
                         const [x, y] = project(c[0], c[1]);
-                        const txt = f.properties.l_aadress;
-                        if (!placeLabel(x, y, txt, 60, 0.55)) continue;
-                        parts.push(`<text x="${fmt(x)}" y="${fmt(y)}">${escapeXML(txt)}</text>`);
+                        const txt = effectiveName(f);
+                        const pos = placeLabel(x, y, txt, 60, 0.55, true);
+                        parts.push(`<text x="${fmt(pos[0])}" y="${fmt(pos[1])}">${escapeXML(txt)}</text>`);
                     }
                     parts.push('</g>');
 
-                    // Lighter labels for the rest — only where they fit
+                    // Lighter labels for the rest — try several offsets,
+                    // skip if nothing fits.
                     parts.push('<g id="parcel-labels-other" font-family="Georgia, &quot;Times New Roman&quot;, &quot;Hoefler Text&quot;, serif" font-style="italic" font-size="44" fill="#6b5d4f" text-anchor="middle" stroke="rgba(241, 233, 210, 0.8)" stroke-width="6" paint-order="stroke fill">');
                     for (const f of otherFeats) {
-                        const c = polygonCentroidLngLat(f.geometry);
+                        const c = LABEL_POSITION_OVERRIDES[f.properties.tunnus] ?? polygonCentroidLngLat(f.geometry);
                         if (!c) continue;
                         const [x, y] = project(c[0], c[1]);
-                        const txt = f.properties.l_aadress;
-                        if (!placeLabel(x, y, txt, 44, 0.5)) continue;
-                        parts.push(`<text x="${fmt(x)}" y="${fmt(y)}">${escapeXML(txt)}</text>`);
+                        const txt = effectiveName(f);
+                        const pos = placeLabel(x, y, txt, 44, 0.5, false);
+                        if (!pos) continue;
+                        parts.push(`<text x="${fmt(pos[0])}" y="${fmt(pos[1])}">${escapeXML(txt)}</text>`);
                     }
                     parts.push('</g>');
                 }
